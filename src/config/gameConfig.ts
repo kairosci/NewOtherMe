@@ -10,9 +10,6 @@ export const SCENES: Record<string, SceneKey> = {
     BOOT: 'BootScene',
     MENU: 'MenuScene',
     GAME: 'GameScene',
-    BATTLE: 'BattleScene',
-    DIALOG: 'DialogScene',
-    ENDING: 'EndingScene',
 };
 
 export const MAPS: Record<string, MapKey> = {
