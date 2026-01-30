@@ -35,6 +35,4 @@ npm run electron:dev
 ```
 
 ## Crediti
-
-Sviluppato da Kairos Sci.
 Vedi [Credits](src/scenes/CreditsScene.ts) in-game.
