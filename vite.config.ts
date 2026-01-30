@@ -8,11 +8,20 @@ export default defineConfig({
         },
     },
     server: {
-        port: 5173,
-        open: true,
+        port: 5175,
+        open: false,
     },
+    base: './',
     build: {
         outDir: 'dist',
-        sourcemap: true,
+        sourcemap: false,
+        minify: 'esbuild',
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    phaser: ['phaser'],
+                },
+            },
+        },
     },
 });
