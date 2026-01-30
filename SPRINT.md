@@ -343,17 +343,17 @@
 
 ### 15. GESTIONE ERRORI
 
-**Status:** Minimale
+**Status:** [COMPLETATO]
 **Tempo stimato:** 1 giorno
 
 #### Da implementare
 
-- [ ] Try-catch su tutte le operazioni critiche
-- [ ] Error boundaries per scene
-- [ ] Fallback quando salvataggio corrotto
-- [ ] Logging errori (console + file?)
-- [ ] Messaggio user-friendly in caso di crash
-- [ ] Auto-recovery quando possibile
+- [x] Try-catch su tutte le operazioni critiche
+- [x] Error boundaries per scene
+- [x] Fallback quando salvataggio corrotto
+- [x] Logging errori (console + file?)
+- [x] Messaggio user-friendly in caso di crash
+- [x] Auto-recovery quando possibile
 
 #### Files da modificare
 

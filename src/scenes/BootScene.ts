@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { SCENES, COLORS, GAME_WIDTH, GAME_HEIGHT } from '@/config/gameConfig';
+import { ErrorHandler } from '@/systems/ErrorHandler';
 
 /**
  * Boot Scene
@@ -11,6 +12,7 @@ export class BootScene extends Phaser.Scene {
     }
 
     preload(): void {
+        ErrorHandler.initialize(this);
         this.createLoadingBar();
 
         /* Audio Loading Scaffold

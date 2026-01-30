@@ -58,10 +58,33 @@ class SaveSystemClass {
         try {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
-                return { ...DEFAULT_SAVE, ...JSON.parse(saved) };
+                const parsed = JSON.parse(saved);
+
+                /* Validate essential fields */
+                if (!parsed.currentMap || typeof parsed.timestamp !== 'number') {
+                    console.warn('Corrupted save detected, using backup or default');
+                    return this.loadBackup();
+                }
+
+                return { ...DEFAULT_SAVE, ...parsed };
             }
         } catch (e) {
             console.error('Failed to load save:', e);
+            return this.loadBackup();
+        }
+        return { ...DEFAULT_SAVE };
+    }
+
+    private loadBackup(): SaveData {
+        try {
+            const backup = localStorage.getItem(STORAGE_KEY + '_backup');
+            if (backup) {
+                const parsed = JSON.parse(backup);
+                console.log('Restored from backup save');
+                return { ...DEFAULT_SAVE, ...parsed };
+            }
+        } catch (_e) {
+            /* Backup also corrupted */
         }
         return { ...DEFAULT_SAVE };
     }
@@ -72,6 +95,12 @@ class SaveSystemClass {
         this.data.timestamp = Date.now();
 
         try {
+            /* Create backup of existing save first */
+            const existing = localStorage.getItem(STORAGE_KEY);
+            if (existing) {
+                localStorage.setItem(STORAGE_KEY + '_backup', existing);
+            }
+
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
         } catch (e) {
             console.error('Failed to save:', e);
