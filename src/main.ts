@@ -4,7 +4,6 @@ import { BootScene } from '@/scenes/BootScene';
 import { MenuScene } from '@/scenes/MenuScene';
 import { GameScene } from '@/scenes/GameScene';
 
-// EndingScene rimossa temporaneamente, sarà ricreata nel prossimo Sprint
 const config: Phaser.Types.Core.GameConfig = {
     ...PHASER_CONFIG,
     parent: 'game',
