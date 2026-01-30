@@ -199,6 +199,33 @@ class SaveSystemClass {
         this.data.settings.sfxVolume = Math.max(0, Math.min(1, vol));
         this.save();
     }
+
+    getSaveSummary(): { time: string; map: string; karma: string; lastSaved: string } {
+        const totalMinutes = Math.floor(this.data.stats.playTime / 60000);
+        const hours = Math.floor(totalMinutes / 60);
+        const mins = totalMinutes % 60;
+        const timeStr = `${hours}h ${mins}m`;
+
+        const maps: Record<string, string> = {
+            apartment: 'Casa di Gennaro',
+            theater: 'Teatro Bellini',
+            fatherHouse: 'Casa del Padre',
+            naplesAlley: 'Vicolo di Napoli',
+        };
+
+        const date = new Date(this.data.timestamp);
+        const lastSaved = date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        const karmaScore = this.data.stats.resistCount - this.data.stats.fightCount;
+        const karmaLabel = karmaScore > 0 ? 'Puro' : (karmaScore < 0 ? 'Corrotto' : 'Neutrale');
+
+        return {
+            time: timeStr,
+            map: maps[this.data.currentMap] || 'Ignoto',
+            karma: karmaLabel,
+            lastSaved: lastSaved
+        };
+    }
 }
 
 export const SaveSystem = new SaveSystemClass();

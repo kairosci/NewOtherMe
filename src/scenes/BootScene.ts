@@ -65,34 +65,34 @@ export class BootScene extends Phaser.Scene {
      */
     private generatePlaceholderAssets(): void {
         /* Genera personaggi con diverse caratteristiche */
-        this.generateCharacterSprite('player', {
+        this.generateCharacterAssets('player', {
             body: 0xe0d5c0,
             hair: 0x4a3728,
             hairStyle: 'short'
         });
 
-        this.generateCharacterSprite('dario', {
+        this.generateCharacterAssets('dario', {
             body: 0xffdbac,
             hair: 0x2a1a0f,
             hairStyle: 'messy',
             shirt: 0xcc3333
         });
 
-        this.generateCharacterSprite('elisa', {
+        this.generateCharacterAssets('elisa', {
             body: 0xffd5c0,
             hair: 0x8b4513,
             hairStyle: 'long',
             lips: 0xff6b9d
         });
 
-        this.generateCharacterSprite('shadow', {
+        this.generateCharacterAssets('shadow', {
             body: 0x3a3a3a,
             hair: 0x1a1a1a,
             hairStyle: 'hood',
             shirt: 0x1a1a1a
         });
 
-        this.generateCharacterSprite('bully', {
+        this.generateCharacterAssets('bully', {
             body: 0xf0c0a0,
             hair: 0x6b4423,
             hairStyle: 'bald',
@@ -214,7 +214,12 @@ export class BootScene extends Phaser.Scene {
      * @param key Texture key
      * @param features Configuration for character appearance (colors, hair style, etc.)
      */
-    private generateCharacterSprite(
+    /**
+     * Procedurally generates a character sprite sheet and portrait.
+     * @param key Base texture key
+     * @param features Configuration for character appearance
+     */
+    private generateCharacterAssets(
         key: string,
         features: {
             body: number;
@@ -225,91 +230,187 @@ export class BootScene extends Phaser.Scene {
             shirt?: number;
         }
     ): void {
-        const width = 16;
-        const height = 24;
+        this.generateCharacterSprite(key, features);
+        this.generateCharacterPortrait(`${key}_portrait`, features);
+    }
 
-        /* Rimuovi texture esistenti */
-        if (this.textures.exists(key)) {
-            this.textures.remove(key);
+    private generateCharacterSprite(
+        key: string,
+        features: any
+    ): void {
+        const frameW = 16;
+        const frameH = 24;
+        const cols = 3; /* Idle, Walk1, Walk2 */
+        const rows = 4; /* Down, Up, Left, Right */
+
+        if (this.textures.exists(key)) this.textures.remove(key);
+
+        const graphics = this.make.graphics({ x: 0, y: 0 });
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                const x = col * frameW;
+                const y = row * frameH;
+                const isWalk = col > 0;
+                const walkPhase = col === 1 ? 1 : -1;
+                const direction: 'down' | 'up' | 'left' | 'right' = ['down', 'up', 'left', 'right'][row] as any;
+
+                this.drawCharacterFrame(graphics, x, y, features, direction, isWalk ? walkPhase : 0);
+            }
         }
 
-        /* Crea uno sprite semplice (1 frame solo) per ora */
-        const graphics = this.make.graphics({});
+        graphics.generateTexture(key, frameW * cols, frameH * rows);
+        graphics.destroy();
 
-        /* Disegna un personaggio semplice in idle down (frame 0) */
-        const baseX = 0;
-        const baseY = 0;
+        /* Define frames */
+        const tex = this.textures.get(key);
+        for (let row = 0; row < rows; row++) {
+            const dir = ['down', 'up', 'left', 'right'][row];
+            tex.add(`${dir}_idle`, 0, 0, row * frameH, frameW, frameH);
+            tex.add(`${dir}_walk1`, 0, 1 * frameW, row * frameH, frameW, frameH);
+            tex.add(`${dir}_walk2`, 0, 2 * frameW, row * frameH, frameW, frameH);
 
-        /* Corpo/Torso */
-        const shirtColor = features.shirt || this.darkenColor(features.body, 0.8);
-        graphics.fillStyle(shirtColor);
-        graphics.fillRect(baseX + 4, baseY + 10, 8, 7);
+            /* Animations */
+            this.anims.create({
+                key: `${key}_idle_${dir}`,
+                frames: [{ key, frame: `${dir}_idle` }],
+                frameRate: 1
+            });
 
-        /* Braccia */
-        graphics.fillStyle(features.body);
-        graphics.fillRect(baseX + 3, baseY + 11, 2, 5);
-        graphics.fillRect(baseX + 11, baseY + 11, 2, 5);
+            this.anims.create({
+                key: `${key}_walk_${dir}`,
+                frames: [
+                    { key, frame: `${dir}_walk1` },
+                    { key, frame: `${dir}_idle` },
+                    { key, frame: `${dir}_walk2` },
+                    { key, frame: `${dir}_idle` }
+                ],
+                frameRate: 8,
+                repeat: -1
+            });
+        }
+    }
 
-        /* Gambe */
-        const pantsColor = features.shirt ? this.darkenColor(features.shirt, 0.6) : this.darkenColor(features.body, 0.7);
-        graphics.fillStyle(pantsColor);
-        graphics.fillRect(baseX + 5, baseY + 16, 2, 5);
-        graphics.fillRect(baseX + 9, baseY + 16, 2, 5);
-        graphics.fillRect(baseX + 5, baseY + 21, 2, 3);
-        graphics.fillRect(baseX + 9, baseY + 21, 2, 3);
+    private drawCharacterFrame(
+        g: Phaser.GameObjects.Graphics,
+        x: number,
+        y: number,
+        f: any,
+        dir: 'down' | 'up' | 'left' | 'right',
+        walk: number /* 0: idle, 1: left foot, -1: right foot */
+    ): void {
+        const shirtColor = f.shirt || this.darkenColor(f.body, 0.8);
+        const pantsColor = f.shirt ? this.darkenColor(f.shirt, 0.6) : this.darkenColor(f.body, 0.7);
 
-        /* Testa */
-        graphics.fillStyle(features.body);
-        graphics.fillRect(baseX + 5, baseY + 3, 6, 8);
-        graphics.fillRect(baseX + 4, baseY + 5, 8, 4);
+        /* Torso */
+        g.fillStyle(shirtColor);
+        g.fillRect(x + 4, y + 10, 8, 7);
 
-        /* Occhi (guardano verso il basso) */
-        graphics.fillStyle(0x000000);
-        graphics.fillRect(baseX + 6, baseY + 7, 1, 2);
-        graphics.fillRect(baseX + 9, baseY + 7, 1, 2);
+        /* Legs */
+        g.fillStyle(pantsColor);
+        const legY = y + 17;
+        const leftLegH = 6 + (walk > 0 ? -2 : 0);
+        const rightLegH = 6 + (walk < 0 ? -2 : 0);
+        g.fillRect(x + 5, legY, 2, leftLegH);
+        g.fillRect(x + 9, legY, 2, rightLegH);
 
-        /* Capelli */
-        graphics.fillStyle(features.hair);
-        switch (features.hairStyle) {
+        /* Arms */
+        g.fillStyle(f.body);
+        const armY = y + 11;
+        if (dir === 'down' || dir === 'up') {
+            const armOffset = walk * 2;
+            g.fillRect(x + 2, armY + (walk > 0 ? 2 : 0), 2, 5);
+            g.fillRect(x + 12, armY + (walk < 0 ? 2 : 0), 2, 5);
+        } else if (dir === 'left') {
+            g.fillRect(x + 6, armY, 2, 5);
+        } else {
+            g.fillRect(x + 8, armY, 2, 5);
+        }
+
+        /* Head */
+        g.fillStyle(f.body);
+        g.fillRect(x + 5, y + 3, 6, 8);
+        g.fillRect(x + 4, y + 5, 8, 4);
+
+        /* Face details */
+        if (dir !== 'up') {
+            const eyeX = dir === 'left' ? 5 : (dir === 'right' ? 10 : 6);
+            const eyeGap = dir === 'down' ? 3 : 0;
+            g.fillStyle(0x000000);
+            g.fillRect(x + eyeX, y + 7, 1, 2);
+            if (dir === 'down') g.fillRect(x + eyeX + eyeGap, y + 7, 1, 2);
+
+            if (f.lips) {
+                g.fillStyle(f.lips);
+                g.fillRect(x + (dir === 'left' ? 5 : (dir === 'right' ? 9 : 6)), y + 10, dir === 'down' ? 4 : 2, 1);
+            }
+            if (f.beard && dir === 'down') {
+                g.fillStyle(f.beard);
+                g.fillRect(x + 5, y + 10, 6, 2);
+            }
+        }
+
+        /* Hair */
+        g.fillStyle(f.hair);
+        switch (f.hairStyle) {
             case 'short':
-                graphics.fillRect(baseX + 4, baseY + 3, 8, 3);
-                graphics.fillRect(baseX + 3, baseY + 4, 2, 2);
-                graphics.fillRect(baseX + 11, baseY + 4, 2, 2);
+                g.fillRect(x + 4, y + 3, 8, 3);
                 break;
             case 'long':
-                graphics.fillRect(baseX + 4, baseY + 2, 8, 4);
-                graphics.fillRect(baseX + 3, baseY + 4, 2, 6);
-                graphics.fillRect(baseX + 11, baseY + 4, 2, 6);
+                g.fillRect(x + 4, y + 2, 8, 4);
+                g.fillRect(x + (dir === 'right' ? 5 : 3), y + 4, 2, 6);
+                g.fillRect(x + (dir === 'left' ? 9 : 11), y + 4, 2, 6);
                 break;
             case 'messy':
-                graphics.fillRect(baseX + 4, baseY + 2, 8, 3);
-                graphics.fillRect(baseX + 3, baseY + 3, 1, 3);
-                graphics.fillRect(baseX + 12, baseY + 3, 1, 3);
+                g.fillRect(x + 4, y + 2, 8, 4);
+                for (let i = 0; i < 4; i++) g.fillRect(x + 4 + i * 2, y + 1, 1, 2);
                 break;
             case 'hood':
-                graphics.fillRect(baseX + 3, baseY + 2, 10, 8);
-                graphics.fillRect(baseX + 2, baseY + 5, 12, 3);
-                break;
-            case 'bald':
-                graphics.fillRect(baseX + 3, baseY + 5, 2, 2);
-                graphics.fillRect(baseX + 11, baseY + 5, 2, 2);
+                g.fillStyle(shirtColor);
+                g.fillRect(x + 3, y + 2, 10, 9);
                 break;
         }
+    }
 
-        /* Barba */
-        if (features.beard) {
-            graphics.fillStyle(features.beard);
-            graphics.fillRect(baseX + 5, baseY + 9, 6, 2);
+    private generateCharacterPortrait(key: string, f: any): void {
+        const size = 64;
+        if (this.textures.exists(key)) this.textures.remove(key);
+        const g = this.make.graphics({ x: 0, y: 0 });
+
+        /* BG Circle */
+        g.fillStyle(0x333333, 0.8);
+        g.fillCircle(size / 2, size / 2, size / 2 - 2);
+        g.lineStyle(2, 0xd4af37);
+        g.strokeCircle(size / 2, size / 2, size / 2 - 2);
+
+        /* Face */
+        g.fillStyle(f.body);
+        g.fillEllipse(size / 2, size / 2 + 5, 20, 25);
+
+        /* Eyes */
+        g.fillStyle(0x000000);
+        g.fillCircle(size / 2 - 8, size / 2, 2);
+        g.fillCircle(size / 2 + 8, size / 2, 2);
+
+        /* Hair */
+        g.fillStyle(f.hair);
+        if (f.hairStyle === 'long') {
+            g.fillEllipse(size / 2, size / 2 - 10, 25, 15);
+            g.fillRect(size / 2 - 25, size / 2 - 5, 50, 30);
+        } else if (f.hairStyle === 'short' || f.hairStyle === 'messy') {
+            g.fillEllipse(size / 2, size / 2 - 15, 22, 12);
+        } else if (f.hairStyle === 'hood') {
+            g.fillStyle(f.shirt || this.darkenColor(f.body, 0.8));
+            g.strokeEllipse(size / 2, size / 2 + 2, 25, 30);
         }
 
-        /* Rossetto */
-        if (features.lips) {
-            graphics.fillStyle(features.lips);
-            graphics.fillRect(baseX + 6, baseY + 9, 4, 1);
+        if (f.lips) {
+            g.fillStyle(f.lips);
+            g.fillRect(size / 2 - 5, size / 2 + 15, 10, 2);
         }
 
-        graphics.generateTexture(key, width, height);
-        graphics.destroy();
+        g.generateTexture(key, size, size);
+        g.destroy();
     }
 
     private darkenColor(color: number, factor: number): number {

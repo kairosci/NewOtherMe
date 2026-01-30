@@ -15,7 +15,7 @@ export class DialogManager {
     private speakerText: Phaser.GameObjects.Text;
     private contentText: Phaser.GameObjects.Text;
     private continuePrompt: Phaser.GameObjects.Text;
-    private portrait: Phaser.GameObjects.Rectangle;
+    private portrait: Phaser.GameObjects.Image;
     private choiceTexts: Phaser.GameObjects.Text[] = [];
 
     private currentDialog: Dialog | null = null;
@@ -30,7 +30,7 @@ export class DialogManager {
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
         this.container = scene.add.container(0, 0);
-        this.container.setDepth(1000);
+        this.container.setDepth(1001);
         this.container.setScrollFactor(0);
 
         this.createUI();
@@ -41,7 +41,7 @@ export class DialogManager {
         const boxHeight = 160;
         const boxY = GAME_HEIGHT - boxHeight / 2 - 10;
 
-        this.background = this.scene.add.rectangle(
+        const bg = this.scene.add.rectangle(
             GAME_WIDTH / 2,
             boxY,
             GAME_WIDTH - 20,
@@ -49,23 +49,24 @@ export class DialogManager {
             0x000000,
             0.95
         );
-        this.background.setStrokeStyle(3, 0xffffff);
+        bg.setStrokeStyle(3, 0xffffff);
 
-        this.portrait = this.scene.add.rectangle(60, boxY - 20, 80, 80, 0x333333);
-        this.portrait.setStrokeStyle(2, 0xffffff);
+        /* Change rectangle to Image */
+        this.portrait = this.scene.add.image(65, boxY - 10, 'player_portrait');
+        this.portrait.setScale(1.2);
 
-        this.speakerText = this.scene.add.text(120, boxY - 65, '', {
+        this.speakerText = this.scene.add.text(130, boxY - 65, '', {
             fontFamily: 'monospace',
             fontSize: '18px',
             color: '#ffd700',
         });
 
-        this.contentText = this.scene.add.text(120, boxY - 35, '', {
+        this.contentText = this.scene.add.text(130, boxY - 35, '', {
             fontFamily: 'monospace',
             fontSize: '16px',
             color: '#ffffff',
-            wordWrap: { width: GAME_WIDTH - 160 },
-            lineSpacing: 6,
+            wordWrap: { width: GAME_WIDTH - 180 },
+            lineSpacing: 8,
         });
 
         this.continuePrompt = this.scene.add.text(
@@ -89,7 +90,7 @@ export class DialogManager {
         });
 
         this.container.add([
-            this.background,
+            bg,
             this.portrait,
             this.speakerText,
             this.contentText,
@@ -166,15 +167,25 @@ export class DialogManager {
     }
 
     private updatePortrait(speaker?: string): void {
-        const colors: Record<string, number> = {
-            DARIO: COLORS.red,
-            ELISA: 0xffb6c1,
-            GENNARO: COLORS.cream,
-            OMBRA: 0x1a1a1a,
-            MASCHERA: 0xf5f5dc,
-            BULLO: 0x444444,
+        const portraits: Record<string, string> = {
+            DARIO: 'dario_portrait',
+            ELISA: 'elisa_portrait',
+            GENNARO: 'player_portrait',
+            OMBRA: 'shadow_portrait',
+            BULLO: 'bully_portrait',
+            MASCHERA: 'mask',
         };
-        this.portrait.setFillStyle(colors[speaker || ''] || 0x333333);
+
+        const key = portraits[speaker || ''] || 'player_portrait';
+        if (this.scene.textures.exists(key)) {
+            this.portrait.setTexture(key);
+            this.scene.tweens.add({
+                targets: this.portrait,
+                scale: { from: 1.1, to: 1.2 },
+                duration: 200,
+                ease: 'Back.out'
+            });
+        }
     }
 
     private showChoices(): void {
@@ -184,7 +195,7 @@ export class DialogManager {
         this.continuePrompt.setText('[INVIO] conferma');
         this.speakerText.setText('');
         this.contentText.setText('Cosa fai?');
-        this.portrait.setFillStyle(COLORS.cream);
+        this.portrait.setTexture('player_portrait');
 
         const startY = GAME_HEIGHT - 100;
         this.currentDialog.choices.forEach((choice, index) => {

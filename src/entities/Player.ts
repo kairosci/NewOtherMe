@@ -66,21 +66,18 @@ export class Player {
         else if (input.y > 0) this.direction = 'down';
 
         if (this.isMoving) {
-            this.animationTimer += delta;
-            if (this.animationTimer > 150) {
-                this.walkFrame = (this.walkFrame + 1) % 4;
-                this.animationTimer = 0;
-                this.updateVisualWalk();
-            }
+            this.sprite.play(`player_walk_${this.direction}`, true);
         } else {
-            this.walkFrame = 0;
-            this.sprite.setTint(0xffffff);
+            this.sprite.play(`player_idle_${this.direction}`, true);
         }
-    }
 
-    private updateVisualWalk(): void {
-        const tints = [0xffffff, 0xeeeeee, 0xffffff, 0xdddddd];
-        this.sprite.setTint(tints[this.walkFrame]);
+        /* Bobbing effect when idle */
+        if (!this.isMoving) {
+            this.animationTimer += delta;
+            this.sprite.y += Math.sin(this.animationTimer / 300) * 0.1;
+        } else {
+            this.animationTimer = 0;
+        }
     }
 
     getSprite(): Phaser.Physics.Arcade.Sprite {

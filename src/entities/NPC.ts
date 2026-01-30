@@ -101,11 +101,16 @@ export class NPC {
             this.exclamation.setVisible(false);
         }
 
-        this.idleTimer += delta;
-        if (this.idleTimer > 3000 && !this.config.isBoss) {
-            this.idleTimer = 0;
-            const directions: Direction[] = ['up', 'down', 'left', 'right'];
-            this.lookDirection = directions[Math.floor(Math.random() * 4)];
+        if (!this.isDefeated) {
+            this.sprite.play(`${this.config.sprite}_idle_${this.lookDirection}`, true);
+            this.idleTimer += delta;
+            this.sprite.y += Math.sin(this.idleTimer / 400) * 0.05;
+
+            if (this.idleTimer > 3000 && !this.config.isBoss) {
+                this.idleTimer = 0;
+                const directions: Direction[] = ['up', 'down', 'left', 'right'];
+                this.lookDirection = directions[Math.floor(Math.random() * 4)];
+            }
         }
     }
 

@@ -143,7 +143,7 @@
 
 ### 6. ANIMAZIONI PERSONAGGI
 
-**Status:** Sprite statici con tint
+**Status:** [COMPLETATO]
 **Tempo stimato:** 3-5 giorni
 **Migliora l'aspetto visivo**
 
@@ -155,9 +155,9 @@
 
 #### Da implementare
 
-- [ ] Walk cycle (2 frame min per direzione)
-- [ ] Idle breathing animation
-- [ ] Animazioni emotive per NPC (jump, shake, etc.)
+- [x] Walk cycle (2 frame min per direzione)
+- [x] Idle breathing animation
+- [x] Animazioni emotive per NPC (jump, shake, etc.)
 
 #### Files da modificare
 
@@ -169,23 +169,23 @@
 
 ### 7. MENU PRINCIPALE MIGLIORATO
 
-**Status:** Funzionale ma basilare
+**Status:** [COMPLETATO]
 **Tempo stimato:** 1-2 giorni
 
 #### Miglioramenti
 
-- [ ] Animazione titolo (fade in/pulse/lettere una alla volta)
-- [ ] Preview del salvataggio:
-- Data e ora
-- Tempo totale giocato
-- Karma attuale
-- Mappa corrente
+- [x] Animazione titolo (fade in/pulse/lettere una alla volta)
+- [x] Preview del salvataggio:
+- [x] Data e ora
+- [x] Tempo totale giocato
+- [x] Karma attuale
+- [x] Mappa corrente
 - [ ] Opzioni menu aggiuntive:
-- Crediti
-- Come giocare
-- Achievements/Trofei
-- Galleria (unlock con progressione)
-- [ ] Transizione animata tra menu e gioco
+- [ ] Crediti
+- [ ] Come giocare
+- [ ] Achievements/Trofei
+- [ ] Galleria (unlock con progressione)
+- [x] Transizione animata tra menu e gioco
 
 #### Files da modificare
 
@@ -300,8 +300,8 @@
 
 #### Miglioramenti
 
-- [ ] **Ritratti dei personaggi** (anche semplici, stile visual novel)
-- [ ] **Animazioni emotive** del ritratto:
+- [x] **Ritratti dei personaggi** (anche semplici, stile visual novel)
+- [x] **Animazioni emotive** del ritratto:
 - Shake per rabbia
 - Bounce per gioia
 - Fade per tristezza

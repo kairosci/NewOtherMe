@@ -66,7 +66,8 @@ export class MenuScene extends BaseScene {
     }
 
     private createTitle(): void {
-        const title = this.add.text(GAME_WIDTH / 2, 120, 'IL TEATRO\nDELLE OMBRE', {
+        const titleText = 'IL TEATRO\nDELLE OMBRE';
+        const title = this.add.text(GAME_WIDTH / 2, 120, '', {
             fontFamily: 'Georgia, serif',
             fontSize: '52px',
             color: '#e0d5c0',
@@ -76,6 +77,18 @@ export class MenuScene extends BaseScene {
         title.setOrigin(0.5);
         title.setShadow(3, 3, '#000000', 5);
 
+        /* Letter by letter animation */
+        let i = 0;
+        this.time.addEvent({
+            delay: 100,
+            callback: () => {
+                title.text += titleText[i];
+                i++;
+                if (i % 3 === 0) this.cameras.main.shake(100, 0.001);
+            },
+            repeat: titleText.length - 1
+        });
+
         const subtitle = this.add.text(GAME_WIDTH / 2, 220, 'Un viaggio nei sogni di Gennaro', {
             fontFamily: 'Georgia, serif',
             fontSize: '16px',
@@ -83,20 +96,25 @@ export class MenuScene extends BaseScene {
             fontStyle: 'italic',
         });
         subtitle.setOrigin(0.5);
+        subtitle.setAlpha(0);
+        this.tweens.add({ targets: subtitle, alpha: 1, delay: 1500, duration: 1000 });
     }
 
     private createButtons(): void {
         const buttonY = GAME_HEIGHT / 2 + 50;
+        const hasSave = SaveSystem.hasSave();
 
         this.createButton(GAME_WIDTH / 2, buttonY, 'NUOVA PARTITA', () => {
             SaveSystem.reset();
             this.startGame();
         });
 
-        if (SaveSystem.hasSave()) {
+        if (hasSave) {
             this.createButton(GAME_WIDTH / 2, buttonY + 60, 'CONTINUA', () => {
                 this.startGame(true);
             });
+            this.createSavePreview(GAME_WIDTH / 2 + 200, buttonY + 30);
+
             this.createButton(GAME_WIDTH / 2, buttonY + 120, 'IMPOSTAZIONI', () => {
                 this.scene.launch(SCENES.SETTINGS);
             });
@@ -105,6 +123,39 @@ export class MenuScene extends BaseScene {
                 this.scene.launch(SCENES.SETTINGS);
             });
         }
+    }
+
+    private createSavePreview(x: number, y: number): void {
+        const summary = SaveSystem.getSaveSummary();
+        const container = this.add.container(x, y);
+
+        const bg = this.add.rectangle(0, 0, 180, 100, 0x000000, 0.6);
+        bg.setStrokeStyle(1, 0xd4af37);
+
+        const title = this.add.text(0, -35, 'ULTIMO SALVATAGGIO', {
+            fontFamily: 'monospace', fontSize: '10px', color: '#d4af37'
+        }).setOrigin(0.5);
+
+        const details = this.add.text(0, 5, [
+            `Mappa: ${summary.map}`,
+            `Tempo: ${summary.time}`,
+            `Anima: ${summary.karma}`,
+            `Data: ${summary.lastSaved.split(' ')[0]}`
+        ].join('\n'), {
+            fontFamily: 'monospace', fontSize: '11px', color: '#ffffff', lineSpacing: 5
+        }).setOrigin(0.5);
+
+        container.add([bg, title, details]);
+        container.setAlpha(0);
+
+        this.tweens.add({
+            targets: container,
+            alpha: 1,
+            x: x - 20,
+            duration: 800,
+            delay: 1000,
+            ease: 'Power2'
+        });
     }
 
     private createButton(x: number, y: number, text: string, callback: () => void): void {
@@ -147,33 +198,23 @@ export class MenuScene extends BaseScene {
         const achievements = SaveSystem.getAchievements();
 
         if (stats.resistCount > 0 || stats.fightCount > 0) {
-            const statsText = this.add.text(30, GAME_HEIGHT - 80, [
-                `Resistenze: ${stats.resistCount}`,
-                `Cedimenti: ${stats.fightCount}`,
-            ].join('\n'), {
+            const statsText = this.add.text(30, GAME_HEIGHT - 40, [
+                `Sfide: ${stats.resistCount + stats.fightCount}`,
+                `Achievements: ${achievements.length}`,
+            ].join(' | '), {
                 fontFamily: 'monospace',
                 fontSize: '12px',
-                color: '#555555',
+                color: '#8b7355',
             });
         }
 
-        if (achievements.length > 0) {
-            const achText = this.add.text(GAME_WIDTH - 30, GAME_HEIGHT - 60,
-                `Achievements: ${achievements.length}`, {
-                fontFamily: 'monospace',
-                fontSize: '12px',
-                color: '#d4af37',
-            });
-            achText.setOrigin(1, 0);
-        }
-
-        const credits = this.add.text(GAME_WIDTH / 2, GAME_HEIGHT - 20,
-            'Global Game Jam 2026', {
+        const credits = this.add.text(GAME_WIDTH - 20, GAME_HEIGHT - 20,
+            'Global Game Jam 2026 | The Maskerati', {
             fontFamily: 'monospace',
             fontSize: '11px',
             color: '#333333',
         });
-        credits.setOrigin(0.5);
+        credits.setOrigin(1, 0.5);
     }
 
     private startGame(continueGame = false): void {

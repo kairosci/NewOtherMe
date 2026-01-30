@@ -262,11 +262,13 @@ export class MinigameManager {
             const diff = Math.abs(this.rhythmBeat.radius - 50); /* 50 is target radius */
             if (diff < 10) {
                 this.rhythmHits++;
-                this.instructionText.setText(`RITMO! ${this.rhythmHits}/${this.rhythmGoal}`);
+                if (diff < 5) this.combo++;
+                this.instructionText.setText(`RITMO! ${this.rhythmHits}/${this.rhythmGoal}${this.combo > 0 ? '\nCOMBO ' + this.combo : ''}`);
                 this.scene.cameras.main.flash(100, 0, 255, 0);
                 this.rhythmBeat.radius = 0; /* Reset immediately on hit */
                 if (this.rhythmHits >= this.rhythmGoal) this.endMinigame(true);
             } else {
+                this.combo = 0;
                 this.scene.cameras.main.shake(100, 0.01);
             }
         }
@@ -341,20 +343,37 @@ export class MinigameManager {
         this.balanceCursor.setVisible(true);
     }
 
+    private combo: number = 0;
+
     private endMinigame(success: boolean): void {
         this.isActive = false;
         if (this.gameTimer) this.gameTimer.remove();
         this.container.setVisible(false);
 
         if (success) {
-            /* Adjust Mask Score based on type CATEGORY */
+            /* Visual feedback */
+            this.scene.cameras.main.flash(200, 255, 255, 255);
+
+            /* Performance Bonus */
+            const isPerfect = this.combo >= 3;
+            const mask = MaskSystem.getInstance();
+
             if (['qte', 'rhythm', 'hold'].includes(this.currentType!)) {
-                MaskSystem.getInstance().modifyScore(1); /* Anger/Mask */
+                mask.modifyScore(isPerfect ? 2 : 1); /* Anger/Mask boost */
             } else {
-                MaskSystem.getInstance().modifyScore(-1); /* Control/Calm */
+                mask.modifyScore(isPerfect ? -2 : -1); /* Control/Calm boost */
             }
+
+            if (isPerfect) {
+                /* Show perfect message or similar */
+                console.log('PERFECT PERFORMANCE!');
+            }
+        } else {
+            this.scene.cameras.main.shake(300, 0.02);
+            this.scene.cameras.main.flash(200, 100, 0, 0);
         }
 
+        this.combo = 0;
         if (this.onComplete) this.onComplete(success);
     }
 
