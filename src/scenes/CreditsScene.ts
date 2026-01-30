@@ -55,7 +55,7 @@ export class CreditsScene extends BaseScene {
             { text: 'Alessio Attilio', style: 'name' },
             { text: 'Francesco Pio Russo', style: 'name' },
             { text: 'Francesco Zeno', style: 'name' },
-            { text: 'Jose Emmanuel Galiero', style: 'name' },
+            { text: 'José Emmnuel Galiero', style: 'name' },
             { text: 'Martina Cozzolino', style: 'name' },
             { text: '', style: 'spacer' },
             { text: 'Tech stack', style: 'section' },
