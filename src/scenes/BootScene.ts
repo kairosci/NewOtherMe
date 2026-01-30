@@ -15,14 +15,17 @@ export class BootScene extends Phaser.Scene {
         ErrorHandler.initialize(this);
         this.createLoadingBar();
 
-        /* Audio Loading Scaffold
-           In a real scenario, these files would exist in public/audio/ */
+        /* Audio files are not included in this prototype.
+           Audio loading is disabled to prevent errors.
+           In production, uncomment and provide actual audio files.
+
         this.load.audio('bgm_apartment', 'audio/bgm/apartment.mp3');
         this.load.audio('bgm_theater', 'audio/bgm/theater.mp3');
         this.load.audio('bgm_naplesAlley', 'audio/bgm/alley.mp3');
         this.load.audio('bgm_fatherHouse', 'audio/bgm/house.mp3');
         this.load.audio('sfx_click', 'audio/sfx/click.mp3');
         this.load.audio('sfx_interact', 'audio/sfx/interact.mp3');
+        */
 
         this.load.on('complete', () => {
             this.generatePlaceholderAssets();

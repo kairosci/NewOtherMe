@@ -283,7 +283,7 @@
 
 #### Nuovi minigame da aggiungere
 
-- [ ] Memory (carte da teatro)
+- [x] Memory (carte da teatro)
 - [ ] Reaction (schiva attacchi)
 - [ ] Pattern matching (sequenza movimenti)
 
@@ -306,7 +306,7 @@
 - Bounce per gioia
 - Fade per tristezza
 - [x] **Scelte con timer** (10 secondi per decidere)
-- [ ] **Memoria delle scelte** (NPC ricordano cosa hai detto)
+- [x] **Memoria delle scelte** (NPC ricordano cosa hai detto)
 - [ ] **Branching più complesso** (albero decisionale profondo)
 - [ ] **Voice blips** (suoni per ogni personaggio)
 

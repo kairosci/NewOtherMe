@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 import { MaskSystem } from './MaskSystem';
 import { GAME_WIDTH, GAME_HEIGHT, COLORS } from '@/config/gameConfig';
 
-type MinigameType = 'qte' | 'balance' | 'rhythm' | 'hold' | 'breath' | 'focus';
+type MinigameType = 'qte' | 'balance' | 'rhythm' | 'hold' | 'breath' | 'focus' | 'memory';
 
 export class MinigameManager {
     private scene: Phaser.Scene;
@@ -53,6 +53,14 @@ export class MinigameManager {
     /* Using rectangle/primitive */
     private focusScore: number = 0;
     private focusMaxScore: number = 1000;
+
+    /* Memory Props */
+    private memoryCards: Phaser.GameObjects.Rectangle[] = [];
+    private memoryValues: number[] = [];
+    private memoryFlipped: boolean[] = [];
+    private memoryFirstPick: number = -1;
+    private memoryMatches: number = 0;
+    private memoryLocked: boolean = false;
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
@@ -106,7 +114,7 @@ export class MinigameManager {
     }
 
     startRandom(difficulty: number, onComplete: (success: boolean) => void): void {
-        const types: MinigameType[] = ['qte', 'balance', 'rhythm', 'hold', 'breath', 'focus'];
+        const types: MinigameType[] = ['qte', 'balance', 'rhythm', 'hold', 'breath', 'focus', 'memory'];
         const type = types[Math.floor(Math.random() * types.length)];
         this.startMinigame(type, difficulty, onComplete);
     }
@@ -137,6 +145,7 @@ export class MinigameManager {
             case 'hold': this.setupHold(difficulty); break;
             case 'breath': this.setupBreath(difficulty); break;
             case 'focus': this.setupFocus(difficulty); break;
+            case 'memory': this.setupMemory(difficulty); break;
         }
     }
 
@@ -146,6 +155,8 @@ export class MinigameManager {
         this.holdBarBg.setVisible(false); this.holdBarFill.setVisible(false);
         this.breathCircleOuter.setVisible(false); this.breathCircleInner.setVisible(false);
         this.focusTarget.setVisible(false);
+        this.memoryCards.forEach(c => { c.destroy(); });
+        this.memoryCards = [];
     }
 
     /** SETUP METHODS */
@@ -200,6 +211,101 @@ export class MinigameManager {
         this.focusScore = 0;
         this.instructionText.setText('INSEGUI LA STELLA CON IL MOUSE!');
         this.startTimer(5000, false); /* Win if score high enough */
+    }
+
+    private setupMemory(difficulty: number): void {
+        this.instructionText.setText('TROVA LE COPPIE!');
+        this.memoryMatches = 0;
+        this.memoryFirstPick = -1;
+        this.memoryLocked = false;
+        this.memoryCards = [];
+        this.memoryFlipped = [];
+
+        /* Create pairs: 3 pairs for easy, 4 for medium, 6 for hard */
+        const pairCount = Math.min(6, 3 + Math.floor(difficulty));
+        const values: number[] = [];
+        for (let i = 0; i < pairCount; i++) {
+            values.push(i, i);
+        }
+
+        /* Shuffle */
+        for (let i = values.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [values[i], values[j]] = [values[j], values[i]];
+        }
+        this.memoryValues = values;
+
+        /* Create card grid */
+        const cols = pairCount <= 3 ? 3 : 4;
+        const rows = Math.ceil(values.length / cols);
+        const cardW = 60;
+        const cardH = 80;
+        const startX = GAME_WIDTH / 2 - (cols * cardW) / 2 + cardW / 2;
+        const startY = GAME_HEIGHT / 2 - (rows * cardH) / 2 + cardH / 2;
+
+        const colors = [0xc41e3a, 0xd4af37, 0x3c1642, 0x0d1b2a, 0x228b22, 0x4169e1];
+
+        values.forEach((val, idx) => {
+            const col = idx % cols;
+            const row = Math.floor(idx / cols);
+            const x = startX + col * cardW;
+            const y = startY + row * cardH;
+
+            const card = this.scene.add.rectangle(x, y, cardW - 8, cardH - 8, 0x333333);
+            card.setStrokeStyle(2, 0xd4af37);
+            card.setInteractive({ useHandCursor: true });
+            card.setData('idx', idx);
+            card.setData('value', val);
+            card.setData('color', colors[val % colors.length]);
+
+            card.on('pointerdown', () => this.flipCard(idx));
+
+            this.memoryCards.push(card);
+            this.memoryFlipped.push(false);
+            this.container.add(card);
+        });
+
+        this.startTimer(30000 - difficulty * 2000, false);
+    }
+
+    private flipCard(idx: number): void {
+        if (this.memoryLocked || this.memoryFlipped[idx]) return;
+
+        const card = this.memoryCards[idx];
+        const color = card.getData('color') as number;
+        card.setFillStyle(color);
+        this.memoryFlipped[idx] = true;
+
+        if (this.memoryFirstPick === -1) {
+            this.memoryFirstPick = idx;
+        } else {
+            const firstIdx = this.memoryFirstPick;
+            const firstVal = this.memoryValues[firstIdx];
+            const secondVal = this.memoryValues[idx];
+
+            if (firstVal === secondVal) {
+                /* Match! */
+                this.memoryMatches++;
+                this.combo++;
+                this.scene.cameras.main.flash(100, 0, 255, 0);
+
+                if (this.memoryMatches === this.memoryValues.length / 2) {
+                    this.endMinigame(true);
+                }
+            } else {
+                /* No match, flip back */
+                this.combo = 0;
+                this.memoryLocked = true;
+                this.scene.time.delayedCall(800, () => {
+                    this.memoryCards[firstIdx].setFillStyle(0x333333);
+                    this.memoryCards[idx].setFillStyle(0x333333);
+                    this.memoryFlipped[firstIdx] = false;
+                    this.memoryFlipped[idx] = false;
+                    this.memoryLocked = false;
+                });
+            }
+            this.memoryFirstPick = -1;
+        }
     }
 
     private startTimer(duration: number, winOnTimeout: boolean): void {

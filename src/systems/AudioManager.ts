@@ -38,6 +38,12 @@ export class AudioManager {
     public playMusic(key: string, loop: boolean = true): void {
         if (this.currentMusic === key) return;
 
+        /* Check if the audio file exists */
+        if (!this.scene.cache.audio.exists(key)) {
+            console.warn(`Audio file not found: ${key}`);
+            return;
+        }
+
         /* Stop current music */
         if (this.currentMusic) {
             const current = this.music.get(this.currentMusic);
@@ -91,6 +97,9 @@ export class AudioManager {
      * Plays a sound effect once.
      */
     public playSFX(key: string, volume: number = this.sfxVolume): void {
+        if (!this.scene.cache.audio.exists(key)) {
+            return; /* Silently skip missing SFX */
+        }
         this.scene.sound.play(key, { volume });
     }
 
