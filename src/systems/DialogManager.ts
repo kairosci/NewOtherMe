@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { COLORS, GAME_WIDTH, GAME_HEIGHT } from '@/config/gameConfig';
 import { Dialog, DialogLine, DialogChoice } from '@/types/dialog';
 import { DIALOGS } from '@/config/constants';
+import { KarmaSystem } from '@/systems/KarmaSystem';
 
 /**
  * Manages the dialogue system, including displaying text, character portraits,
@@ -223,6 +224,12 @@ export class DialogManager {
         if (!this.currentDialog?.choices) return null;
 
         const choice = this.currentDialog.choices[this.selectedChoice];
+        
+        // Applica gli effetti della scelta
+        if (choice.karmaEffect) {
+            KarmaSystem.recordChoice(this.currentDialog.id, choice.karmaEffect);
+        }
+        
         this.clearChoices();
 
         if (choice.nextDialogId) {

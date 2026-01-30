@@ -111,6 +111,18 @@ export class MinigameManager {
         this.startMinigame(type, difficulty, onComplete);
     }
 
+    start(type: 'dodge' | 'timing' | 'mash', difficulty: number, onComplete: (success: boolean) => void): void {
+        // Mappa i tipi semplificati ai tipi di minigame interni
+        const typeMap: Record<'dodge' | 'timing' | 'mash', MinigameType> = {
+            'dodge': 'balance',    // Schivare = mantenere equilibrio
+            'timing': 'rhythm',    // Timing = premere al momento giusto
+            'mash': 'qte'          // Mashing = premere rapidamente
+        };
+        
+        const minigameType = typeMap[type];
+        this.startMinigame(minigameType, difficulty, onComplete);
+    }
+
     private startMinigame(type: MinigameType, difficulty: number, onComplete: (success: boolean) => void): void {
         this.isActive = true;
         this.currentType = type;

@@ -50,7 +50,10 @@ export const DIALOGS: Record<string, Dialog> = {
             { speaker: 'GENNARO', text: '...' },
             { speaker: 'DARIO', text: 'Lascia che ti insegni il tuo posto!' },
         ],
-        onComplete: 'battle_dario',
+        choices: [
+            { text: 'Mantieni la calma e rispondi con dignità', action: 'battle_dario_calm', karmaEffect: 1 },
+            { text: 'Lascia che la rabbia prenda il controllo', action: 'battle_dario_rage', karmaEffect: -1 },
+        ],
     },
 
     dario_defeated: {
@@ -131,10 +134,13 @@ export const DIALOGS: Record<string, Dialog> = {
         lines: [
             { speaker: 'GENNARO', text: 'BASTA!' },
             { text: 'La tua voce rimbomba nel vicolo.' },
-            { speaker: 'BULLO', text: '...Andiamo via.' },
-            { speaker: 'MASCHERA', text: 'Vedi? Il potere funziona.' },
+            { speaker: 'BULLO', text: 'Oh, vuoi fare il duro?' },
+            { speaker: 'BULLO', text: 'Vediamo se sai difenderti!' },
         ],
-        onComplete: 'start_minigame',
+        choices: [
+            { text: 'Cerca di calmare la situazione', action: 'battle_bully_calm', karmaEffect: 1 },
+            { text: 'Attacca per primo con violenza', action: 'battle_bully_rage', karmaEffect: -1 },
+        ],
     },
 
     father_house_enter: {
@@ -156,7 +162,10 @@ export const DIALOGS: Record<string, Dialog> = {
             { speaker: 'GENNARO', text: 'Io...' },
             { speaker: 'OMBRA', text: 'Lascia che ti mostri la verita!' },
         ],
-        onComplete: 'battle_father',
+        choices: [
+            { text: 'Affronta con compassione e perdono', action: 'battle_father_peaceful', karmaEffect: 1 },
+            { text: 'Lascia emergere tutto il tuo rancore', action: 'battle_father_aggressive', karmaEffect: -1 },
+        ],
     },
 
     father_defeated_resist: {

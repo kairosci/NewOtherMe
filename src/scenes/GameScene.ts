@@ -190,13 +190,26 @@ export class GameScene extends BaseScene {
         this.player.freeze();
         this.interactionPrompt.setVisible(false);
 
+        const dialogId = npc.getDialogId();
         this.dialogManager.show(dialogId, (action) => {
-            if (action === 'start_minigame' || action?.includes('battle') || npc.isBoss()) {
+            // Gestisce le azioni dalle scelte del dialogo
+            if (action?.includes('battle_') || action === 'start_minigame' || npc.isBoss()) {
                 const difficulty = 1.0 + (this.stage * 0.2);
+                
+                // Determina il tipo di minigame in base alla scelta
+                let minigameType: 'dodge' | 'timing' | 'mash' = 'dodge';
+                
+                if (action?.includes('_calm') || action?.includes('_peaceful')) {
+                    minigameType = 'timing'; // Approccio pacifico = timing preciso
+                } else if (action?.includes('_rage') || action?.includes('_aggressive')) {
+                    minigameType = 'mash'; // Approccio aggressivo = button mashing
+                } else {
+                    minigameType = 'dodge'; // Default = schivare
+                }
 
                 MaskSystem.getInstance().updateTask(`SCONFIGGI ${npc.getName().toUpperCase()}`);
 
-                this.minigameManager.startRandom(difficulty, (success) => {
+                this.minigameManager.start(minigameType, difficulty, (success) => {
                     if (success) {
                         this.dialogManager.show('minigame_win', () => {
                             this.player.unfreeze();

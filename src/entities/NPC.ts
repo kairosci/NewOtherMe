@@ -25,7 +25,7 @@ export class NPC {
         const x = config.position.x * TILE_SIZE * SCALE;
         const y = config.position.y * TILE_SIZE * SCALE;
 
-        this.sprite = scene.physics.add.sprite(x, y, config.sprite, 0);
+        this.sprite = scene.physics.add.sprite(x, y, config.sprite);
         this.sprite.setScale(SCALE);
         this.sprite.setImmovable(true);
         this.sprite.setDepth(9);
@@ -33,8 +33,6 @@ export class NPC {
         const body = this.sprite.body as Phaser.Physics.Arcade.Body;
         body.setSize(12, 8);
         body.setOffset(2, 16);
-        
-        this.sprite.play(`${config.sprite}_idle_${this.direction}`);
 
         this.interactionZone = scene.add.zone(x, y, TILE_SIZE * SCALE * 3, TILE_SIZE * SCALE * 3);
         scene.physics.world.enable(this.interactionZone);
@@ -108,7 +106,6 @@ export class NPC {
             this.idleTimer = 0;
             const directions: Direction[] = ['up', 'down', 'left', 'right'];
             this.lookDirection = directions[Math.floor(Math.random() * 4)];
-            this.sprite.play(`${this.config.sprite}_idle_${this.lookDirection}`, true);
         }
     }
 
@@ -170,8 +167,6 @@ export class NPC {
         } else {
             this.direction = dy > 0 ? 'down' : 'up';
         }
-        
-        this.sprite.play(`${this.config.sprite}_idle_${this.direction}`, true);
     }
 
     getPosition(): Vector2 {
