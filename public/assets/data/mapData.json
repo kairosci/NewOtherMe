@@ -1,0 +1,62 @@
+{
+    "SPAWN_POINTS": {
+        "apartment": {
+            "x": 10,
+            "y": 10
+        },
+        "theater": {
+            "x": 5,
+            "y": 18
+        },
+        "naplesAlley": {
+            "x": 8,
+            "y": 15
+        },
+        "fatherHouse": {
+            "x": 12,
+            "y": 15
+        }
+    },
+    "NPC_CONFIGS": {
+        "dario": {
+            "map": "theater",
+            "position": {
+                "x": 20,
+                "y": 5
+            },
+            "dialogId": "dario_intro"
+        },
+        "elisa": {
+            "map": "naplesAlley",
+            "position": {
+                "x": 10,
+                "y": 30
+            },
+            "dialogId": "elisa_meet"
+        },
+        "bully1": {
+            "map": "naplesAlley",
+            "position": {
+                "x": 15,
+                "y": 25
+            },
+            "dialogId": "bully_encounter"
+        },
+        "bully2": {
+            "map": "naplesAlley",
+            "position": {
+                "x": 18,
+                "y": 28
+            },
+            "dialogId": ""
+        },
+        "father_shadow": {
+            "map": "fatherHouse",
+            "position": {
+                "x": 12,
+                "y": 10
+            },
+            "dialogId": "father_confrontation"
+        }
+    }
+}

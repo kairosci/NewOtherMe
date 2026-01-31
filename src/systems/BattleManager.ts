@@ -7,7 +7,7 @@ import {
     type BattleState,
 } from "@/types/combat";
 import type { EnemyConfig } from "@/types/entities";
-import { InventoryManager, ItemDefinition, ItemEffect } from "./InventoryManager";
+import { InventoryManager } from "./InventoryManager";
 
 type BattleMenuState = "main" | "items";
 
@@ -238,10 +238,10 @@ export class BattleManager {
             const action = item.getData("action") as BattleActionType;
             if (index === this.selectedIndex) {
                 item.setColor("#ffd700");
-                item.setText("> " + BATTLE_ACTIONS[action].name);
+                item.setText(`> ${BATTLE_ACTIONS[action].name}`);
             } else {
                 item.setColor("#e0d5c0");
-                item.setText("  " + BATTLE_ACTIONS[action].name);
+                item.setText(`  ${BATTLE_ACTIONS[action].name}`);
             }
         });
     }
@@ -252,7 +252,9 @@ export class BattleManager {
         this.itemMenuBg.setVisible(true);
 
         // Clear old item menu
-        this.itemMenuItems.forEach((item) => item.destroy());
+        for (const item of this.itemMenuItems) {
+            item.destroy();
+        }
         this.itemMenuItems = [];
 
         const items = InventoryManager.getBattleItems();
@@ -318,26 +320,28 @@ export class BattleManager {
         this.menuState = "main";
         this.selectedIndex = 2; // Return to OGGETTO in main menu
         this.itemMenuBg.setVisible(false);
-        this.itemMenuItems.forEach((item) => item.destroy());
+        for (const item of this.itemMenuItems) {
+            item.destroy();
+        }
         this.itemMenuItems = [];
         this.updateMenuSelection();
     }
 
     private updateItemMenuSelection(): void {
-        const items = InventoryManager.getBattleItems();
+        const _items = InventoryManager.getBattleItems();
         let textIndex = 0;
 
-        this.itemMenuItems.forEach((item, index) => {
+        this.itemMenuItems.forEach((item, _index) => {
             if (item.getData("itemId")) {
                 if (textIndex === this.selectedIndex) {
                     item.setColor("#ffd700");
-                    item.setText("> " + item.text.substring(2));
+                    item.setText(`> ${item.text.substring(2)}`);
                 } else {
                     item.setColor("#e0d5c0");
                     const currentText = item.text.startsWith("> ")
                         ? item.text.substring(2)
                         : item.text;
-                    item.setText("  " + currentText);
+                    item.setText(`  ${currentText}`);
                 }
                 textIndex++;
             }
@@ -630,12 +634,15 @@ export class BattleManager {
             fled: "Ti allontani in silenzio.",
         };
 
-        await this.showMessage(messages[this.state.result!]);
+        const result = this.state.result;
+        if (result !== undefined) {
+            await this.showMessage(messages[result]);
 
-        this.scene.time.delayedCall(800, () => {
-            this.container.setVisible(false);
-            this.onComplete?.(this.state.result!, lastAction);
-        });
+            this.scene.time.delayedCall(800, () => {
+                this.container.setVisible(false);
+                this.onComplete?.(result, lastAction);
+            });
+        }
     }
 
     isActive(): boolean {

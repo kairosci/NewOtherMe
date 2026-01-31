@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-import { ENEMIES } from "@/config/constants";
 import { BATTLE_CONFIG, COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { DataManager } from "@/systems/DataManager";
 import { BATTLE_ACTIONS, type BattleActionType, type BattleState } from "@/types/combat";
 import type { EnemyConfig } from "@/types/entities";
 
@@ -25,7 +25,10 @@ export class BattleScene extends Phaser.Scene {
     }
 
     init(data: BattleSceneData): void {
-        this.enemy = ENEMIES[data.enemyId] || ENEMIES.dario;
+        this.enemy =
+            DataManager.getInstance().getEnemy(data.enemyId) ||
+            DataManager.getInstance().getEnemy("dario") ||
+            DataManager.getInstance().enemies.dario;
         this.state = {
             playerHp: BATTLE_CONFIG.playerMaxHp,
             playerMaxHp: BATTLE_CONFIG.playerMaxHp,
@@ -145,10 +148,10 @@ export class BattleScene extends Phaser.Scene {
             const action = item.getData("action") as BattleActionType;
             if (index === this.selectedIndex) {
                 item.setColor("#ffd700");
-                item.setText("> " + BATTLE_ACTIONS[action].name);
+                item.setText(`> ${BATTLE_ACTIONS[action].name}`);
             } else {
                 item.setColor("#e0d5c0");
-                item.setText("  " + BATTLE_ACTIONS[action].name);
+                item.setText(`  ${BATTLE_ACTIONS[action].name}`);
             }
         });
     }

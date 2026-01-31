@@ -1,0 +1,281 @@
+src/entities/Player.ts:5:6 lint/correctness/noUnusedVariables ━━━━━━━━━━
+
+  ! This type alias AnimationKey is unused.
+  
+    3 │ import type { Direction, Vector2 } from "@/types/game";
+    4 │ 
+  > 5 │ type AnimationKey =
+      │      ^^^^^^^^^^^^
+    6 │     | "idle_down"
+    7 │     | "idle_up"
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+
+src/scenes/BattleScene.ts:30:13 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    28 │         this.enemy =
+    29 │             DataManager.getInstance().getEnemy(data.enemyId) ||
+  > 30 │             DataManager.getInstance().getEnemy("dario")!;
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    31 │         this.state = {
+    32 │             playerHp: BATTLE_CONFIG.playerMaxHp,
+  
+
+src/scenes/DialogScene.ts:177:27 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    176 │         if (choice.nextDialogId) {
+  > 177 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+        │                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    178 │             this.lineIndex = 0;
+    179 │             this.choiceTexts.forEach((t) => t.destroy());
+  
+
+src/systems/BattleManager.ts:633:41 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    631 │         };
+    632 │ 
+  > 633 │         await this.showMessage(messages[this.state.result!]);
+        │                                         ^^^^^^^^^^^^^^^^^^
+    634 │ 
+    635 │         this.scene.time.delayedCall(800, () => {
+  
+
+src/systems/BattleManager.ts:637:31 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    635 │         this.scene.time.delayedCall(800, () => {
+    636 │             this.container.setVisible(false);
+  > 637 │             this.onComplete?.(this.state.result!, lastAction);
+        │                               ^^^^^^^^^^^^^^^^^^
+    638 │         });
+    639 │     }
+  
+
+src/systems/MinigameManager.ts:877:52 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    875 │             const mask = MaskSystem.getInstance();
+    876 │ 
+  > 877 │             if (["qte", "rhythm", "hold"].includes(this.currentType!)) {
+        │                                                    ^^^^^^^^^^^^^^^^^
+    878 │                 mask.modifyScore(isPerfect ? 2 : 1); /* Anger/Mask boost */
+    879 │             } else {
+  
+
+src/systems/MinigameManager.ts:59:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    57 │     private breathPhase: number = 0; /* 0 to PI*2 */
+    58 │     private breathSpeed: number = 0.002;
+  > 59 │     private breathTargetSize: number = 50;
+       │             ^^^^^^^^^^^^^^^^
+    60 │ 
+    61 │     /* Focus Props */
+  
+  i Unsafe fix: Remove unused declaration.
+  
+     57  57 │       private breathPhase: number = 0; /* 0 to PI*2 */
+     58  58 │       private breathSpeed: number = 0.002;
+     59     │ - ····private·breathTargetSize:·number·=·50;
+     60  59 │   
+     61  60 │       /* Focus Props */
+  
+
+src/utils/MobileDetector.ts:5:8 lint/complexity/noStaticOnlyClass ━━━━━━━━━━
+
+  ! Avoid classes that contain only static members.
+  
+     3 │  * Used to enable touch controls and adjust UI layout.
+     4 │  */
+   > 5 │ export class MobileDetector {
+       │        ^^^^^^^^^^^^^^^^^^^^^^
+   > 6 │     /**
+        ...
+  > 25 │         return MobileDetector.isMobile() || MobileDetector.isTouchDevice();
+  > 26 │     }
+  > 27 │ }
+       │ ^
+    28 │ 
+  
+  i Prefer using simple functions instead of classes with only static members.
+  
+
+src/scenes/DialogScene.ts:179:30 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    177 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+    178 │             this.lineIndex = 0;
+  > 179 │             this.choiceTexts.forEach((t) => t.destroy());
+        │                              ^^^^^^^
+    180 │             this.choiceTexts = [];
+    181 │             this.showCurrentLine();
+  
+  i Either remove this return or remove the returned value.
+  
+    177 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+    178 │             this.lineIndex = 0;
+  > 179 │             this.choiceTexts.forEach((t) => t.destroy());
+        │                                             ^^^^^^^^^^^
+    180 │             this.choiceTexts = [];
+    181 │             this.showCurrentLine();
+  
+
+src/scenes/GameScene.ts:294:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    292 │             this.player.getSprite() as Phaser.Physics.Arcade.Sprite,
+    293 │         );
+  > 294 │         this.npcs.forEach((npc) => npc.update(delta, this.player.getPosition()));
+        │                   ^^^^^^^
+    295 │ 
+    296 │         /* Interactions */
+  
+  i Either remove this return or remove the returned value.
+  
+    292 │             this.player.getSprite() as Phaser.Physics.Arcade.Sprite,
+    293 │         );
+  > 294 │         this.npcs.forEach((npc) => npc.update(delta, this.player.getPosition()));
+        │                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    295 │ 
+    296 │         /* Interactions */
+  
+
+src/scenes/GameScene.ts:468:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    467 │     private setupNPCCollisions(): void {
+  > 468 │         this.npcs.forEach((npc) =>
+        │                   ^^^^^^^
+    469 │             this.physics.add.collider(this.player.getSprite(), npc.getSprite()),
+    470 │         );
+  
+  i Either remove this return or remove the returned value.
+  
+    467 │     private setupNPCCollisions(): void {
+    468 │         this.npcs.forEach((npc) =>
+  > 469 │             this.physics.add.collider(this.player.getSprite(), npc.getSprite()),
+        │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    470 │         );
+    471 │     }
+  
+
+src/systems/AudioManager.ts:200:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    198 │      */
+    199 │     public destroy(): void {
+  > 200 │         this.music.forEach((s) => s.destroy());
+        │                    ^^^^^^^
+    201 │         this.music.clear();
+    202 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    198 │      */
+    199 │     public destroy(): void {
+  > 200 │         this.music.forEach((s) => s.destroy());
+        │                                   ^^^^^^^^^^^
+    201 │         this.music.clear();
+    202 │     }
+  
+
+src/systems/BattleManager.ts:255:28 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    254 │         // Clear old item menu
+  > 255 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                            ^^^^^^^
+    256 │         this.itemMenuItems = [];
+    257 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    254 │         // Clear old item menu
+  > 255 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                                              ^^^^^^^^^^^^^^
+    256 │         this.itemMenuItems = [];
+    257 │ 
+  
+
+src/systems/BattleManager.ts:321:28 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    319 │         this.selectedIndex = 2; // Return to OGGETTO in main menu
+    320 │         this.itemMenuBg.setVisible(false);
+  > 321 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                            ^^^^^^^
+    322 │         this.itemMenuItems = [];
+    323 │         this.updateMenuSelection();
+  
+  i Either remove this return or remove the returned value.
+  
+    319 │         this.selectedIndex = 2; // Return to OGGETTO in main menu
+    320 │         this.itemMenuBg.setVisible(false);
+  > 321 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                                              ^^^^^^^^^^^^^^
+    322 │         this.itemMenuItems = [];
+    323 │         this.updateMenuSelection();
+  
+
+src/systems/DialogManager.ts:297:26 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    296 │     private clearChoices(): void {
+  > 297 │         this.choiceTexts.forEach((t) => t.destroy());
+        │                          ^^^^^^^
+    298 │         this.choiceTexts = [];
+    299 │         if (this.timerBar) {
+  
+  i Either remove this return or remove the returned value.
+  
+    296 │     private clearChoices(): void {
+  > 297 │         this.choiceTexts.forEach((t) => t.destroy());
+        │                                         ^^^^^^^^^^^
+    298 │         this.choiceTexts = [];
+    299 │         if (this.timerBar) {
+  
+
+src/systems/ObjectiveManager.ts:107:24 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    106 │     private notifyListeners(): void {
+  > 107 │         this.listeners.forEach((listener) => listener(this.currentObjective));
+        │                        ^^^^^^^
+    108 │     }
+    109 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    106 │     private notifyListeners(): void {
+  > 107 │         this.listeners.forEach((listener) => listener(this.currentObjective));
+        │                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    108 │     }
+    109 │ 
+  
+
+Checked 43 files in 100ms. No fixes applied.
+Found 8 errors.
+Found 8 warnings.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

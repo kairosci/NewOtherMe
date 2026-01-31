@@ -1,6 +1,7 @@
 import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
 import { ErrorHandler } from "@/systems/ErrorHandler";
 import { SaveSystem } from "@/systems/SaveSystem";
+import type { CharacterFeatures } from "@/types/entities";
 
 /**
  * Boot Scene
@@ -36,22 +37,36 @@ export class BootScene extends Phaser.Scene {
         });
 
         this.load.image("background_shadow", "../background_shadow.png");
+
+        /* Config Data loading */
+        this.load.path = "assets/data/";
+        this.load.json("locale", "locale.json");
+        this.load.json("dialogs", "dialogs.json");
+        this.load.json("enemies", "enemies.json");
+        this.load.json("objectives", "objectives.json");
+        this.load.json("mapData", "mapData.json");
+        this.load.json("items", "items.json");
+
         this.load.path = "";
 
         this.load.on("complete", () => {
             /* Defer generation slightly to ensure scene is fully ready */
             this.time.delayedCall(100, () => {
-                this.generatePlaceholderAssets();
+                /* Initialize Data Manager with loaded JSONs */
+                import("@/systems/DataManager").then(({ DataManager }) => {
+                    DataManager.getInstance().init(this);
+                    this.generatePlaceholderAssets();
 
-                /* Apply generic settings */
-                const settings = SaveSystem.getSettings();
-                if (settings.fullscreen && !this.scale.isFullscreen) {
-                    /* Note: Browser may block this without user interaction,
-                       but Electron usually allows it. */
-                    this.scale.startFullscreen();
-                }
+                    /* Apply generic settings */
+                    const settings = SaveSystem.getSettings();
+                    if (settings.fullscreen && !this.scale.isFullscreen) {
+                        /* Note: Browser may block this without user interaction,
+                           but Electron usually allows it. */
+                        this.scale.startFullscreen();
+                    }
 
-                this.startGame();
+                    this.startGame();
+                });
             });
         });
 
@@ -198,12 +213,12 @@ export class BootScene extends Phaser.Scene {
      * Generates a sprite sheet for a character using direct Canvas drawing.
      * This avoids async issues with Phaser Graphics.
      */
-    private generateCharacterAssets(key: string, features: any): void {
+    private generateCharacterAssets(key: string, features: CharacterFeatures): void {
         this.generateCharacterSprite(key, features);
         this.generateCharacterPortrait(`${key}_portrait`, features);
     }
 
-    private generateCharacterSprite(key: string, features: any): void {
+    private generateCharacterSprite(key: string, features: CharacterFeatures): void {
         const frameW = 16;
         const frameH = 24;
         const cols = 3;
@@ -319,7 +334,7 @@ export class BootScene extends Phaser.Scene {
         ctx: CanvasRenderingContext2D,
         x: number,
         y: number,
-        f: any,
+        f: CharacterFeatures,
         dir: "down" | "up" | "left" | "right",
         walk: number,
     ): void {
@@ -383,7 +398,7 @@ export class BootScene extends Phaser.Scene {
         }
     }
 
-    private generateCharacterPortrait(key: string, f: any): void {
+    private generateCharacterPortrait(key: string, f: CharacterFeatures): void {
         const size = 64;
         if (this.textures.exists(key)) this.textures.remove(key);
 
@@ -597,6 +612,6 @@ export class BootScene extends Phaser.Scene {
 
     /* Helper: Hex ID to CSS String */
     private hexToCSS(color: number): string {
-        return "#" + color.toString(16).padStart(6, "0");
+        return `#${color.toString(16).padStart(6, "0")}`;
     }
 }

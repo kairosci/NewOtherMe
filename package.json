@@ -21,7 +21,8 @@
     "electron:build:mac": "npm run build && electron-builder --mac",
     "lint": "biome check ./src",
     "format": "biome format --write ./src",
-    "check": "biome check --write ./src"
+    "check": "biome check --write ./src",
+    "prepare": "husky"
   },
   "build": {
     "appId": "com.maskerati.teatrodelleombre",
@@ -67,6 +68,7 @@
     "concurrently": "^9.2.1",
     "electron": "^40.1.0",
     "electron-builder": "^26.4.0",
+    "husky": "^9.1.7",
     "typescript": "^5.9.3",
     "vite": "^7.2.4",
     "wait-on": "^9.0.3"

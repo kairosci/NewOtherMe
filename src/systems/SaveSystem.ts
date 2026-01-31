@@ -93,7 +93,7 @@ class SaveSystemClass {
 
     private loadBackup(): SaveData {
         try {
-            const backup = localStorage.getItem(STORAGE_KEY + "_backup");
+            const backup = localStorage.getItem(`${STORAGE_KEY}_backup`);
             if (backup) {
                 const parsed = JSON.parse(backup);
                 console.log("Restored from backup save");
@@ -114,7 +114,7 @@ class SaveSystemClass {
             /* Create backup of existing save first */
             const existing = localStorage.getItem(STORAGE_KEY);
             if (existing) {
-                localStorage.setItem(STORAGE_KEY + "_backup", existing);
+                localStorage.setItem(`${STORAGE_KEY}_backup`, existing);
             }
 
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));

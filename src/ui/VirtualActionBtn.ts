@@ -1,6 +1,6 @@
 import type Phaser from "phaser";
 import { GAME_HEIGHT, GAME_WIDTH } from "@/config/gameConfig";
-import { MobileDetector } from "@/utils/MobileDetector";
+import { shouldEnableMobileControls } from "@/utils/MobileDetector";
 
 /**
  * Virtual Action Button for mobile controls.
@@ -20,7 +20,7 @@ export class VirtualActionBtn {
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
-        if (MobileDetector.shouldEnableMobileControls()) {
+        if (shouldEnableMobileControls()) {
             this.create();
             this.active = true;
         }

@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
 
 /**
  * Pause Scene
@@ -19,7 +19,7 @@ export class PauseScene extends Phaser.Scene {
         const centerY = GAME_HEIGHT / 2;
 
         /* Titolo */
-        const title = this.add
+        const _title = this.add
             .text(centerX, centerY - 150, "PAUSA", {
                 fontFamily: "serif",
                 fontSize: "48px",

@@ -45,3 +45,12 @@ export interface EnemyAttack {
     temptationIncrease: number;
     description: string;
 }
+
+export interface CharacterFeatures {
+    body: number;
+    hair: number;
+    hairStyle: "short" | "long" | "messy" | "hood" | "bald";
+    shirt?: number;
+    beard?: number;
+    lips?: number;
+}

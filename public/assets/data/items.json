@@ -1,0 +1,68 @@
+{
+    "caffe": {
+        "id": "caffe",
+        "effect": {
+            "type": "heal",
+            "value": 30
+        },
+        "usableInBattle": true,
+        "usableInExploration": true,
+        "maxStack": 5,
+        "icon": "☕"
+    },
+    "sfogliatella": {
+        "id": "sfogliatella",
+        "effect": {
+            "type": "heal",
+            "value": 50
+        },
+        "usableInBattle": true,
+        "usableInExploration": true,
+        "maxStack": 3,
+        "icon": "🥐"
+    },
+    "limoncello": {
+        "id": "limoncello",
+        "effect": {
+            "type": "temptation_reduce",
+            "value": 20
+        },
+        "usableInBattle": true,
+        "usableInExploration": false,
+        "maxStack": 3,
+        "icon": "🍋"
+    },
+    "amuleto": {
+        "id": "amuleto",
+        "effect": {
+            "type": "temptation_reduce",
+            "value": 40
+        },
+        "usableInBattle": true,
+        "usableInExploration": false,
+        "maxStack": 2,
+        "icon": "🔮"
+    },
+    "foto_mamma": {
+        "id": "foto_mamma",
+        "effect": {
+            "type": "heal",
+            "value": 80
+        },
+        "usableInBattle": true,
+        "usableInExploration": true,
+        "maxStack": 1,
+        "icon": "📷"
+    },
+    "biglietto_teatro": {
+        "id": "biglietto_teatro",
+        "effect": {
+            "type": "heal",
+            "value": 20
+        },
+        "usableInBattle": true,
+        "usableInExploration": true,
+        "maxStack": 5,
+        "icon": "🎭"
+    }
+}

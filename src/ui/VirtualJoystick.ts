@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { GAME_HEIGHT } from "@/config/gameConfig";
-import { MobileDetector } from "@/utils/MobileDetector";
+import { shouldEnableMobileControls } from "@/utils/MobileDetector";
 
 /**
  * Virtual Joystick for mobile controls.
@@ -27,7 +27,7 @@ export class VirtualJoystick {
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene;
-        if (MobileDetector.shouldEnableMobileControls()) {
+        if (shouldEnableMobileControls()) {
             this.create();
             this.active = true;
         }

@@ -1,0 +1,1856 @@
+src/scenes/BattleScene.ts:150:30 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    148 │             if (index === this.selectedIndex) {
+    149 │                 item.setColor("#ffd700");
+  > 150 │                 item.setText("> " + BATTLE_ACTIONS[action].name);
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    151 │             } else {
+    152 │                 item.setColor("#e0d5c0");
+  
+  i Unsafe fix: Use a template literal.
+  
+    148 148 │               if (index === this.selectedIndex) {
+    149 149 │                   item.setColor("#ffd700");
+    150     │ - ················item.setText(">·"·+·BATTLE_ACTIONS[action].name);
+        150 │ + ················item.setText(`>·${BATTLE_ACTIONS[action].name}`);
+    151 151 │               } else {
+    152 152 │                   item.setColor("#e0d5c0");
+  
+
+src/scenes/BattleScene.ts:153:30 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    151 │             } else {
+    152 │                 item.setColor("#e0d5c0");
+  > 153 │                 item.setText("  " + BATTLE_ACTIONS[action].name);
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    154 │             }
+    155 │         });
+  
+  i Unsafe fix: Use a template literal.
+  
+    151 151 │               } else {
+    152 152 │                   item.setColor("#e0d5c0");
+    153     │ - ················item.setText("··"·+·BATTLE_ACTIONS[action].name);
+        153 │ + ················item.setText(`··${BATTLE_ACTIONS[action].name}`);
+    154 154 │               }
+    155 155 │           });
+  
+
+src/scenes/BootScene.ts:614:16 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    612 │     /* Helper: Hex ID to CSS String */
+    613 │     private hexToCSS(color: number): string {
+  > 614 │         return "#" + color.toString(16).padStart(6, "0");
+        │                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    615 │     }
+    616 │ }
+  
+  i Unsafe fix: Use a template literal.
+  
+    612 612 │       /* Helper: Hex ID to CSS String */
+    613 613 │       private hexToCSS(color: number): string {
+    614     │ - ········return·"#"·+·color.toString(16).padStart(6,·"0");
+        614 │ + ········return·`#${color.toString(16).padStart(6,·"0")}`;
+    615 615 │       }
+    616 616 │   }
+  
+
+src/scenes/DialogScene.ts:160:30 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    158 │             if (index === this.selectedChoice) {
+    159 │                 text.setColor("#ffd700");
+  > 160 │                 text.setText("> " + this.dialog.choices![index].text);
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    161 │             } else {
+    162 │                 text.setColor("#ffffff");
+  
+  i Unsafe fix: Use a template literal.
+  
+    158 158 │               if (index === this.selectedChoice) {
+    159 159 │                   text.setColor("#ffd700");
+    160     │ - ················text.setText(">·"·+·this.dialog.choices![index].text);
+        160 │ + ················text.setText(`>·${this.dialog.choices![index].text}`);
+    161 161 │               } else {
+    162 162 │                   text.setColor("#ffffff");
+  
+
+src/scenes/DialogScene.ts:163:30 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    161 │             } else {
+    162 │                 text.setColor("#ffffff");
+  > 163 │                 text.setText("  " + this.dialog.choices![index].text);
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    164 │             }
+    165 │         });
+  
+  i Unsafe fix: Use a template literal.
+  
+    161 161 │               } else {
+    162 162 │                   text.setColor("#ffffff");
+    163     │ - ················text.setText("··"·+·this.dialog.choices![index].text);
+        163 │ + ················text.setText(`··${this.dialog.choices![index].text}`);
+    164 164 │               }
+    165 165 │           });
+  
+
+src/scenes/EndingScene.ts:195:26 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    194 │     private showText(lines: string[], color: number): void {
+  > 195 │         const colorStr = "#" + color.toString(16).padStart(6, "0");
+        │                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    196 │         let y = 80;
+    197 │ 
+  
+  i Unsafe fix: Use a template literal.
+  
+    193 193 │   
+    194 194 │       private showText(lines: string[], color: number): void {
+    195     │ - ········const·colorStr·=·"#"·+·color.toString(16).padStart(6,·"0");
+        195 │ + ········const·colorStr·=·`#${color.toString(16).padStart(6,·"0")}`;
+    196 196 │           let y = 80;
+    197 197 │   
+  
+
+src/systems/BattleManager.ts:241:30 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    239 │             if (index === this.selectedIndex) {
+    240 │                 item.setColor("#ffd700");
+  > 241 │                 item.setText("> " + BATTLE_ACTIONS[action].name);
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    242 │             } else {
+    243 │                 item.setColor("#e0d5c0");
+  
+  i Unsafe fix: Use a template literal.
+  
+    239 239 │               if (index === this.selectedIndex) {
+    240 240 │                   item.setColor("#ffd700");
+    241     │ - ················item.setText(">·"·+·BATTLE_ACTIONS[action].name);
+        241 │ + ················item.setText(`>·${BATTLE_ACTIONS[action].name}`);
+    242 242 │               } else {
+    243 243 │                   item.setColor("#e0d5c0");
+  
+
+src/systems/BattleManager.ts:244:30 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    242 │             } else {
+    243 │                 item.setColor("#e0d5c0");
+  > 244 │                 item.setText("  " + BATTLE_ACTIONS[action].name);
+        │                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    245 │             }
+    246 │         });
+  
+  i Unsafe fix: Use a template literal.
+  
+    242 242 │               } else {
+    243 243 │                   item.setColor("#e0d5c0");
+    244     │ - ················item.setText("··"·+·BATTLE_ACTIONS[action].name);
+        244 │ + ················item.setText(`··${BATTLE_ACTIONS[action].name}`);
+    245 245 │               }
+    246 246 │           });
+  
+
+src/systems/BattleManager.ts:334:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    332 │                 if (textIndex === this.selectedIndex) {
+    333 │                     item.setColor("#ffd700");
+  > 334 │                     item.setText("> " + item.text.substring(2));
+        │                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    335 │                 } else {
+    336 │                     item.setColor("#e0d5c0");
+  
+  i Unsafe fix: Use a template literal.
+  
+    332 332 │                   if (textIndex === this.selectedIndex) {
+    333 333 │                       item.setColor("#ffd700");
+    334     │ - ····················item.setText(">·"·+·item.text.substring(2));
+        334 │ + ····················item.setText(`>·${item.text.substring(2)}`);
+    335 335 │                   } else {
+    336 336 │                       item.setColor("#e0d5c0");
+  
+
+src/systems/BattleManager.ts:340:34 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    338 │                         ? item.text.substring(2)
+    339 │                         : item.text;
+  > 340 │                     item.setText("  " + currentText);
+        │                                  ^^^^^^^^^^^^^^^^^^
+    341 │                 }
+    342 │                 textIndex++;
+  
+  i Unsafe fix: Use a template literal.
+  
+    338 338 │                           ? item.text.substring(2)
+    339 339 │                           : item.text;
+    340     │ - ····················item.setText("··"·+·currentText);
+        340 │ + ····················item.setText(`··${currentText}`);
+    341 341 │                   }
+    342 342 │                   textIndex++;
+  
+
+src/systems/DialogManager.ts:277:25 lint/correctness/useParseIntRadix  FIXABLE  ━━━━━━━━━━
+
+  i Missing radix parameter
+  
+    276 │         if (condition.startsWith("karma>")) {
+  > 277 │             const val = parseInt(condition.split(">")[1]);
+        │                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    278 │             return karma > val;
+    279 │         }
+  
+  i Add a non-fractional number between 2 and 36
+  
+  i Unsafe fix: Add a radix of 10
+  
+    277 │ ············const·val·=·parseInt(condition.split(">")[1],·10);
+        │                                                         ++++  
+
+src/systems/DialogManager.ts:281:25 lint/correctness/useParseIntRadix  FIXABLE  ━━━━━━━━━━
+
+  i Missing radix parameter
+  
+    279 │         }
+    280 │         if (condition.startsWith("karma<")) {
+  > 281 │             const val = parseInt(condition.split("<")[1]);
+        │                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    282 │             return karma < val;
+    283 │         }
+  
+  i Add a non-fractional number between 2 and 36
+  
+  i Unsafe fix: Add a radix of 10
+  
+    281 │ ············const·val·=·parseInt(condition.split("<")[1],·10);
+        │                                                         ++++  
+
+src/systems/EffectsManager.ts:157:13 lint/complexity/noUselessSwitchCase  FIXABLE  ━━━━━━━━━━
+
+  i Useless case clause.
+  
+    155 │                 break;
+    156 │ 
+  > 157 │             case "apartment":
+        │             ^^^^^^^^^^^^^^^^^
+    158 │             default:
+    159 │                 this.ambientLayer.setFillStyle(
+  
+  i because the default clause is present:
+  
+    157 │             case "apartment":
+  > 158 │             default:
+        │             ^^^^^^^^
+  > 159 │                 this.ambientLayer.setFillStyle(
+  > 160 │                     VISUALS.COLORS.AMBIENT.APARTMENT,
+  > 161 │                     VISUALS.ATMOSPHERE.DEFAULT.alpha,
+  > 162 │                 );
+  > 163 │                 break;
+        │                 ^^^^^^
+    164 │         }
+    165 │     }
+  
+  i Unsafe fix: Remove the useless case.
+  
+    154 154 │                   this.vignette.setAlpha(VISUALS.ATMOSPHERE.FATHER_HOUSE.vignette);
+    155 155 │                   break;
+    156     │ - 
+    157     │ - ············case·"apartment":
+    158 156 │               default:
+    159 157 │                   this.ambientLayer.setFillStyle(
+  
+
+src/systems/MinigameManager.ts:341:38 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    339 │         this.qteCount = 0;
+    340 │         this.qteTarget = Math.floor(5 + difficulty * 2);
+  > 341 │         this.instructionText.setText(locale.INSTRUCTIONS.QTE + `0/${this.qteTarget}`);
+        │                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    342 │         this.startTimer(Math.max(2000, 4000 - difficulty * 300), false);
+    343 │     }
+  
+  i Unsafe fix: Use a template literal.
+  
+    339 339 │           this.qteCount = 0;
+    340 340 │           this.qteTarget = Math.floor(5 + difficulty * 2);
+    341     │ - ········this.instructionText.setText(locale.INSTRUCTIONS.QTE·+·`0/${this.qteTarget}`);
+        341 │ + ········this.instructionText.setText(`${locale.INSTRUCTIONS.QTE}0/${this.qteTarget}`);
+    342 342 │           this.startTimer(Math.max(2000, 4000 - difficulty * 300), false);
+    343 343 │       }
+  
+
+src/systems/SaveSystem.ts:88:49 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    86 │     private loadBackup(): SaveData {
+    87 │         try {
+  > 88 │             const backup = localStorage.getItem(STORAGE_KEY + "_backup");
+       │                                                 ^^^^^^^^^^^^^^^^^^^^^^^
+    89 │             if (backup) {
+    90 │                 const parsed = JSON.parse(backup);
+  
+  i Unsafe fix: Use a template literal.
+  
+     86  86 │       private loadBackup(): SaveData {
+     87  87 │           try {
+     88     │ - ············const·backup·=·localStorage.getItem(STORAGE_KEY·+·"_backup");
+         88 │ + ············const·backup·=·localStorage.getItem(`${STORAGE_KEY}_backup`);
+     89  89 │               if (backup) {
+     90  90 │                   const parsed = JSON.parse(backup);
+  
+
+src/systems/SaveSystem.ts:109:38 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    107 │             const existing = localStorage.getItem(STORAGE_KEY);
+    108 │             if (existing) {
+  > 109 │                 localStorage.setItem(STORAGE_KEY + "_backup", existing);
+        │                                      ^^^^^^^^^^^^^^^^^^^^^^^
+    110 │             }
+    111 │ 
+  
+  i Unsafe fix: Use a template literal.
+  
+    107 107 │               const existing = localStorage.getItem(STORAGE_KEY);
+    108 108 │               if (existing) {
+    109     │ - ················localStorage.setItem(STORAGE_KEY·+·"_backup",·existing);
+        109 │ + ················localStorage.setItem(`${STORAGE_KEY}_backup`,·existing);
+    110 110 │               }
+    111 111 │   
+  
+
+src/ui/HUD.ts:90:17 lint/style/useTemplate  FIXABLE  ━━━━━━━━━━━━━━━━
+
+  i Template literals are preferred over string concatenation.
+  
+    88 │                 this.scene.cameras.main.width / 2,
+    89 │                 this.scene.cameras.main.height - 40,
+  > 90 │                 locale.UI.OBJECTIVE_PREFIX + "???",
+       │                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    91 │                 {
+    92 │                     fontFamily: "monospace",
+  
+  i Unsafe fix: Use a template literal.
+  
+     88  88 │                   this.scene.cameras.main.width / 2,
+     89  89 │                   this.scene.cameras.main.height - 40,
+     90     │ - ················locale.UI.OBJECTIVE_PREFIX·+·"???",
+         90 │ + ················`${locale.UI.OBJECTIVE_PREFIX}???`,
+     91  91 │                   {
+     92  92 │                       fontFamily: "monospace",
+  
+
+src/config/constants.ts:27:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    25 │         lines: [
+    26 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[0] as any).text },
+  > 27 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[1] as any).text },
+       │                                                                               ^^^
+    28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+    29 │             { speaker: "GENNARO", text: LOCALE.DIALOGS.dario_intro.lines[3] as string },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:26:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    24 │         id: "dario_intro",
+    25 │         lines: [
+  > 26 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[0] as any).text },
+       │                                                                               ^^^
+    27 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[1] as any).text },
+    28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:12:85 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    10 │             { text: LOCALE.DIALOGS.intro_apartment.lines[1] as string },
+    11 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[2] as any).text },
+  > 12 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[3] as any).text },
+       │                                                                                     ^^^
+    13 │         ],
+    14 │     },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:28:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    26 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[0] as any).text },
+    27 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[1] as any).text },
+  > 28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+       │                                                                               ^^^
+    29 │             { speaker: "GENNARO", text: LOCALE.DIALOGS.dario_intro.lines[3] as string },
+    30 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[4] as any).text },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:30:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+    29 │             { speaker: "GENNARO", text: LOCALE.DIALOGS.dario_intro.lines[3] as string },
+  > 30 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[4] as any).text },
+       │                                                                               ^^^
+    31 │         ],
+    32 │         choices: [
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:34:23 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    32 │         choices: [
+    33 │             {
+  > 34 │                 text: LOCALE.DIALOGS.dario_intro.choices![0],
+       │                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    35 │                 action: "battle_dario_calm",
+    36 │                 karmaEffect: 1,
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     32  32 │           choices: [
+     33  33 │               {
+     34     │ - ················text:·LOCALE.DIALOGS.dario_intro.choices![0],
+         34 │ + ················text:·LOCALE.DIALOGS.dario_intro.choices?.[0],
+     35  35 │                   action: "battle_dario_calm",
+     36  36 │                   karmaEffect: 1,
+  
+
+src/config/constants.ts:11:85 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+     9 │             { text: LOCALE.DIALOGS.intro_apartment.lines[0] as string },
+    10 │             { text: LOCALE.DIALOGS.intro_apartment.lines[1] as string },
+  > 11 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[2] as any).text },
+       │                                                                                     ^^^
+    12 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[3] as any).text },
+    13 │         ],
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:39:23 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    37 │             },
+    38 │             {
+  > 39 │                 text: LOCALE.DIALOGS.dario_intro.choices![1],
+       │                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    40 │                 action: "battle_dario_rage",
+    41 │                 karmaEffect: -1,
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+     37  37 │               },
+     38  38 │               {
+     39     │ - ················text:·LOCALE.DIALOGS.dario_intro.choices![1],
+         39 │ + ················text:·LOCALE.DIALOGS.dario_intro.choices?.[1],
+     40  40 │                   action: "battle_dario_rage",
+     41  41 │                   karmaEffect: -1,
+  
+
+src/config/constants.ts:19:84 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    17 │         lines: [
+    18 │             { speaker: "OMBRA", text: (LOCALE.DIALOGS.generic_intro.lines[0] as any).text },
+  > 19 │             { speaker: "MASCHERA", text: (LOCALE.DIALOGS.generic_intro.lines[1] as any).text },
+       │                                                                                    ^^^
+    20 │             { text: LOCALE.DIALOGS.generic_intro.lines[2] as string },
+    21 │         ],
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:18:81 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    16 │         id: "generic_intro",
+    17 │         lines: [
+  > 18 │             { speaker: "OMBRA", text: (LOCALE.DIALOGS.generic_intro.lines[0] as any).text },
+       │                                                                                 ^^^
+    19 │             { speaker: "MASCHERA", text: (LOCALE.DIALOGS.generic_intro.lines[1] as any).text },
+    20 │             { text: LOCALE.DIALOGS.generic_intro.lines[2] as string },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/entities/NPC.ts:10:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+     8 │     private sprite: Phaser.Physics.Arcade.Sprite;
+     9 │     private config: NPCConfig;
+  > 10 │     private direction: Direction;
+       │             ^^^^^^^^^
+    11 │     private interactionZone: Phaser.GameObjects.Zone;
+    12 │     private nameTag: Phaser.GameObjects.Text;
+  
+  i Unsafe fix: Remove unused declaration.
+  
+      8   8 │       private sprite: Phaser.Physics.Arcade.Sprite;
+      9   9 │       private config: NPCConfig;
+     10     │ - ····private·direction:·Direction;
+     11  10 │       private interactionZone: Phaser.GameObjects.Zone;
+     12  11 │       private nameTag: Phaser.GameObjects.Text;
+  
+
+src/entities/Player.ts:5:6 lint/correctness/noUnusedVariables ━━━━━━━━━━
+
+  ! This type alias AnimationKey is unused.
+  
+    3 │ import type { Direction, Vector2 } from "@/types/game";
+    4 │ 
+  > 5 │ type AnimationKey =
+      │      ^^^^^^^^^^^^
+    6 │     | "idle_down"
+    7 │     | "idle_up"
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+
+src/entities/Player.ts:23:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    21 │     private speed: number;
+    22 │     private animationTimer: number = 0;
+  > 23 │     private walkFrame = 0;
+       │             ^^^^^^^^^
+    24 │ 
+    25 │     constructor(scene: Phaser.Scene, x: number, y: number) {
+  
+  i Unsafe fix: Remove unused declaration.
+  
+     21  21 │       private speed: number;
+     22  22 │       private animationTimer: number = 0;
+     23     │ - ····private·walkFrame·=·0;
+     24  23 │   
+     25  24 │       constructor(scene: Phaser.Scene, x: number, y: number) {
+  
+
+src/scenes/AchievementsScene.ts:275:14 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    273 │         this.input.on(
+    274 │             "wheel",
+  > 275 │             (pointer: Phaser.Input.Pointer, gameObjects: any, deltaX: number, deltaY: number) => {
+        │              ^^^^^^^
+    276 │                 this.updateScroll(deltaY * 0.5);
+    277 │             },
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend pointer with an underscore.
+  
+    273 273 │           this.input.on(
+    274 274 │               "wheel",
+    275     │ - ············(pointer:·Phaser.Input.Pointer,·gameObjects:·any,·deltaX:·number,·deltaY:·number)·=>·{
+        275 │ + ············(_pointer:·Phaser.Input.Pointer,·gameObjects:·any,·deltaX:·number,·deltaY:·number)·=>·{
+    276 276 │                   this.updateScroll(deltaY * 0.5);
+    277 277 │               },
+  
+
+src/scenes/AchievementsScene.ts:275:45 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    273 │         this.input.on(
+    274 │             "wheel",
+  > 275 │             (pointer: Phaser.Input.Pointer, gameObjects: any, deltaX: number, deltaY: number) => {
+        │                                             ^^^^^^^^^^^
+    276 │                 this.updateScroll(deltaY * 0.5);
+    277 │             },
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend gameObjects with an underscore.
+  
+    273 273 │           this.input.on(
+    274 274 │               "wheel",
+    275     │ - ············(pointer:·Phaser.Input.Pointer,·gameObjects:·any,·deltaX:·number,·deltaY:·number)·=>·{
+        275 │ + ············(pointer:·Phaser.Input.Pointer,·_gameObjects:·any,·deltaX:·number,·deltaY:·number)·=>·{
+    276 276 │                   this.updateScroll(deltaY * 0.5);
+    277 277 │               },
+  
+
+src/scenes/AchievementsScene.ts:275:63 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    273 │         this.input.on(
+    274 │             "wheel",
+  > 275 │             (pointer: Phaser.Input.Pointer, gameObjects: any, deltaX: number, deltaY: number) => {
+        │                                                               ^^^^^^
+    276 │                 this.updateScroll(deltaY * 0.5);
+    277 │             },
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend deltaX with an underscore.
+  
+    273 273 │           this.input.on(
+    274 274 │               "wheel",
+    275     │ - ············(pointer:·Phaser.Input.Pointer,·gameObjects:·any,·deltaX:·number,·deltaY:·number)·=>·{
+        275 │ + ············(pointer:·Phaser.Input.Pointer,·gameObjects:·any,·_deltaX:·number,·deltaY:·number)·=>·{
+    276 276 │                   this.updateScroll(deltaY * 0.5);
+    277 277 │               },
+  
+
+src/scenes/AchievementsScene.ts:275:58 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    273 │         this.input.on(
+    274 │             "wheel",
+  > 275 │             (pointer: Phaser.Input.Pointer, gameObjects: any, deltaX: number, deltaY: number) => {
+        │                                                          ^^^
+    276 │                 this.updateScroll(deltaY * 0.5);
+    277 │             },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/AchievementsScene.ts:1:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+  > 1 │ import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+      │          ^^^^^^
+    2 │ import { type Achievement, AchievementManager } from "@/systems/AchievementManager";
+    3 │ import { DataManager } from "@/systems/DataManager";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    1 │ import·{·COLORS,·GAME_HEIGHT,·GAME_WIDTH,·SCENES·}·from·"@/config/gameConfig";
+      │          --------                                                             
+
+src/scenes/BattleScene.ts:30:13 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    28 │         this.enemy =
+    29 │             DataManager.getInstance().getEnemy(data.enemyId) ||
+  > 30 │             DataManager.getInstance().getEnemy("dario")!;
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    31 │         this.state = {
+    32 │             playerHp: BATTLE_CONFIG.playerMaxHp,
+  
+
+src/scenes/BootScene.ts:215:60 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    213 │      * This avoids async issues with Phaser Graphics.
+    214 │      */
+  > 215 │     private generateCharacterAssets(key: string, features: any): void {
+        │                                                            ^^^
+    216 │         this.generateCharacterSprite(key, features);
+    217 │         this.generateCharacterPortrait(`${key}_portrait`, features);
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BootScene.ts:220:60 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    218 │     }
+    219 │ 
+  > 220 │     private generateCharacterSprite(key: string, features: any): void {
+        │                                                            ^^^
+    221 │         const frameW = 16;
+    222 │         const frameH = 24;
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BootScene.ts:336:12 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    334 │         x: number,
+    335 │         y: number,
+  > 336 │         f: any,
+        │            ^^^
+    337 │         dir: "down" | "up" | "left" | "right",
+    338 │         walk: number,
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BootScene.ts:400:55 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    398 │     }
+    399 │ 
+  > 400 │     private generateCharacterPortrait(key: string, f: any): void {
+        │                                                       ^^^
+    401 │         const size = 64;
+    402 │         if (this.textures.exists(key)) this.textures.remove(key);
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/CreditsScene.ts:1:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+  > 1 │ import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+      │          ^^^^^^
+    2 │ import { DataManager } from "@/systems/DataManager";
+    3 │ import { BaseScene } from "./BaseScene";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    1 │ import·{·COLORS,·GAME_HEIGHT,·GAME_WIDTH,·SCENES·}·from·"@/config/gameConfig";
+      │          --------                                                             
+
+src/scenes/CreditsScene.ts:23:15 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable skip is unused.
+  
+    22 │         /* Skip hint */
+  > 23 │         const skip = this.add
+       │               ^^^^
+    24 │             .text(
+    25 │                 GAME_WIDTH - 20,
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend skip with an underscore.
+  
+     21  21 │   
+     22  22 │           /* Skip hint */
+     23     │ - ········const·skip·=·this.add
+         23 │ + ········const·_skip·=·this.add
+     24  24 │               .text(
+     25  25 │                   GAME_WIDTH - 20,
+  
+
+src/scenes/CreditsScene.ts:131:12 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    129 │     }
+    130 │ 
+  > 131 │     update(time: number, delta: number): void {
+        │            ^^^^
+    132 │         this.scrollingText.y -= this.scrollSpeed * (delta / 16);
+    133 │ 
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend time with an underscore.
+  
+    129 129 │       }
+    130 130 │   
+    131     │ - ····update(time:·number,·delta:·number):·void·{
+        131 │ + ····update(_time:·number,·delta:·number):·void·{
+    132 132 │           this.scrollingText.y -= this.scrollSpeed * (delta / 16);
+    133 133 │   
+  
+
+src/scenes/DialogScene.ts:32:23 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    31 │     init(data: DialogSceneData): void {
+  > 32 │         this.dialog = DataManager.getInstance().getDialog(data.dialogId)!;
+       │                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    33 │         this.lineIndex = 0;
+    34 │         this.displayedText = "";
+  
+
+src/scenes/DialogScene.ts:1:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+  > 1 │ import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+      │          ^^^^^^
+    2 │ import { DataManager } from "@/systems/DataManager";
+    3 │ import type { Dialog, DialogChoice } from "@/types/dialog";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    1 │ import·{·COLORS,·GAME_HEIGHT,·GAME_WIDTH,·SCENES·}·from·"@/config/gameConfig";
+      │          --------                                                             
+
+src/scenes/DialogScene.ts:4:8 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! This import is unused.
+  
+    2 │ import { DataManager } from "@/systems/DataManager";
+    3 │ import type { Dialog, DialogChoice } from "@/types/dialog";
+  > 4 │ import { BaseScene } from "./BaseScene";
+      │        ^^^^^^^^^^^^^
+    5 │ 
+    6 │ interface DialogSceneData {
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+      2   2 │   import { DataManager } from "@/systems/DataManager";
+      3   3 │   import type { Dialog, DialogChoice } from "@/types/dialog";
+      4     │ - import·{·BaseScene·}·from·"./BaseScene";
+      5   4 │   
+      6   5 │   interface DialogSceneData {
+  
+
+src/scenes/DialogScene.ts:160:37 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    158 │             if (index === this.selectedChoice) {
+    159 │                 text.setColor("#ffd700");
+  > 160 │                 text.setText("> " + this.dialog.choices![index].text);
+        │                                     ^^^^^^^^^^^^^^^^^^^^
+    161 │             } else {
+    162 │                 text.setColor("#ffffff");
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    158 158 │               if (index === this.selectedChoice) {
+    159 159 │                   text.setColor("#ffd700");
+    160     │ - ················text.setText(">·"·+·this.dialog.choices![index].text);
+        160 │ + ················text.setText(">·"·+·this.dialog.choices?.[index].text);
+    161 161 │               } else {
+    162 162 │                   text.setColor("#ffffff");
+  
+
+src/scenes/DialogScene.ts:163:37 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    161 │             } else {
+    162 │                 text.setColor("#ffffff");
+  > 163 │                 text.setText("  " + this.dialog.choices![index].text);
+        │                                     ^^^^^^^^^^^^^^^^^^^^
+    164 │             }
+    165 │         });
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    161 161 │               } else {
+    162 162 │                   text.setColor("#ffffff");
+    163     │ - ················text.setText("··"·+·this.dialog.choices![index].text);
+        163 │ + ················text.setText("··"·+·this.dialog.choices?.[index].text);
+    164 164 │               }
+    165 165 │           });
+  
+
+src/scenes/DialogScene.ts:169:24 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    168 │     private selectChoice(): void {
+  > 169 │         const choice = this.dialog.choices![this.selectedChoice];
+        │                        ^^^^^^^^^^^^^^^^^^^^
+    170 │ 
+    171 │         if (choice.nextDialogId) {
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    167 167 │   
+    168 168 │       private selectChoice(): void {
+    169     │ - ········const·choice·=·this.dialog.choices![this.selectedChoice];
+        169 │ + ········const·choice·=·this.dialog.choices?.[this.selectedChoice];
+    170 170 │   
+    171 171 │           if (choice.nextDialogId) {
+  
+
+src/scenes/DialogScene.ts:172:27 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    171 │         if (choice.nextDialogId) {
+  > 172 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+        │                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    173 │             this.lineIndex = 0;
+    174 │             this.choiceTexts.forEach((t) => t.destroy());
+  
+
+src/scenes/DialogScene.ts:209:21 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    207 │             ) {
+    208 │                 this.selectedChoice = Math.min(
+  > 209 │                     this.dialog.choices!.length - 1,
+        │                     ^^^^^^^^^^^^^^^^^^^^
+    210 │                     this.selectedChoice + 1,
+    211 │                 );
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    207 207 │               ) {
+    208 208 │                   this.selectedChoice = Math.min(
+    209     │ - ····················this.dialog.choices!.length·-·1,
+        209 │ + ····················this.dialog.choices?.length·-·1,
+    210 210 │                       this.selectedChoice + 1,
+    211 211 │                   );
+  
+
+src/scenes/EndingScene.ts:239:15 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable stats is unused.
+  
+    238 │     private showStats(): void {
+  > 239 │         const stats = SaveSystem.getStats();
+        │               ^^^^^
+    240 │         const summary = KarmaSystem.getSummary();
+    241 │ 
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend stats with an underscore.
+  
+    237 237 │   
+    238 238 │       private showStats(): void {
+    239     │ - ········const·stats·=·SaveSystem.getStats();
+        239 │ + ········const·_stats·=·SaveSystem.getStats();
+    240 240 │           const summary = KarmaSystem.getSummary();
+    241 241 │   
+  
+
+src/scenes/GameScene.ts:3:5 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    1 │ import {
+    2 │     BATTLE_CONFIG,
+  > 3 │     COLORS,
+      │     ^^^^^^
+    4 │     GAME_HEIGHT,
+    5 │     GAME_WIDTH,
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+      1   1 │   import {
+      2   2 │       BATTLE_CONFIG,
+      3     │ - ····COLORS,
+      4   3 │       GAME_HEIGHT,
+      5   4 │       GAME_WIDTH,
+  
+
+src/scenes/GameScene.ts:62:22 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    61 │     /** Cycle of maps for Endless Mode progression */
+  > 62 │     private readonly MAP_CYCLE: MapKey[] = ["theater", "naplesAlley", "fatherHouse"];
+       │                      ^^^^^^^^^
+    63 │ 
+    64 │     public static resetState(): void {
+  
+  i Unsafe fix: Remove unused declaration.
+  
+     58  58 │       private stage: number = 1;
+     59  59 │       private static tutorialDone = false;
+     60     │ - 
+     61     │ - ····/**·Cycle·of·maps·for·Endless·Mode·progression·*/
+     62     │ - ····private·readonly·MAP_CYCLE:·MapKey[]·=·["theater",·"naplesAlley",·"fatherHouse"];
+     63  60 │   
+     64  61 │       public static resetState(): void {
+  
+
+src/scenes/GameScene.ts:276:13 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━
+
+  ! Change to an optional chain.
+  
+    274 │         /* Input Handling (Keyboard + Mobile) */
+    275 │         const input = this.getMovementInput();
+  > 276 │         if (this.joystick && this.joystick.isActive()) {
+        │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    277 │             if (this.joystick.left) input.x = -1;
+    278 │             if (this.joystick.right) input.x = 1;
+  
+  i Unsafe fix: Change to an optional chain.
+  
+    274 274 │           /* Input Handling (Keyboard + Mobile) */
+    275 275 │           const input = this.getMovementInput();
+    276     │ - ········if·(this.joystick·&&·this.joystick.isActive())·{
+        276 │ + ········if·(this.joystick?.isActive())·{
+    277 277 │               if (this.joystick.left) input.x = -1;
+    278 278 │               if (this.joystick.right) input.x = 1;
+  
+
+src/scenes/GameScene.ts:285:14 lint/complexity/useOptionalChain  FIXABLE  ━━━━━━━━━━
+
+  ! Change to an optional chain.
+  
+    283 │         const interactPressed =
+    284 │             Phaser.Input.Keyboard.JustDown(this.keys.E) ||
+  > 285 │             (this.actionBtn && this.actionBtn.isActionActive());
+        │              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    286 │ 
+    287 │         /* Mobile Touch Interaction Handled by ActionBtn now */
+  
+  i Unsafe fix: Change to an optional chain.
+  
+    283 283 │           const interactPressed =
+    284 284 │               Phaser.Input.Keyboard.JustDown(this.keys.E) ||
+    285     │ - ············(this.actionBtn·&&·this.actionBtn.isActionActive());
+        285 │ + ············(this.actionBtn?.isActionActive());
+    286 286 │   
+    287 287 │           /* Mobile Touch Interaction Handled by ActionBtn now */
+  
+
+src/scenes/MenuScene.ts:299:19 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable statsText is unused.
+  
+    298 │         if (stats.resistCount > 0 || stats.fightCount > 0) {
+  > 299 │             const statsText = this.add.text(
+        │                   ^^^^^^^^^
+    300 │                 30,
+    301 │                 GAME_HEIGHT - 40,
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend statsText with an underscore.
+  
+    297 297 │   
+    298 298 │           if (stats.resistCount > 0 || stats.fightCount > 0) {
+    299     │ - ············const·statsText·=·this.add.text(
+        299 │ + ············const·_statsText·=·this.add.text(
+    300 300 │                   30,
+    301 301 │                   GAME_HEIGHT - 40,
+  
+
+src/scenes/PauseScene.ts:22:15 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable title is unused.
+  
+    21 │         /* Titolo */
+  > 22 │         const title = this.add
+       │               ^^^^^
+    23 │             .text(centerX, centerY - 150, "PAUSA", {
+    24 │                 fontFamily: "serif",
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend title with an underscore.
+  
+    20 20 │   
+    21 21 │           /* Titolo */
+    22    │ - ········const·title·=·this.add
+       22 │ + ········const·_title·=·this.add
+    23 23 │               .text(centerX, centerY - 150, "PAUSA", {
+    24 24 │                   fontFamily: "serif",
+  
+
+src/scenes/PauseScene.ts:2:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    1 │ import Phaser from "phaser";
+  > 2 │ import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+      │          ^^^^^^
+    3 │ 
+    4 │ /**
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    2 │ import·{·COLORS,·GAME_HEIGHT,·GAME_WIDTH,·SCENES·}·from·"@/config/gameConfig";
+      │          --------                                                             
+
+src/scenes/SettingsScene.ts:25:15 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable centerY is unused.
+  
+    24 │         const centerX = GAME_WIDTH / 2;
+  > 25 │         const centerY = GAME_HEIGHT / 2;
+       │               ^^^^^^^
+    26 │ 
+    27 │         /* Ensure fullscreen targets the wrapper for better scaling */
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend centerY with an underscore.
+  
+    23 23 │   
+    24 24 │           const centerX = GAME_WIDTH / 2;
+    25    │ - ········const·centerY·=·GAME_HEIGHT·/·2;
+       25 │ + ········const·_centerY·=·GAME_HEIGHT·/·2;
+    26 26 │   
+    27 27 │           /* Ensure fullscreen targets the wrapper for better scaling */
+  
+
+src/systems/AchievementManager.ts:1:8 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! This import is unused.
+  
+  > 1 │ import Phaser from "phaser";
+      │        ^^^^^^
+    2 │ import { SaveSystem } from "./SaveSystem";
+    3 │ 
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    1 │ import·Phaser·from·"phaser";
+      │ ----------------------------
+
+src/systems/AudioManager.ts:167:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    165 │             const current = this.music.get(this.currentMusic);
+    166 │             if (current) {
+  > 167 │                 (current as any).setRate(value);
+        │                             ^^^
+    168 │             }
+    169 │         }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/AudioManager.ts:183:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    181 │             if (current) {
+    182 │                 /* Update currently playing music volume immediately */
+  > 183 │                 (current as any).volume = this.musicVolume;
+        │                             ^^^
+    184 │             }
+    185 │         }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/BattleManager.ts:633:41 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    631 │         };
+    632 │ 
+  > 633 │         await this.showMessage(messages[this.state.result!]);
+        │                                         ^^^^^^^^^^^^^^^^^^
+    634 │ 
+    635 │         this.scene.time.delayedCall(800, () => {
+  
+
+src/systems/BattleManager.ts:637:31 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    635 │         this.scene.time.delayedCall(800, () => {
+    636 │             this.container.setVisible(false);
+  > 637 │             this.onComplete?.(this.state.result!, lastAction);
+        │                               ^^^^^^^^^^^^^^^^^^
+    638 │         });
+    639 │     }
+  
+
+src/systems/BattleManager.ts:10:28 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+     8 │ } from "@/types/combat";
+     9 │ import type { EnemyConfig } from "@/types/entities";
+  > 10 │ import { InventoryManager, ItemDefinition, ItemEffect } from "./InventoryManager";
+       │                            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    11 │ 
+    12 │ type BattleMenuState = "main" | "items";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    10 │ import·{·InventoryManager,·ItemDefinition,·ItemEffect·}·from·"./InventoryManager";
+       │                            ---------------------------                            
+
+src/systems/BattleManager.ts:327:15 lint/correctness/noUnusedVariables  FIXABLE  ━━━━━━━━━━
+
+  ! This variable items is unused.
+  
+    326 │     private updateItemMenuSelection(): void {
+  > 327 │         const items = InventoryManager.getBattleItems();
+        │               ^^^^^
+    328 │         let textIndex = 0;
+    329 │ 
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+  i Unsafe fix: If this is intentional, prepend items with an underscore.
+  
+    325 325 │   
+    326 326 │       private updateItemMenuSelection(): void {
+    327     │ - ········const·items·=·InventoryManager.getBattleItems();
+        327 │ + ········const·_items·=·InventoryManager.getBattleItems();
+    328 328 │           let textIndex = 0;
+    329 329 │   
+  
+
+src/systems/BattleManager.ts:330:43 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    328 │         let textIndex = 0;
+    329 │ 
+  > 330 │         this.itemMenuItems.forEach((item, index) => {
+        │                                           ^^^^^
+    331 │             if (item.getData("itemId")) {
+    332 │                 if (textIndex === this.selectedIndex) {
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend index with an underscore.
+  
+    328 328 │           let textIndex = 0;
+    329 329 │   
+    330     │ - ········this.itemMenuItems.forEach((item,·index)·=>·{
+        330 │ + ········this.itemMenuItems.forEach((item,·_index)·=>·{
+    331 331 │               if (item.getData("itemId")) {
+    332 332 │                   if (textIndex === this.selectedIndex) {
+  
+
+src/systems/DataManager.ts:53:30 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    51 │         return this._enemies;
+    52 │     }
+  > 53 │     public get objectives(): any {
+       │                              ^^^
+    54 │         return this._objectives;
+    55 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:56:27 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    54 │         return this._objectives;
+    55 │     }
+  > 56 │     public get mapData(): any {
+       │                           ^^^
+    57 │         return this._mapData;
+    58 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:59:25 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    57 │         return this._mapData;
+    58 │     }
+  > 59 │     public get items(): any {
+       │                         ^^^
+    60 │         return this._items;
+    61 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:12:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    10 │ export class DataManager {
+    11 │     private static instance: DataManager;
+  > 12 │     private scene!: Phaser.Scene;
+       │             ^^^^^
+    13 │     private _locale: any;
+    14 │     private _dialogs: Record<string, Dialog> = {};
+  
+  i Unsafe fix: Remove unused declaration.
+  
+    10 10 │   export class DataManager {
+    11 11 │       private static instance: DataManager;
+    12    │ - ····private·scene!:·Phaser.Scene;
+    13 12 │       private _locale: any;
+    14 13 │       private _dialogs: Record<string, Dialog> = {};
+  
+
+src/systems/DataManager.ts:13:22 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    11 │     private static instance: DataManager;
+    12 │     private scene!: Phaser.Scene;
+  > 13 │     private _locale: any;
+       │                      ^^^
+    14 │     private _dialogs: Record<string, Dialog> = {};
+    15 │     private _enemies: Record<string, EnemyConfig> = {};
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:16:26 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    14 │     private _dialogs: Record<string, Dialog> = {};
+    15 │     private _enemies: Record<string, EnemyConfig> = {};
+  > 16 │     private _objectives: any;
+       │                          ^^^
+    17 │     private _mapData: any;
+    18 │     private _items: any;
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:17:23 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    15 │     private _enemies: Record<string, EnemyConfig> = {};
+    16 │     private _objectives: any;
+  > 17 │     private _mapData: any;
+       │                       ^^^
+    18 │     private _items: any;
+    19 │ 
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:18:21 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    16 │     private _objectives: any;
+    17 │     private _mapData: any;
+  > 18 │     private _items: any;
+       │                     ^^^
+    19 │ 
+    20 │     private constructor() {}
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:44:26 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    43 │     /* Getters */
+  > 44 │     public get locale(): any {
+       │                          ^^^
+    45 │         return this._locale;
+    46 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DialogManager.ts:295:55 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    293 │             const isSelected = index === this.selectedChoice;
+    294 │             text.setColor(isSelected ? "#ffd700" : "#ffffff");
+  > 295 │             text.setText((isSelected ? "> " : "  ") + this.currentDialog!.choices![index].text);
+        │                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    296 │         });
+    297 │     }
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    293 293 │               const isSelected = index === this.selectedChoice;
+    294 294 │               text.setColor(isSelected ? "#ffd700" : "#ffffff");
+    295     │ - ············text.setText((isSelected·?·">·"·:·"··")·+·this.currentDialog!.choices![index].text);
+        295 │ + ············text.setText((isSelected·?·">·"·:·"··")·+·this.currentDialog!.choices?.[index].text);
+    296 296 │           });
+    297 297 │       }
+  
+
+src/systems/DialogManager.ts:295:55 lint/style/noNonNullAssertion  FIXABLE  ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    293 │             const isSelected = index === this.selectedChoice;
+    294 │             text.setColor(isSelected ? "#ffd700" : "#ffffff");
+  > 295 │             text.setText((isSelected ? "> " : "  ") + this.currentDialog!.choices![index].text);
+        │                                                       ^^^^^^^^^^^^^^^^^^^
+    296 │         });
+    297 │     }
+  
+  i Unsafe fix: Replace with optional chain operator ?. This operator includes runtime checks, so it is safer than the compile-only non-null assertion operator
+  
+    293 293 │               const isSelected = index === this.selectedChoice;
+    294 294 │               text.setColor(isSelected ? "#ffd700" : "#ffffff");
+    295     │ - ············text.setText((isSelected·?·">·"·:·"··")·+·this.currentDialog!.choices![index].text);
+        295 │ + ············text.setText((isSelected·?·">·"·:·"··")·+·this.currentDialog?.choices![index].text);
+    296 296 │           });
+    297 297 │       }
+  
+
+src/systems/DialogManager.ts:2:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    1 │ import Phaser from "phaser";
+  > 2 │ import { COLORS, GAME_HEIGHT, GAME_WIDTH, UI_CONFIG } from "@/config/gameConfig";
+      │          ^^^^^^
+    3 │ import { AudioManager } from "@/systems/AudioManager";
+    4 │ import { KarmaSystem } from "@/systems/KarmaSystem";
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    2 │ import·{·COLORS,·GAME_HEIGHT,·GAME_WIDTH,·UI_CONFIG·}·from·"@/config/gameConfig";
+      │          --------                                                                
+
+src/systems/DialogManager.ts:6:42 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    4 │ import { KarmaSystem } from "@/systems/KarmaSystem";
+    5 │ import { SaveSystem } from "@/systems/SaveSystem";
+  > 6 │ import { type Dialog, type DialogChoice, DialogLine } from "@/types/dialog";
+      │                                          ^^^^^^^^^^
+    7 │ import { DataManager } from "./DataManager";
+    8 │ 
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    6 │ import·{·type·Dialog,·type·DialogChoice,·DialogLine·}·from·"@/types/dialog";
+      │                                          -----------                        
+
+src/systems/DialogManager.ts:16:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    14 │     private scene: Phaser.Scene;
+    15 │     private container: Phaser.GameObjects.Container;
+  > 16 │     private background: Phaser.GameObjects.Rectangle;
+       │             ^^^^^^^^^^
+    17 │     private speakerText: Phaser.GameObjects.Text;
+    18 │     private contentText: Phaser.GameObjects.Text;
+  
+  i Unsafe fix: Remove unused declaration.
+  
+     14  14 │       private scene: Phaser.Scene;
+     15  15 │       private container: Phaser.GameObjects.Container;
+     16     │ - ····private·background:·Phaser.GameObjects.Rectangle;
+     17  16 │       private speakerText: Phaser.GameObjects.Text;
+     18  17 │       private contentText: Phaser.GameObjects.Text;
+  
+
+src/systems/DialogManager.ts:199:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    197 │     }
+    198 │ 
+  > 199 │     private choiceTimer: Phaser.Time.TimerEvent | null = null;
+        │             ^^^^^^^^^^^
+    200 │     private timerBar: Phaser.GameObjects.Rectangle | null = null;
+    201 │ 
+  
+  i Unsafe fix: Remove unused declaration.
+  
+    196 196 │           }
+    197 197 │       }
+    198     │ - 
+    199     │ - ····private·choiceTimer:·Phaser.Time.TimerEvent·|·null·=·null;
+    200 198 │       private timerBar: Phaser.GameObjects.Rectangle | null = null;
+    201 199 │   
+  
+
+src/systems/MapManager.ts:2:10 lint/correctness/noUnusedImports  FIXABLE  ━━━━━━━━━━
+
+  ! Several of these imports are unused.
+  
+    1 │ import type Phaser from "phaser";
+  > 2 │ import { COLORS, SCALE, TILE_SIZE } from "@/config/gameConfig";
+      │          ^^^^^^
+    3 │ import type { MapKey } from "@/types/game";
+    4 │ 
+  
+  i Unused imports might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: Remove the unused imports.
+  
+    2 │ import·{·COLORS,·SCALE,·TILE_SIZE·}·from·"@/config/gameConfig";
+      │          --------                                              
+
+src/ui/Slider.ts:53:33 lint/correctness/noUnusedFunctionParameters  FIXABLE  ━━━━━━━━━━
+
+  ! This parameter is unused.
+  
+    52 │         /* Input Events */
+  > 53 │         this.handle.on("drag", (pointer: Phaser.Input.Pointer, dragX: number) => {
+       │                                 ^^^^^^^
+    54 │             const minX = -width / 2;
+    55 │             const maxX = width / 2;
+  
+  i Unused parameters might be the result of an incomplete refactoring.
+  
+  i Unsafe fix: If this is intentional, prepend pointer with an underscore.
+  
+    51 51 │   
+    52 52 │           /* Input Events */
+    53    │ - ········this.handle.on("drag",·(pointer:·Phaser.Input.Pointer,·dragX:·number)·=>·{
+       53 │ + ········this.handle.on("drag",·(_pointer:·Phaser.Input.Pointer,·dragX:·number)·=>·{
+    54 54 │               const minX = -width / 2;
+    55 55 │               const maxX = width / 2;
+  
+
+src/utils/MobileDetector.ts:5:8 lint/complexity/noStaticOnlyClass ━━━━━━━━━━
+
+  ! Avoid classes that contain only static members.
+  
+     3 │  * Used to enable touch controls and adjust UI layout.
+     4 │  */
+   > 5 │ export class MobileDetector {
+       │        ^^^^^^^^^^^^^^^^^^^^^^
+   > 6 │     /**
+        ...
+  > 25 │         return MobileDetector.isMobile() || MobileDetector.isTouchDevice();
+  > 26 │     }
+  > 27 │ }
+       │ ^
+    28 │ 
+  
+  i Prefer using simple functions instead of classes with only static members.
+  
+
+src/scenes/DialogScene.ts:174:30 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    172 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+    173 │             this.lineIndex = 0;
+  > 174 │             this.choiceTexts.forEach((t) => t.destroy());
+        │                              ^^^^^^^
+    175 │             this.choiceTexts = [];
+    176 │             this.showCurrentLine();
+  
+  i Either remove this return or remove the returned value.
+  
+    172 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+    173 │             this.lineIndex = 0;
+  > 174 │             this.choiceTexts.forEach((t) => t.destroy());
+        │                                             ^^^^^^^^^^^
+    175 │             this.choiceTexts = [];
+    176 │             this.showCurrentLine();
+  
+
+src/scenes/GameScene.ts:141:23 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    139 │         /** Day/Night Cycle Handling */
+    140 │         TimeManager.onTimeChange((time) => {
+  > 141 │             this.npcs.forEach((npc) => npc.checkAvailability(time));
+        │                       ^^^^^^^
+    142 │         });
+    143 │         /* Initial check */
+  
+  i Either remove this return or remove the returned value.
+  
+    139 │         /** Day/Night Cycle Handling */
+    140 │         TimeManager.onTimeChange((time) => {
+  > 141 │             this.npcs.forEach((npc) => npc.checkAvailability(time));
+        │                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    142 │         });
+    143 │         /* Initial check */
+  
+
+src/scenes/GameScene.ts:144:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    142 │         });
+    143 │         /* Initial check */
+  > 144 │         this.npcs.forEach((npc) => npc.checkAvailability(TimeManager.getCurrentTime()));
+        │                   ^^^^^^^
+    145 │     }
+    146 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    142 │         });
+    143 │         /* Initial check */
+  > 144 │         this.npcs.forEach((npc) => npc.checkAvailability(TimeManager.getCurrentTime()));
+        │                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    145 │     }
+    146 │ 
+  
+
+src/scenes/GameScene.ts:295:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    293 │             this.player.getSprite() as Phaser.Physics.Arcade.Sprite,
+    294 │         );
+  > 295 │         this.npcs.forEach((npc) => npc.update(delta, this.player.getPosition()));
+        │                   ^^^^^^^
+    296 │ 
+    297 │         /* Interactions */
+  
+  i Either remove this return or remove the returned value.
+  
+    293 │             this.player.getSprite() as Phaser.Physics.Arcade.Sprite,
+    294 │         );
+  > 295 │         this.npcs.forEach((npc) => npc.update(delta, this.player.getPosition()));
+        │                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    296 │ 
+    297 │         /* Interactions */
+  
+
+src/scenes/GameScene.ts:469:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    468 │     private setupNPCCollisions(): void {
+  > 469 │         this.npcs.forEach((npc) =>
+        │                   ^^^^^^^
+    470 │             this.physics.add.collider(this.player.getSprite(), npc.getSprite()),
+    471 │         );
+  
+  i Either remove this return or remove the returned value.
+  
+    468 │     private setupNPCCollisions(): void {
+    469 │         this.npcs.forEach((npc) =>
+  > 470 │             this.physics.add.collider(this.player.getSprite(), npc.getSprite()),
+        │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    471 │         );
+    472 │     }
+  
+
+src/systems/AudioManager.ts:200:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    198 │      */
+    199 │     public destroy(): void {
+  > 200 │         this.music.forEach((s) => s.destroy());
+        │                    ^^^^^^^
+    201 │         this.music.clear();
+    202 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    198 │      */
+    199 │     public destroy(): void {
+  > 200 │         this.music.forEach((s) => s.destroy());
+        │                                   ^^^^^^^^^^^
+    201 │         this.music.clear();
+    202 │     }
+  
+
+src/systems/BattleManager.ts:255:28 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    254 │         // Clear old item menu
+  > 255 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                            ^^^^^^^
+    256 │         this.itemMenuItems = [];
+    257 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    254 │         // Clear old item menu
+  > 255 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                                              ^^^^^^^^^^^^^^
+    256 │         this.itemMenuItems = [];
+    257 │ 
+  
+
+src/systems/BattleManager.ts:321:28 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    319 │         this.selectedIndex = 2; // Return to OGGETTO in main menu
+    320 │         this.itemMenuBg.setVisible(false);
+  > 321 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                            ^^^^^^^
+    322 │         this.itemMenuItems = [];
+    323 │         this.updateMenuSelection();
+  
+  i Either remove this return or remove the returned value.
+  
+    319 │         this.selectedIndex = 2; // Return to OGGETTO in main menu
+    320 │         this.itemMenuBg.setVisible(false);
+  > 321 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                                              ^^^^^^^^^^^^^^
+    322 │         this.itemMenuItems = [];
+    323 │         this.updateMenuSelection();
+  
+
+src/systems/DialogManager.ts:300:26 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    299 │     private clearChoices(): void {
+  > 300 │         this.choiceTexts.forEach((t) => t.destroy());
+        │                          ^^^^^^^
+    301 │         this.choiceTexts = [];
+    302 │         if (this.timerBar) {
+  
+  i Either remove this return or remove the returned value.
+  
+    299 │     private clearChoices(): void {
+  > 300 │         this.choiceTexts.forEach((t) => t.destroy());
+        │                                         ^^^^^^^^^^^
+    301 │         this.choiceTexts = [];
+    302 │         if (this.timerBar) {
+  
+
+src/systems/InventoryManager.ts:109:38 lint/suspicious/noAssignInExpressions ━━━━━━━━━━
+
+  × The assignment should not be in an expression.
+  
+    107 │     getTotalItems(): number {
+    108 │         let total = 0;
+  > 109 │         this.items.forEach((qty) => (total += qty));
+        │                                      ^^^^^^^^^^^^
+    110 │         return total;
+    111 │     }
+  
+  i The use of assignments in expressions is confusing.
+    Expressions are often considered as side-effect free.
+  
+
+src/systems/InventoryManager.ts:115:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    113 │     saveState(): Record<string, number> {
+    114 │         const state: Record<string, number> = {};
+  > 115 │         this.items.forEach((qty, id) => (state[id] = qty));
+        │                    ^^^^^^^
+    116 │         return state;
+    117 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    113 │     saveState(): Record<string, number> {
+    114 │         const state: Record<string, number> = {};
+  > 115 │         this.items.forEach((qty, id) => (state[id] = qty));
+        │                                         ^^^^^^^^^^^^^^^^^
+    116 │         return state;
+    117 │     }
+  
+
+src/systems/InventoryManager.ts:115:42 lint/suspicious/noAssignInExpressions ━━━━━━━━━━
+
+  × The assignment should not be in an expression.
+  
+    113 │     saveState(): Record<string, number> {
+    114 │         const state: Record<string, number> = {};
+  > 115 │         this.items.forEach((qty, id) => (state[id] = qty));
+        │                                          ^^^^^^^^^^^^^^^
+    116 │         return state;
+    117 │     }
+  
+  i The use of assignments in expressions is confusing.
+    Expressions are often considered as side-effect free.
+  
+
+src/systems/InventoryManager.ts:109:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    107 │     getTotalItems(): number {
+    108 │         let total = 0;
+  > 109 │         this.items.forEach((qty) => (total += qty));
+        │                    ^^^^^^^
+    110 │         return total;
+    111 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    107 │     getTotalItems(): number {
+    108 │         let total = 0;
+  > 109 │         this.items.forEach((qty) => (total += qty));
+        │                                     ^^^^^^^^^^^^^^
+    110 │         return total;
+    111 │     }
+  
+
+src/systems/ObjectiveManager.ts:107:24 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    106 │     private notifyListeners(): void {
+  > 107 │         this.listeners.forEach((listener) => listener(this.currentObjective));
+        │                        ^^^^^^^
+    108 │     }
+    109 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    106 │     private notifyListeners(): void {
+  > 107 │         this.listeners.forEach((listener) => listener(this.currentObjective));
+        │                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    108 │     }
+    109 │ 
+  
+
+The number of diagnostics exceeds the limit allowed. Use --max-diagnostics to increase it.
+Diagnostics not shown: 17.
+Checked 45 files in 123ms. No fixes applied.
+Found 14 errors.
+Found 84 warnings.
+Found 19 infos.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

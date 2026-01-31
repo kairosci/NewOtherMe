@@ -1,7 +1,6 @@
-import { DIALOGS } from "@/config/constants";
-import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { DataManager } from "@/systems/DataManager";
 import type { Dialog, DialogChoice } from "@/types/dialog";
-import { BaseScene } from "./BaseScene";
 
 interface DialogSceneData {
     dialogId: string;
@@ -29,7 +28,13 @@ export class DialogScene extends Phaser.Scene {
     }
 
     init(data: DialogSceneData): void {
-        this.dialog = DIALOGS[data.dialogId];
+        const dialog = DataManager.getInstance().getDialog(data.dialogId);
+        if (!dialog) {
+            console.error(`Dialog not found: ${data.dialogId}`);
+            this.scene.stop();
+            return;
+        }
+        this.dialog = dialog;
         this.lineIndex = 0;
         this.displayedText = "";
         this.isTyping = false;
@@ -157,23 +162,28 @@ export class DialogScene extends Phaser.Scene {
         this.choiceTexts.forEach((text, index) => {
             if (index === this.selectedChoice) {
                 text.setColor("#ffd700");
-                text.setText("> " + this.dialog.choices![index].text);
+                text.setText(`> ${this.dialog.choices?.[index].text}`);
             } else {
                 text.setColor("#ffffff");
-                text.setText("  " + this.dialog.choices![index].text);
+                text.setText(`  ${this.dialog.choices?.[index].text}`);
             }
         });
     }
 
     private selectChoice(): void {
-        const choice = this.dialog.choices![this.selectedChoice];
+        const choice = this.dialog.choices?.[this.selectedChoice];
 
         if (choice.nextDialogId) {
-            this.dialog = DIALOGS[choice.nextDialogId];
-            this.lineIndex = 0;
-            this.choiceTexts.forEach((t) => t.destroy());
-            this.choiceTexts = [];
-            this.showCurrentLine();
+            const nextDialog = DataManager.getInstance().getDialog(choice.nextDialogId);
+            if (nextDialog) {
+                this.dialog = nextDialog;
+                this.lineIndex = 0;
+                for (const t of this.choiceTexts) {
+                    t.destroy();
+                }
+                this.choiceTexts = [];
+                this.showCurrentLine();
+            }
         } else {
             this.endDialog();
         }
@@ -206,7 +216,7 @@ export class DialogScene extends Phaser.Scene {
                 Phaser.Input.Keyboard.JustDown(this.keys.S)
             ) {
                 this.selectedChoice = Math.min(
-                    this.dialog.choices!.length - 1,
+                    this.dialog.choices?.length - 1,
                     this.selectedChoice + 1,
                 );
                 this.updateChoiceSelection();

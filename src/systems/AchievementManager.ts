@@ -1,4 +1,3 @@
-import Phaser from "phaser";
 import { SaveSystem } from "./SaveSystem";
 
 export interface Achievement {

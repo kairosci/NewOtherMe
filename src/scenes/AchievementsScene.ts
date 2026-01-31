@@ -1,5 +1,6 @@
-import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
 import { type Achievement, AchievementManager } from "@/systems/AchievementManager";
+import { DataManager } from "@/systems/DataManager";
 import { BaseScene } from "./BaseScene";
 
 export class AchievementsScene extends BaseScene {
@@ -47,7 +48,8 @@ export class AchievementsScene extends BaseScene {
     }
 
     private createHeader(): void {
-        const title = this.add.text(GAME_WIDTH / 2, 50, "TROFEI", {
+        const locale = DataManager.getInstance().locale.ACHIEVEMENTS;
+        const title = this.add.text(GAME_WIDTH / 2, 50, locale.TITLE, {
             fontFamily: "Georgia, serif",
             fontSize: "36px",
             color: "#d4af37",
@@ -71,7 +73,7 @@ export class AchievementsScene extends BaseScene {
         const subtitle = this.add.text(
             GAME_WIDTH / 2,
             110,
-            `${progress.unlocked} / ${progress.total} sbloccati (${percentage}%)`,
+            `${progress.unlocked} / ${progress.total}${locale.UNLOCKED_SUFFIX} (${percentage}%)`,
             {
                 fontFamily: "monospace",
                 fontSize: "14px",
@@ -130,6 +132,8 @@ export class AchievementsScene extends BaseScene {
         const titleColor = isUnlocked ? "#ffffff" : "#666666";
         const descColor = isUnlocked ? "#aaaaaa" : "#444444";
 
+        const locale = DataManager.getInstance().locale.ACHIEVEMENTS;
+
         const title = this.add
             .text(textX, -15, ach.hidden && !isUnlocked ? "???" : ach.name, {
                 fontFamily: "serif",
@@ -139,7 +143,7 @@ export class AchievementsScene extends BaseScene {
             .setOrigin(0, 0.5);
 
         const desc = this.add
-            .text(textX, 15, ach.hidden && !isUnlocked ? "Segreto" : ach.description, {
+            .text(textX, 15, ach.hidden && !isUnlocked ? locale.SECRET : ach.description, {
                 fontFamily: "monospace",
                 fontSize: "12px",
                 color: descColor,
@@ -152,7 +156,7 @@ export class AchievementsScene extends BaseScene {
         /* Locked / Checkmark overlay */
         if (isUnlocked) {
             const check = this.add
-                .text(width / 2 - 30, 0, "SBLOCCATO", {
+                .text(width / 2 - 30, 0, locale.UNLOCKED, {
                     fontSize: "18px",
                     color: "#d4af37",
                     fontFamily: "monospace",
@@ -161,7 +165,7 @@ export class AchievementsScene extends BaseScene {
             card.add(check);
         } else {
             const lock = this.add
-                .text(width / 2 - 30, 0, "BLOCCATO", {
+                .text(width / 2 - 30, 0, locale.LOCKED, {
                     fontSize: "18px",
                     color: "#666666",
                     fontFamily: "monospace",
@@ -225,8 +229,8 @@ export class AchievementsScene extends BaseScene {
                 g.fillPath();
                 break;
             default: /* Trophy or generic */
-            /* Base */
-            /* Cup */
+                /* Base */
+                /* Cup */
                 g.fillRect(x - 8, y + 8, 16, 4);
                 g.moveTo(x - 10, y - 8);
                 g.lineTo(x, y + 8);
@@ -268,7 +272,12 @@ export class AchievementsScene extends BaseScene {
     private setupScrollInput(): void {
         this.input.on(
             "wheel",
-            (pointer: Phaser.Input.Pointer, gameObjects: any, deltaX: number, deltaY: number) => {
+            (
+                _pointer: Phaser.Input.Pointer,
+                _gameObjects: unknown[],
+                _deltaX: number,
+                deltaY: number,
+            ) => {
                 this.updateScroll(deltaY * 0.5);
             },
         );
@@ -294,7 +303,8 @@ export class AchievementsScene extends BaseScene {
     }
 
     private createBackButton(): void {
-        const btn = this.add.text(50, GAME_HEIGHT - 40, "< INDIETRO", {
+        const locale = DataManager.getInstance().locale.ACHIEVEMENTS;
+        const btn = this.add.text(50, GAME_HEIGHT - 40, locale.BACK, {
             fontFamily: "monospace",
             fontSize: "16px",
             color: "#888888",

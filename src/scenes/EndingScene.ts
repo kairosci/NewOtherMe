@@ -192,7 +192,7 @@ export class EndingScene extends Phaser.Scene {
     }
 
     private showText(lines: string[], color: number): void {
-        const colorStr = "#" + color.toString(16).padStart(6, "0");
+        const colorStr = `#${color.toString(16).padStart(6, "0")}`;
         let y = 80;
 
         lines.forEach((line, index) => {
@@ -236,7 +236,7 @@ export class EndingScene extends Phaser.Scene {
     }
 
     private showStats(): void {
-        const stats = SaveSystem.getStats();
+        const _stats = SaveSystem.getStats();
         const summary = KarmaSystem.getSummary();
 
         const y = GAME_HEIGHT - 180;

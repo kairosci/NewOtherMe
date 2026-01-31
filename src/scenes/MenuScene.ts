@@ -1,7 +1,7 @@
 import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
-import { LOCALE } from "@/config/locale";
 import { TransitionManager } from "@/effects/TransitionManager";
 import { AudioManager } from "@/systems/AudioManager";
+import { DataManager } from "@/systems/DataManager";
 import { KarmaSystem } from "@/systems/KarmaSystem";
 import { SaveSystem } from "@/systems/SaveSystem";
 import { BaseScene } from "./BaseScene";
@@ -81,7 +81,7 @@ export class MenuScene extends BaseScene {
 
         /* Letter by letter animation */
         let i = 0;
-        const text = LOCALE.MENU.TITLE;
+        const text = DataManager.getInstance().locale.MENU.TITLE;
         this.time.addEvent({
             delay: 100,
             callback: () => {
@@ -92,12 +92,17 @@ export class MenuScene extends BaseScene {
             repeat: text.length - 1,
         });
 
-        const subtitle = this.add.text(GAME_WIDTH / 2, 220, LOCALE.MENU.SUBTITLE, {
-            fontFamily: "Georgia, serif",
-            fontSize: "16px",
-            color: "#8b7355",
-            fontStyle: "italic",
-        });
+        const subtitle = this.add.text(
+            GAME_WIDTH / 2,
+            220,
+            DataManager.getInstance().locale.MENU.SUBTITLE,
+            {
+                fontFamily: "Georgia, serif",
+                fontSize: "16px",
+                color: "#8b7355",
+                fontStyle: "italic",
+            },
+        );
         subtitle.setOrigin(0.5);
         subtitle.setAlpha(0);
         this.tweens.add({ targets: subtitle, alpha: 1, delay: 1500, duration: 1000 });
@@ -108,11 +113,16 @@ export class MenuScene extends BaseScene {
         const hasSave = SaveSystem.hasSave();
         const spacing = 50; /* Reduced from 60 */
 
-        this.createButton(GAME_WIDTH / 2, buttonY, LOCALE.MENU.NEW_GAME, () => {
-            SaveSystem.reset();
-            GameScene.resetState();
-            this.startGame();
-        });
+        this.createButton(
+            GAME_WIDTH / 2,
+            buttonY,
+            DataManager.getInstance().locale.MENU.NEW_GAME,
+            () => {
+                SaveSystem.reset();
+                GameScene.resetState();
+                this.startGame();
+            },
+        );
 
         if (hasSave) {
             let step = 0;
@@ -121,12 +131,12 @@ export class MenuScene extends BaseScene {
             const btn = this.createButton(
                 GAME_WIDTH / 2,
                 buttonY + spacing,
-                LOCALE.MENU.CONTINUE,
+                DataManager.getInstance().locale.MENU.CONTINUE,
                 () => {
                     if (step === 0) {
                         /* Show Preview */
                         step = 1;
-                        btn.label.setText(LOCALE.MENU.LOAD);
+                        btn.label.setText(DataManager.getInstance().locale.MENU.LOAD);
                         btn.label.setColor("#ffd700");
 
                         this.tweens.add({
@@ -143,35 +153,55 @@ export class MenuScene extends BaseScene {
                 },
             );
 
-            this.createButton(GAME_WIDTH / 2, buttonY + spacing * 2, LOCALE.MENU.SETTINGS, () => {
-                this.scene.launch(SCENES.SETTINGS);
-            });
-            this.createButton(
-                GAME_WIDTH / 2,
-                buttonY + spacing * 3,
-                LOCALE.MENU.ACHIEVEMENTS,
-                () => {
-                    this.scene.start(SCENES.ACHIEVEMENTS);
-                },
-            );
-            this.createButton(GAME_WIDTH / 2, buttonY + spacing * 4, LOCALE.MENU.CREDITS, () => {
-                this.scene.start(SCENES.CREDITS);
-            });
-        } else {
-            this.createButton(GAME_WIDTH / 2, buttonY + spacing, LOCALE.MENU.SETTINGS, () => {
-                this.scene.launch(SCENES.SETTINGS);
-            });
             this.createButton(
                 GAME_WIDTH / 2,
                 buttonY + spacing * 2,
-                LOCALE.MENU.ACHIEVEMENTS,
+                DataManager.getInstance().locale.MENU.SETTINGS,
+                () => {
+                    this.scene.launch(SCENES.SETTINGS);
+                },
+            );
+            this.createButton(
+                GAME_WIDTH / 2,
+                buttonY + spacing * 3,
+                DataManager.getInstance().locale.MENU.ACHIEVEMENTS,
                 () => {
                     this.scene.start(SCENES.ACHIEVEMENTS);
                 },
             );
-            this.createButton(GAME_WIDTH / 2, buttonY + spacing * 3, LOCALE.MENU.CREDITS, () => {
-                this.scene.start(SCENES.CREDITS);
-            });
+            this.createButton(
+                GAME_WIDTH / 2,
+                buttonY + spacing * 4,
+                DataManager.getInstance().locale.MENU.CREDITS,
+                () => {
+                    this.scene.start(SCENES.CREDITS);
+                },
+            );
+        } else {
+            this.createButton(
+                GAME_WIDTH / 2,
+                buttonY + spacing,
+                DataManager.getInstance().locale.MENU.SETTINGS,
+                () => {
+                    this.scene.launch(SCENES.SETTINGS);
+                },
+            );
+            this.createButton(
+                GAME_WIDTH / 2,
+                buttonY + spacing * 2,
+                DataManager.getInstance().locale.MENU.ACHIEVEMENTS,
+                () => {
+                    this.scene.start(SCENES.ACHIEVEMENTS);
+                },
+            );
+            this.createButton(
+                GAME_WIDTH / 2,
+                buttonY + spacing * 3,
+                DataManager.getInstance().locale.MENU.CREDITS,
+                () => {
+                    this.scene.start(SCENES.CREDITS);
+                },
+            );
         }
     }
 
@@ -183,7 +213,7 @@ export class MenuScene extends BaseScene {
         bg.setStrokeStyle(1, 0xd4af37);
 
         const title = this.add
-            .text(0, -35, LOCALE.MENU.SAVE_TITLE, {
+            .text(0, -35, DataManager.getInstance().locale.MENU.SAVE_TITLE, {
                 fontFamily: "monospace",
                 fontSize: "10px",
                 color: "#d4af37",
@@ -195,10 +225,10 @@ export class MenuScene extends BaseScene {
                 0,
                 5,
                 [
-                    `${LOCALE.MENU.SAVE_MAP}${summary.map}`,
-                    `${LOCALE.MENU.SAVE_TIME}${summary.time}`,
-                    `${LOCALE.MENU.SAVE_KARMA}${summary.karma}`,
-                    `${LOCALE.MENU.SAVE_DATE}${summary.lastSaved.split(" ")[0]}`,
+                    `${DataManager.getInstance().locale.MENU.SAVE_MAP}${summary.map}`,
+                    `${DataManager.getInstance().locale.MENU.SAVE_TIME}${summary.time}`,
+                    `${DataManager.getInstance().locale.MENU.SAVE_KARMA}${summary.karma}`,
+                    `${DataManager.getInstance().locale.MENU.SAVE_DATE}${summary.lastSaved.split(" ")[0]}`,
                 ].join("\n"),
                 {
                     fontFamily: "monospace",
@@ -266,12 +296,12 @@ export class MenuScene extends BaseScene {
         const achievements = SaveSystem.getAchievements();
 
         if (stats.resistCount > 0 || stats.fightCount > 0) {
-            const statsText = this.add.text(
+            const _statsText = this.add.text(
                 30,
                 GAME_HEIGHT - 40,
                 [
-                    `${LOCALE.MENU.STATS_CHALLENGES}${stats.resistCount + stats.fightCount}`,
-                    `${LOCALE.MENU.STATS_ACHIEVEMENTS}${achievements.length}`,
+                    `${DataManager.getInstance().locale.MENU.STATS_CHALLENGES}${stats.resistCount + stats.fightCount}`,
+                    `${DataManager.getInstance().locale.MENU.STATS_ACHIEVEMENTS}${achievements.length}`,
                 ].join(" | "),
                 {
                     fontFamily: "monospace",
@@ -281,11 +311,16 @@ export class MenuScene extends BaseScene {
             );
         }
 
-        const credits = this.add.text(20, GAME_HEIGHT - 20, LOCALE.MENU.FOOTER_CREDITS, {
-            fontFamily: "monospace",
-            fontSize: "11px",
-            color: "#333333",
-        });
+        const credits = this.add.text(
+            20,
+            GAME_HEIGHT - 20,
+            DataManager.getInstance().locale.MENU.FOOTER_CREDITS,
+            {
+                fontFamily: "monospace",
+                fontSize: "11px",
+                color: "#333333",
+            },
+        );
         credits.setOrigin(0, 0.5);
     }
 

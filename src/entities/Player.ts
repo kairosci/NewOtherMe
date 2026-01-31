@@ -2,16 +2,6 @@ import type Phaser from "phaser";
 import { PLAYER_CONFIG, SCALE, TILE_SIZE } from "@/config/gameConfig";
 import type { Direction, Vector2 } from "@/types/game";
 
-type AnimationKey =
-    | "idle_down"
-    | "idle_up"
-    | "idle_left"
-    | "idle_right"
-    | "walk_down"
-    | "walk_up"
-    | "walk_left"
-    | "walk_right";
-
 export class Player {
     private scene: Phaser.Scene;
     private sprite: Phaser.Physics.Arcade.Sprite;
@@ -20,7 +10,6 @@ export class Player {
     private canMove = true;
     private speed: number;
     private animationTimer: number = 0;
-    private walkFrame = 0;
 
     constructor(scene: Phaser.Scene, x: number, y: number) {
         this.scene = scene;

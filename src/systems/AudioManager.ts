@@ -163,8 +163,8 @@ export class AudioManager {
     public setRate(value: number): void {
         if (this.currentMusic) {
             const current = this.music.get(this.currentMusic);
-            if (current) {
-                (current as any).setRate(value);
+            if (current && "setRate" in current) {
+                (current as unknown as { setRate: (v: number) => void }).setRate(value);
             }
         }
     }
@@ -178,9 +178,9 @@ export class AudioManager {
 
         if (this.currentMusic) {
             const current = this.music.get(this.currentMusic);
-            if (current) {
+            if (current && "volume" in current) {
                 /* Update currently playing music volume immediately */
-                (current as any).volume = this.musicVolume;
+                (current as unknown as { volume: number }).volume = this.musicVolume;
             }
         }
     }
@@ -197,7 +197,9 @@ export class AudioManager {
      * Cleans up resources.
      */
     public destroy(): void {
-        this.music.forEach((s) => s.destroy());
+        for (const s of this.music.values()) {
+            s.destroy();
+        }
         this.music.clear();
     }
 }

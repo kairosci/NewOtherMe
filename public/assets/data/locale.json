@@ -1,0 +1,97 @@
+{
+    "UI": {
+        "OBJECTIVE_PREFIX": "OBIETTIVO: ",
+        "KARMA_PREFIX": "KARMA: ",
+        "STAGE_PREFIX": "STAGE ",
+        "UNKNOWN": "???",
+        "CONTINUE_PROMPT": "[INVIO] continua",
+        "CONFIRM_PROMPT": "[INVIO] conferma",
+        "INTERACTION_PROMPT": "[E] INTERAGISCI",
+        "CHALLENGE_PROMPT": "[E] Sfida ",
+        "CHOICE_PREFIX_SELECTED": "> ",
+        "CHOICE_PREFIX_NORMAL": "  ",
+        "MAP_NAME_SEPARATOR": " - ROUND ",
+        "DOOR_DEFAULT_LABEL": "Avanti"
+    },
+    "MAP_NAMES": {
+        "apartment": "Il Risveglio",
+        "theater": "Il Teatro",
+        "bar": "Il Bar",
+        "fatherHouse": "La Casa",
+        "naplesAlley": "I Vicoli"
+    },
+    "TIME": {
+        "MORNING": "MATTINA",
+        "AFTERNOON": "POMERIGGIO",
+        "EVENING": "SERA",
+        "NIGHT": "NOTTE"
+    },
+    "MINIGAME": {
+        "NEW_RECORD": "NUOVO RECORD!",
+        "WIN": "VITTORIA!",
+        "LOSS": "SCONFITTA...",
+        "INSTRUCTIONS": {
+            "QTE": "PREMI SPAZIO RAPIDAMENTE!\n",
+            "BALANCE": "TIENI LA BARRA AL CENTRO!",
+            "RHYTHM": "PREMI SPAZIO QUANDO I CERCHI COMBACIANO!",
+            "HOLD": "TIENI PREMUTO SPAZIO PER RIEMPIRE!",
+            "BREATH": "PREMI SPAZIO QUANDO IL CERCHIO SI ALLARGA (INSPIRA/ESPIRA)",
+            "FOCUS": "INSEGUI LA STELLA CON IL MOUSE!",
+            "MEMORY": "TROVA LE COPPIE!",
+            "REACTION": "SCHIVA GLI OSTACOLI! [A/D o FRECCE]",
+            "PATTERN": "MEMORIZZA LA SEQUENZA!",
+            "PATTERN_MEMORIZE": "MEMORIZZA!",
+            "PATTERN_REPEAT": "RIPETI LA SEQUENZA!"
+        },
+        "DODGES_PREFIX": "SCHIVA!\nDodges: ",
+        "RHYTHM_PREFIX": "RITMO! ",
+        "COMBO_PREFIX": "\nCOMBO "
+    },
+    "DIALOG": {
+        "CHOICE_QUESTION": "Cosa fai?"
+    },
+    "MENU": {
+        "TITLE": "IL TEATRO\nDELLE OMBRE",
+        "SUBTITLE": "Un viaggio nei sogni di Gennaro",
+        "NEW_GAME": "NUOVA PARTITA",
+        "CONTINUE": "CONTINUA",
+        "LOAD": "CARICA",
+        "SETTINGS": "IMPOSTAZIONI",
+        "ACHIEVEMENTS": "TROFEI",
+        "CREDITS": "CREDITI",
+        "SAVE_TITLE": "ULTIMO SALVATAGGIO",
+        "SAVE_MAP": "Mappa: ",
+        "SAVE_TIME": "Tempo: ",
+        "SAVE_KARMA": "Anima: ",
+        "SAVE_DATE": "Data: ",
+        "STATS_CHALLENGES": "Sfide: ",
+        "STATS_ACHIEVEMENTS": "Achievements: ",
+        "FOOTER_CREDITS": "Global Game Jam 2026 | The Maskerati"
+    },
+    "ITEMS": {
+        "caffe": {
+            "name": "Caffè Napoletano",
+            "description": "Restaura 30 HP. Il sapore di casa."
+        },
+        "sfogliatella": {
+            "name": "Sfogliatella",
+            "description": "Restaura 50 HP. Croccante fuori, morbida dentro."
+        },
+        "limoncello": {
+            "name": "Limoncello",
+            "description": "Riduce la Tentazione di 20. Il gusto della costa."
+        },
+        "amuleto": {
+            "name": "Corno Portafortuna",
+            "description": "Riduce la Tentazione di 40. Protezione antica."
+        },
+        "foto_mamma": {
+            "name": "Foto della Mamma",
+            "description": "Restaura 80 HP e riduce Tentazione di 30. Ricordi felici."
+        },
+        "biglietto_teatro": {
+            "name": "Biglietto del Teatro",
+            "description": "Un ricordo dei bei tempi. +20 HP."
+        }
+    }
+}

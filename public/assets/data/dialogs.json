@@ -1,0 +1,74 @@
+{
+    "intro_apartment": {
+        "id": "intro_apartment",
+        "lines": [
+            {
+                "text": "Napoli. Un monolocale al quinto piano."
+            },
+            {
+                "text": "Piatti sporchi. Caffe freddo. Insonnia."
+            },
+            {
+                "speaker": "GENNARO",
+                "text": "...Ancora quel sogno."
+            },
+            {
+                "speaker": "GENNARO",
+                "text": "Meglio alzarsi. Stasera ho lo spettacolo."
+            }
+        ]
+    },
+    "generic_intro": {
+        "id": "generic_intro",
+        "lines": [
+            {
+                "speaker": "OMBRA",
+                "text": "Ti senti osservato."
+            },
+            {
+                "speaker": "MASCHERA",
+                "text": "Un'altra prova ti attende."
+            },
+            {
+                "text": "L'aria si fa pesante. Scegli la tua Maschera."
+            }
+        ]
+    },
+    "dario_intro": {
+        "id": "dario_intro",
+        "lines": [
+            {
+                "speaker": "DARIO",
+                "text": "Esposito! Ancora in ritardo."
+            },
+            {
+                "speaker": "DARIO",
+                "text": "Sai qual è il tuo problema?"
+            },
+            {
+                "speaker": "DARIO",
+                "text": "Non hai TALENTO. Solo ambizioni vuote."
+            },
+            {
+                "speaker": "GENNARO",
+                "text": "..."
+            },
+            {
+                "speaker": "DARIO",
+                "text": "Lascia che ti insegni il tuo posto!"
+            }
+        ],
+        "choices": [
+            {
+                "text": "Mantieni la calma e rispondi con dignità",
+                "action": "battle_dario_calm",
+                "karmaEffect": 1
+            },
+            {
+                "text": "Lascia che la rabbia prenda il controllo",
+                "action": "battle_dario_rage",
+                "karmaEffect": -1
+            }
+        ]
+    }
+}

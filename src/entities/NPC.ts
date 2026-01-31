@@ -7,7 +7,6 @@ export class NPC {
     private scene: Phaser.Scene;
     private sprite: Phaser.Physics.Arcade.Sprite;
     private config: NPCConfig;
-    private direction: Direction;
     private interactionZone: Phaser.GameObjects.Zone;
     private nameTag: Phaser.GameObjects.Text;
     private exclamation: Phaser.GameObjects.Text;

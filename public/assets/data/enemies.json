@@ -1,0 +1,92 @@
+{
+    "dario": {
+        "id": "dario",
+        "name": "Dario Izzo",
+        "position": {
+            "x": 20,
+            "y": 5
+        },
+        "sprite": "dario",
+        "dialogId": "dario_intro",
+        "faceDirection": "down",
+        "isBoss": true,
+        "hp": 80,
+        "maxHp": 80,
+        "attacks": [
+            {
+                "name": "Insulto",
+                "damage": 8,
+                "temptationIncrease": 5,
+                "description": "Sei solo una comparsa!"
+            },
+            {
+                "name": "Umiliazione",
+                "damage": 12,
+                "temptationIncrease": 8,
+                "description": "Non vali niente!"
+            },
+            {
+                "name": "Licenziamento",
+                "damage": 18,
+                "temptationIncrease": 12,
+                "description": "SEI FUORI!"
+            }
+        ]
+    },
+    "bully1": {
+        "id": "bully1",
+        "name": "Bullo",
+        "position": {
+            "x": 15,
+            "y": 25
+        },
+        "sprite": "bully",
+        "dialogId": "bully_encounter",
+        "faceDirection": "left",
+        "isBoss": false,
+        "hp": 40,
+        "maxHp": 40,
+        "attacks": [
+            {
+                "name": "Scherno",
+                "damage": 6,
+                "temptationIncrease": 4,
+                "description": "Che sfigato!"
+            },
+            {
+                "name": "Spintone",
+                "damage": 10,
+                "temptationIncrease": 6,
+                "description": "Levati dai piedi!"
+            }
+        ]
+    },
+    "bully2": {
+        "id": "bully2",
+        "name": "Teppista",
+        "position": {
+            "x": 18,
+            "y": 28
+        },
+        "sprite": "bully",
+        "dialogId": "",
+        "faceDirection": "right",
+        "isBoss": false,
+        "hp": 35,
+        "maxHp": 35,
+        "attacks": [
+            {
+                "name": "Minaccia",
+                "damage": 5,
+                "temptationIncrease": 5,
+                "description": "Ti facciamo a pezzi!"
+            },
+            {
+                "name": "Pugno",
+                "damage": 12,
+                "temptationIncrease": 4,
+                "description": "*WHACK*"
+            }
+        ]
+    }
+}

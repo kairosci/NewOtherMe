@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-import { COLORS, GAME_HEIGHT, GAME_WIDTH } from "@/config/gameConfig";
-import { LOCALE } from "@/config/locale";
+import { GAME_HEIGHT, GAME_WIDTH } from "@/config/gameConfig";
+import { DataManager } from "./DataManager";
 import { MaskSystem } from "./MaskSystem";
 
 type MinigameType =
@@ -25,7 +25,6 @@ export class MinigameManager {
 
     /* Shared UI */
     private instructionText: Phaser.GameObjects.Text;
-    private timerText: Phaser.GameObjects.Text;
     private gameTimer: Phaser.Time.TimerEvent | null = null;
 
     /* QTE Props */
@@ -57,7 +56,6 @@ export class MinigameManager {
     private breathCircleInner: Phaser.GameObjects.Arc;
     private breathPhase: number = 0; /* 0 to PI*2 */
     private breathSpeed: number = 0.002;
-    private breathTargetSize: number = 100;
 
     /* Focus Props */
     private focusTarget: Phaser.GameObjects.Star;
@@ -117,7 +115,7 @@ export class MinigameManager {
         const txt = this.scene.add.text(
             GAME_WIDTH / 2,
             GAME_HEIGHT / 2 - 50,
-            LOCALE.MINIGAME.NEW_RECORD,
+            DataManager.getInstance().locale.MINIGAME.NEW_RECORD,
             {
                 fontFamily: "Impact",
                 fontSize: "48px",
@@ -335,28 +333,31 @@ export class MinigameManager {
     /** SETUP METHODS */
 
     private setupQTE(difficulty: number): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.qteCount = 0;
         this.qteTarget = Math.floor(5 + difficulty * 2);
-        this.instructionText.setText(LOCALE.MINIGAME.INSTRUCTIONS.QTE + `0/${this.qteTarget}`);
+        this.instructionText.setText(`${locale.INSTRUCTIONS.QTE}0/${this.qteTarget}`);
         this.startTimer(Math.max(2000, 4000 - difficulty * 300), false);
     }
 
     private setupBalance(difficulty: number): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.showBalanceUI();
         this.balanceValue = 0;
         this.balanceVelocity = (Math.random() > 0.5 ? 1 : -1) * 0.5;
-        this.instructionText.setText(LOCALE.MINIGAME.INSTRUCTIONS.BALANCE);
+        this.instructionText.setText(locale.INSTRUCTIONS.BALANCE);
         this.startTimer(Math.min(8000, 4000 + difficulty * 500), true);
     }
 
     private setupRhythm(difficulty: number): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.rhythmTarget.setVisible(true);
         this.rhythmBeat.setVisible(true);
         this.rhythmHits = 0;
         this.rhythmGoal = Math.floor(3 + difficulty);
         this.rhythmSpeed = 0.02 + difficulty * 0.005;
         this.rhythmScale = 0;
-        this.instructionText.setText(LOCALE.MINIGAME.INSTRUCTIONS.RHYTHM);
+        this.instructionText.setText(locale.INSTRUCTIONS.RHYTHM);
         /** No auto-win timer, win by hits */
     }
 
@@ -375,11 +376,10 @@ export class MinigameManager {
         this.breathPhase = 0;
         this.breathSpeed = 0.002 + difficulty * 0.0005;
         this.instructionText.setText("PREMI SPAZIO QUANDO IL CERCHIO SI ALARGA (INSPIRA/ESPIRA)");
-        this.breathTargetSize = 50;
         this.startTimer(5000, true);
     }
 
-    private setupFocus(difficulty: number): void {
+    private setupFocus(_difficulty: number): void {
         this.focusTarget.setVisible(true);
         this.focusScore = 0;
         this.instructionText.setText("INSEGUI LA STELLA CON IL MOUSE!");
@@ -483,7 +483,8 @@ export class MinigameManager {
     }
 
     private setupReaction(difficulty: number): void {
-        this.instructionText.setText(LOCALE.MINIGAME.INSTRUCTIONS.REACTION);
+        const locale = DataManager.getInstance().locale.MINIGAME;
+        this.instructionText.setText(locale.INSTRUCTIONS.REACTION);
         this.reactionDodges = 0;
         this.reactionGoal = 5 + Math.floor(difficulty);
         this.reactionObstacles = [];
@@ -501,7 +502,7 @@ export class MinigameManager {
 
         /* Spawn obstacles periodically */
         const spawnInterval = Math.max(400, 800 - difficulty * 50);
-        const spawnEvent = this.scene.time.addEvent({
+        const _spawnEvent = this.scene.time.addEvent({
             delay: spawnInterval,
             callback: () => {
                 if (!this.isActive) return;
@@ -534,7 +535,8 @@ export class MinigameManager {
     }
 
     private setupPattern(difficulty: number): void {
-        this.instructionText.setText(LOCALE.MINIGAME.INSTRUCTIONS.PATTERN);
+        const locale = DataManager.getInstance().locale.MINIGAME;
+        this.instructionText.setText(locale.INSTRUCTIONS.PATTERN);
         this.patternSequence = [];
         this.patternInput = [];
         this.patternInputMode = false;
@@ -670,12 +672,13 @@ export class MinigameManager {
     private updateQTE(): void {
         if (
             Phaser.Input.Keyboard.JustDown(
-                this.scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+                this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
             )
         ) {
             this.qteCount++;
+            const locale = DataManager.getInstance().locale.MINIGAME;
             this.instructionText.setText(
-                LOCALE.MINIGAME.INSTRUCTIONS.QTE + `${this.qteCount}/${this.qteTarget}`,
+                `${locale.INSTRUCTIONS.QTE}${this.qteCount}/${this.qteTarget}`,
             );
             this.scene.cameras.main.shake(50, 0.01);
             if (this.qteCount >= this.qteTarget) this.endMinigame(true);
@@ -683,15 +686,15 @@ export class MinigameManager {
     }
 
     private updateBalance(): void {
-        const keys = this.scene.input.keyboard!.createCursorKeys();
+        const keys = this.scene.input.keyboard?.createCursorKeys();
         if (
             keys.left.isDown ||
-            this.scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown
+            this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.A).isDown
         )
             this.balanceVelocity -= 0.05;
         if (
             keys.right.isDown ||
-            this.scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown
+            this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.D).isDown
         )
             this.balanceVelocity += 0.05;
         this.balanceVelocity += (Math.random() - 0.5) * 0.2;
@@ -716,7 +719,7 @@ export class MinigameManager {
 
         if (
             Phaser.Input.Keyboard.JustDown(
-                this.scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+                this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
             )
         ) {
             /* Check overlap */
@@ -724,9 +727,13 @@ export class MinigameManager {
             if (diff < 10) {
                 this.rhythmHits++;
                 if (diff < 5) this.combo++;
+                const locale = DataManager.getInstance().locale.MINIGAME;
+                const rhythmGoal = this.rhythmGoal;
+                const comboSuffix =
+                    this.combo > 0 ? (locale.COMBO_PREFIX as string) + this.combo : "";
                 this.instructionText.setText(
-                    LOCALE.MINIGAME.RHYTHM_PREFIX +
-                        `${this.rhythmHits}/${this.rhythmGoal}${this.combo > 0 ? LOCALE.MINIGAME.COMBO_PREFIX + this.combo : ""}`,
+                    (locale.RHYTHM_PREFIX as string) +
+                        `${this.rhythmHits}/${rhythmGoal}${comboSuffix}`,
                 );
                 this.scene.cameras.main.flash(100, 0, 255, 0);
                 this.rhythmBeat.radius = 0; /* Reset immediately on hit */
@@ -739,7 +746,7 @@ export class MinigameManager {
     }
 
     private updateHold(): void {
-        if (this.scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE).isDown) {
+        if (this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE).isDown) {
             this.holdValue += 2;
         }
         this.holdValue -= this.holdDecay;
@@ -750,7 +757,7 @@ export class MinigameManager {
         if (this.holdValue >= 300) this.endMinigame(true);
     }
 
-    private updateBreath(time: number, delta: number): void {
+    private updateBreath(_time: number, delta: number): void {
         this.breathPhase += this.breathSpeed * delta;
         const scale = 1 + Math.sin(this.breathPhase) * 0.5; /* 0.5 to 1.5 */
         this.breathCircleInner.setScale(scale);
@@ -764,7 +771,7 @@ export class MinigameManager {
 
         if (
             Phaser.Input.Keyboard.JustDown(
-                this.scene.input.keyboard!.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
+                this.scene.input.keyboard?.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE),
             )
         ) {
             if (scale > 0.9 && scale < 1.1) {
@@ -832,8 +839,9 @@ export class MinigameManager {
                 this.reactionObstacles.splice(i, 1);
                 this.reactionDodges++;
                 this.combo++;
+                const locale = DataManager.getInstance().locale.MINIGAME;
                 this.instructionText.setText(
-                    LOCALE.MINIGAME.DODGES_PREFIX + `${this.reactionDodges}/${this.reactionGoal}`,
+                    `${locale.DODGES_PREFIX}${this.reactionDodges}/${this.reactionGoal}`,
                 );
 
                 if (this.reactionDodges >= this.reactionGoal) {
@@ -842,13 +850,6 @@ export class MinigameManager {
                 }
             }
         }
-    }
-
-    /** UTILS */
-
-    private hideBalanceUI(): void {
-        this.balanceZone.setVisible(false);
-        this.balanceCursor.setVisible(false);
     }
 
     private showBalanceUI(): void {
@@ -870,8 +871,9 @@ export class MinigameManager {
             /* Performance Bonus */
             const isPerfect = this.combo >= 3;
             const mask = MaskSystem.getInstance();
+            const type = this.currentType;
 
-            if (["qte", "rhythm", "hold"].includes(this.currentType!)) {
+            if (type && ["qte", "rhythm", "hold"].includes(type)) {
                 mask.modifyScore(isPerfect ? 2 : 1); /* Anger/Mask boost */
             } else {
                 mask.modifyScore(isPerfect ? -2 : -1); /* Control/Calm boost */

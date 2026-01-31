@@ -1,5 +1,5 @@
-import { OBJECTIVE_TRIGGERS, OBJECTIVES } from "@/config/objectives";
 import type { MapKey } from "@/types/game";
+import { DataManager } from "./DataManager";
 
 type ObjectiveListener = (objective: string) => void;
 
@@ -32,9 +32,9 @@ export class ObjectiveManager {
      */
     initForMap(mapKey: MapKey | string): void {
         this.currentMap = mapKey;
-        const mapObjectives = OBJECTIVES[mapKey];
-        if (mapObjectives?.initial) {
-            this.setObjective(mapObjectives.initial);
+        const initial = DataManager.getInstance().getInitialObjective(mapKey as MapKey);
+        if (initial) {
+            this.setObjective(initial);
         }
     }
 
@@ -60,10 +60,12 @@ export class ObjectiveManager {
      * Usato per eventi come: vittorie, dialoghi completati, prossimità a NPC.
      */
     trigger(eventName: string): void {
-        const triggerConfig = OBJECTIVE_TRIGGERS[eventName];
+        const triggerConfig = DataManager.getInstance().getObjectiveTrigger(eventName);
         if (triggerConfig && triggerConfig.map === this.currentMap) {
-            const mapObjectives = OBJECTIVES[this.currentMap];
-            const newObjective = mapObjectives?.[triggerConfig.objectiveKey];
+            const newObjective = DataManager.getInstance().getObjective(
+                this.currentMap as MapKey,
+                triggerConfig.objectiveKey,
+            );
             if (newObjective) {
                 this.setObjective(newObjective);
             }
@@ -102,7 +104,9 @@ export class ObjectiveManager {
     }
 
     private notifyListeners(): void {
-        this.listeners.forEach((listener) => listener(this.currentObjective));
+        for (const listener of this.listeners) {
+            listener(this.currentObjective);
+        }
     }
 
     /**

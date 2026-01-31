@@ -1,5 +1,5 @@
 import type Phaser from "phaser";
-import { COLORS, SCALE, TILE_SIZE } from "@/config/gameConfig";
+import { SCALE, TILE_SIZE } from "@/config/gameConfig";
 import type { MapKey } from "@/types/game";
 
 export interface MapConfig {

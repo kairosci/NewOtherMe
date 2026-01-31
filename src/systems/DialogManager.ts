@@ -1,11 +1,10 @@
 import Phaser from "phaser";
-import { DIALOGS } from "@/config/constants";
-import { COLORS, GAME_HEIGHT, GAME_WIDTH, UI_CONFIG } from "@/config/gameConfig";
-import { LOCALE } from "@/config/locale";
+import { GAME_HEIGHT, GAME_WIDTH, UI_CONFIG } from "@/config/gameConfig";
 import { AudioManager } from "@/systems/AudioManager";
 import { KarmaSystem } from "@/systems/KarmaSystem";
 import { SaveSystem } from "@/systems/SaveSystem";
-import { type Dialog, type DialogChoice, DialogLine } from "@/types/dialog";
+import type { Dialog, DialogChoice } from "@/types/dialog";
+import { DataManager } from "./DataManager";
 
 /**
  * Manages the dialogue system, including displaying text, character portraits,
@@ -14,7 +13,6 @@ import { type Dialog, type DialogChoice, DialogLine } from "@/types/dialog";
 export class DialogManager {
     private scene: Phaser.Scene;
     private container: Phaser.GameObjects.Container;
-    private background: Phaser.GameObjects.Rectangle;
     private speakerText: Phaser.GameObjects.Text;
     private contentText: Phaser.GameObjects.Text;
     private continuePrompt: Phaser.GameObjects.Text;
@@ -74,7 +72,7 @@ export class DialogManager {
         this.continuePrompt = this.scene.add.text(
             GAME_WIDTH - 40,
             boxY + boxHeight / 2 - 25,
-            LOCALE.UI.CONTINUE_PROMPT,
+            DataManager.getInstance().locale.UI.CONTINUE_PROMPT,
             {
                 fontFamily: "monospace",
                 fontSize: "12px",
@@ -106,13 +104,13 @@ export class DialogManager {
      * @param onComplete Optional callback when dialogue ends.
      */
     show(dialogId: string, onComplete?: (action?: string) => void): void {
-        const dialog = DIALOGS[dialogId];
-        if (!dialog) {
+        this.currentDialog = DataManager.getInstance().getDialog(dialogId) || null;
+        if (!this.currentDialog) {
             console.error(`Dialog not found: ${dialogId}`);
             onComplete?.();
             return;
         }
-        this.showDialogRaw(dialog, onComplete);
+        this.showDialogRaw(this.currentDialog, onComplete);
     }
 
     /**
@@ -205,17 +203,15 @@ export class DialogManager {
             });
         }
     }
-
-    private choiceTimer: Phaser.Time.TimerEvent | null = null;
     private timerBar: Phaser.GameObjects.Rectangle | null = null;
 
     private showChoices(): void {
         if (!this.currentDialog?.choices) return;
 
         this.continuePrompt.setVisible(true);
-        this.continuePrompt.setText(LOCALE.UI.CONFIRM_PROMPT);
+        this.continuePrompt.setText(DataManager.getInstance().locale.UI.CONFIRM_PROMPT);
         this.speakerText.setText("");
-        this.contentText.setText(LOCALE.DIALOG.CHOICE_QUESTION);
+        this.contentText.setText(DataManager.getInstance().locale.DIALOG.CHOICE_QUESTION);
         this.portrait.setTexture("player_portrait");
 
         /** Timer bar inside dialog box, above choices */
@@ -284,11 +280,11 @@ export class DialogManager {
         const karma = KarmaSystem.getKarmaScore();
 
         if (condition.startsWith("karma>")) {
-            const val = parseInt(condition.split(">")[1]);
+            const val = parseInt(condition.split(">")[1], 10);
             return karma > val;
         }
         if (condition.startsWith("karma<")) {
-            const val = parseInt(condition.split("<")[1]);
+            const val = parseInt(condition.split("<")[1], 10);
             return karma < val;
         }
         if (condition === "hasItem:mask") return true; /* Placeholder */
@@ -302,12 +298,14 @@ export class DialogManager {
         this.choiceTexts.forEach((text, index) => {
             const isSelected = index === this.selectedChoice;
             text.setColor(isSelected ? "#ffd700" : "#ffffff");
-            text.setText((isSelected ? "> " : "  ") + this.currentDialog!.choices![index].text);
+            text.setText((isSelected ? "> " : "  ") + this.currentDialog?.choices?.[index].text);
         });
     }
 
     private clearChoices(): void {
-        this.choiceTexts.forEach((t) => t.destroy());
+        for (const t of this.choiceTexts) {
+            t.destroy();
+        }
         this.choiceTexts = [];
         if (this.timerBar) {
             this.scene.tweens.killTweensOf(this.timerBar);
@@ -329,7 +327,7 @@ export class DialogManager {
         this.clearChoices();
 
         if (choice.nextDialogId) {
-            this.currentDialog = DIALOGS[choice.nextDialogId];
+            this.currentDialog = DataManager.getInstance().getDialog(choice.nextDialogId) || null;
             this.lineIndex = 0;
             this.showCurrentLine();
             return choice;

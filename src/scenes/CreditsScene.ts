@@ -1,4 +1,5 @@
-import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { DataManager } from "@/systems/DataManager";
 import { BaseScene } from "./BaseScene";
 
 export class CreditsScene extends BaseScene {
@@ -19,12 +20,17 @@ export class CreditsScene extends BaseScene {
         this.cameras.main.fadeIn(1000, 0, 0, 0);
 
         /* Skip hint */
-        const skip = this.add
-            .text(GAME_WIDTH - 20, GAME_HEIGHT - 20, "[ESC] Torna al Menu", {
-                fontFamily: "monospace",
-                fontSize: "12px",
-                color: "#666666",
-            })
+        const _skip = this.add
+            .text(
+                GAME_WIDTH - 20,
+                GAME_HEIGHT - 20,
+                DataManager.getInstance().locale.CREDITS.BACK,
+                {
+                    fontFamily: "monospace",
+                    fontSize: "12px",
+                    color: "#666666",
+                },
+            )
             .setOrigin(1);
 
         this.input.keyboard.on("keydown-ESC", () => this.returnToMenu());
@@ -49,12 +55,12 @@ export class CreditsScene extends BaseScene {
         this.scrollingText = this.add.container(GAME_WIDTH / 2, GAME_HEIGHT + 50);
 
         const content = [
-            { text: "Il teatro delle ombre", style: "title" },
+            { text: DataManager.getInstance().locale.CREDITS.TITLE, style: "title" },
             { text: "", style: "spacer" },
-            { text: "Un gioco creato per", style: "subtitle" },
-            { text: "Global Game Jam 2026", style: "normal" },
+            { text: DataManager.getInstance().locale.CREDITS.SUBTITLE, style: "subtitle" },
+            { text: DataManager.getInstance().locale.CREDITS.JAM, style: "normal" },
             { text: "", style: "spacer" },
-            { text: "The Maskerati", style: "section" },
+            { text: DataManager.getInstance().locale.CREDITS.TEAM, style: "section" },
             { text: "", style: "spacer" },
             { text: "Alessio Attilio", style: "name" },
             { text: "Francesco Pio Russo", style: "name" },
@@ -62,13 +68,13 @@ export class CreditsScene extends BaseScene {
             { text: "José Emanuel Galiero", style: "name" },
             { text: "Martina Cozzolino", style: "name" },
             { text: "", style: "spacer" },
-            { text: "Tech stack", style: "section" },
+            { text: DataManager.getInstance().locale.CREDITS.TECH, style: "section" },
             { text: "", style: "spacer" },
             { text: "Electron e Vite", style: "normal" },
             { text: "Phaser.js", style: "normal" },
             { text: "Typescript", style: "normal" },
             { text: "", style: "spacer" },
-            { text: "Grazie per aver giocato.", style: "final" },
+            { text: DataManager.getInstance().locale.CREDITS.THANKS, style: "final" },
         ];
 
         let y = 0;
@@ -104,7 +110,7 @@ export class CreditsScene extends BaseScene {
 
     private createBackButton(): void {
         const btn = this.add
-            .text(20, 20, "< MENU", {
+            .text(20, 20, DataManager.getInstance().locale.CREDITS.BACK_BTN, {
                 fontFamily: "monospace",
                 fontSize: "16px",
                 color: "#ffffff",
@@ -122,7 +128,7 @@ export class CreditsScene extends BaseScene {
         });
     }
 
-    update(time: number, delta: number): void {
+    update(_time: number, delta: number): void {
         this.scrollingText.y -= this.scrollSpeed * (delta / 16);
 
         /* Reset loop if needed or just stop at end */

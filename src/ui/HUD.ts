@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { LOCALE } from "@/config/locale";
+import { DataManager } from "@/systems/DataManager";
 import { TimeManager, type TimeOfDay } from "@/systems/TimeManager";
 
 /* *
@@ -40,6 +40,7 @@ export class HUD {
 
     private createHUD(): void {
         const padding = 20;
+        const locale = DataManager.getInstance().locale;
 
         /* KARMA (Top Left) */
         const karmaBg = this.scene.add
@@ -86,7 +87,7 @@ export class HUD {
             .text(
                 this.scene.cameras.main.width / 2,
                 this.scene.cameras.main.height - 40,
-                LOCALE.UI.OBJECTIVE_PREFIX + "???",
+                `${locale.UI.OBJECTIVE_PREFIX}???`,
                 {
                     fontFamily: "monospace",
                     fontSize: "18px",
@@ -144,11 +145,12 @@ export class HUD {
     }
 
     private updateTimeDisplay(time: TimeOfDay): void {
+        const locale = DataManager.getInstance().locale;
         const labels: Record<TimeOfDay, string> = {
-            morning: LOCALE.TIME.MORNING,
-            afternoon: LOCALE.TIME.AFTERNOON,
-            evening: LOCALE.TIME.EVENING,
-            night: LOCALE.TIME.NIGHT,
+            morning: locale.TIME.MORNING,
+            afternoon: locale.TIME.AFTERNOON,
+            evening: locale.TIME.EVENING,
+            night: locale.TIME.NIGHT,
         };
         const colors: Record<TimeOfDay, number> = {
             morning: 0xffdd99,
@@ -170,6 +172,7 @@ export class HUD {
         stage: number;
         objective?: string;
     }): void {
+        const locale = DataManager.getInstance().locale;
         /*  Update Karma  */
         this.karmaText.setText(`KARMA: ${data.karma}`);
         if (data.karma > 0) this.karmaIndicator.setFillStyle(0xd4af37);
@@ -191,7 +194,7 @@ export class HUD {
 
         /*  Update Objective  */
         if (data.objective) {
-            this.objectiveText.setText(LOCALE.UI.OBJECTIVE_PREFIX + data.objective.toUpperCase());
+            this.objectiveText.setText(locale.UI.OBJECTIVE_PREFIX + data.objective.toUpperCase());
         }
     }
 

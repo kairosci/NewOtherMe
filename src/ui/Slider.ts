@@ -50,7 +50,7 @@ export class Slider extends Phaser.GameObjects.Container {
         scene.add.existing(this);
 
         /* Input Events */
-        this.handle.on("drag", (pointer: Phaser.Input.Pointer, dragX: number) => {
+        this.handle.on("drag", (_pointer: Phaser.Input.Pointer, dragX: number) => {
             const minX = -width / 2;
             const maxX = width / 2;
             const clampedX = Phaser.Math.Clamp(dragX, minX, maxX);

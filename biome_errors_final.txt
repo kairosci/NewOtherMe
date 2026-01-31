@@ -1,0 +1,726 @@
+src/config/constants.ts:11:85 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+     9 │             { text: LOCALE.DIALOGS.intro_apartment.lines[0] as string },
+    10 │             { text: LOCALE.DIALOGS.intro_apartment.lines[1] as string },
+  > 11 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[2] as any).text },
+       │                                                                                     ^^^
+    12 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[3] as any).text },
+    13 │         ],
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:12:85 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    10 │             { text: LOCALE.DIALOGS.intro_apartment.lines[1] as string },
+    11 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[2] as any).text },
+  > 12 │             { speaker: "GENNARO", text: (LOCALE.DIALOGS.intro_apartment.lines[3] as any).text },
+       │                                                                                     ^^^
+    13 │         ],
+    14 │     },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:18:81 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    16 │         id: "generic_intro",
+    17 │         lines: [
+  > 18 │             { speaker: "OMBRA", text: (LOCALE.DIALOGS.generic_intro.lines[0] as any).text },
+       │                                                                                 ^^^
+    19 │             { speaker: "MASCHERA", text: (LOCALE.DIALOGS.generic_intro.lines[1] as any).text },
+    20 │             { text: LOCALE.DIALOGS.generic_intro.lines[2] as string },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:19:84 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    17 │         lines: [
+    18 │             { speaker: "OMBRA", text: (LOCALE.DIALOGS.generic_intro.lines[0] as any).text },
+  > 19 │             { speaker: "MASCHERA", text: (LOCALE.DIALOGS.generic_intro.lines[1] as any).text },
+       │                                                                                    ^^^
+    20 │             { text: LOCALE.DIALOGS.generic_intro.lines[2] as string },
+    21 │         ],
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:26:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    24 │         id: "dario_intro",
+    25 │         lines: [
+  > 26 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[0] as any).text },
+       │                                                                               ^^^
+    27 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[1] as any).text },
+    28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:27:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    25 │         lines: [
+    26 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[0] as any).text },
+  > 27 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[1] as any).text },
+       │                                                                               ^^^
+    28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+    29 │             { speaker: "GENNARO", text: LOCALE.DIALOGS.dario_intro.lines[3] as string },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:28:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    26 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[0] as any).text },
+    27 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[1] as any).text },
+  > 28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+       │                                                                               ^^^
+    29 │             { speaker: "GENNARO", text: LOCALE.DIALOGS.dario_intro.lines[3] as string },
+    30 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[4] as any).text },
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/config/constants.ts:30:79 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    28 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[2] as any).text },
+    29 │             { speaker: "GENNARO", text: LOCALE.DIALOGS.dario_intro.lines[3] as string },
+  > 30 │             { speaker: "DARIO", text: (LOCALE.DIALOGS.dario_intro.lines[4] as any).text },
+       │                                                                               ^^^
+    31 │         ],
+    32 │         choices: [
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/entities/Player.ts:5:6 lint/correctness/noUnusedVariables ━━━━━━━━━━
+
+  ! This type alias AnimationKey is unused.
+  
+    3 │ import type { Direction, Vector2 } from "@/types/game";
+    4 │ 
+  > 5 │ type AnimationKey =
+      │      ^^^^^^^^^^^^
+    6 │     | "idle_down"
+    7 │     | "idle_up"
+  
+  i Unused variables are often the result of typos, incomplete refactors, or other sources of bugs.
+  
+
+src/scenes/AchievementsScene.ts:277:31 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    275 │             (
+    276 │                 _pointer: Phaser.Input.Pointer,
+  > 277 │                 _gameObjects: any,
+        │                               ^^^
+    278 │                 _deltaX: number,
+    279 │                 deltaY: number,
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BattleScene.ts:30:13 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    28 │         this.enemy =
+    29 │             DataManager.getInstance().getEnemy(data.enemyId) ||
+  > 30 │             DataManager.getInstance().getEnemy("dario")!;
+       │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    31 │         this.state = {
+    32 │             playerHp: BATTLE_CONFIG.playerMaxHp,
+  
+
+src/scenes/BootScene.ts:215:60 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    213 │      * This avoids async issues with Phaser Graphics.
+    214 │      */
+  > 215 │     private generateCharacterAssets(key: string, features: any): void {
+        │                                                            ^^^
+    216 │         this.generateCharacterSprite(key, features);
+    217 │         this.generateCharacterPortrait(`${key}_portrait`, features);
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BootScene.ts:220:60 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    218 │     }
+    219 │ 
+  > 220 │     private generateCharacterSprite(key: string, features: any): void {
+        │                                                            ^^^
+    221 │         const frameW = 16;
+    222 │         const frameH = 24;
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BootScene.ts:336:12 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    334 │         x: number,
+    335 │         y: number,
+  > 336 │         f: any,
+        │            ^^^
+    337 │         dir: "down" | "up" | "left" | "right",
+    338 │         walk: number,
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/BootScene.ts:400:55 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    398 │     }
+    399 │ 
+  > 400 │     private generateCharacterPortrait(key: string, f: any): void {
+        │                                                       ^^^
+    401 │         const size = 64;
+    402 │         if (this.textures.exists(key)) this.textures.remove(key);
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/scenes/DialogScene.ts:31:23 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    30 │     init(data: DialogSceneData): void {
+  > 31 │         this.dialog = DataManager.getInstance().getDialog(data.dialogId)!;
+       │                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    32 │         this.lineIndex = 0;
+    33 │         this.displayedText = "";
+  
+
+src/scenes/DialogScene.ts:171:27 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    170 │         if (choice.nextDialogId) {
+  > 171 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+        │                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    172 │             this.lineIndex = 0;
+    173 │             this.choiceTexts.forEach((t) => t.destroy());
+  
+
+src/systems/AudioManager.ts:167:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    165 │             const current = this.music.get(this.currentMusic);
+    166 │             if (current) {
+  > 167 │                 (current as any).setRate(value);
+        │                             ^^^
+    168 │             }
+    169 │         }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/AudioManager.ts:183:29 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    181 │             if (current) {
+    182 │                 /* Update currently playing music volume immediately */
+  > 183 │                 (current as any).volume = this.musicVolume;
+        │                             ^^^
+    184 │             }
+    185 │         }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/BattleManager.ts:633:41 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    631 │         };
+    632 │ 
+  > 633 │         await this.showMessage(messages[this.state.result!]);
+        │                                         ^^^^^^^^^^^^^^^^^^
+    634 │ 
+    635 │         this.scene.time.delayedCall(800, () => {
+  
+
+src/systems/BattleManager.ts:637:31 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    635 │         this.scene.time.delayedCall(800, () => {
+    636 │             this.container.setVisible(false);
+  > 637 │             this.onComplete?.(this.state.result!, lastAction);
+        │                               ^^^^^^^^^^^^^^^^^^
+    638 │         });
+    639 │     }
+  
+
+src/systems/DataManager.ts:13:22 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    11 │     private static instance: DataManager;
+    12 │     private scene!: Phaser.Scene;
+  > 13 │     private _locale: any;
+       │                      ^^^
+    14 │     private _dialogs: Record<string, Dialog> = {};
+    15 │     private _enemies: Record<string, EnemyConfig> = {};
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:16:26 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    14 │     private _dialogs: Record<string, Dialog> = {};
+    15 │     private _enemies: Record<string, EnemyConfig> = {};
+  > 16 │     private _objectives: any;
+       │                          ^^^
+    17 │     private _mapData: any;
+    18 │     private _items: any;
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:17:23 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    15 │     private _enemies: Record<string, EnemyConfig> = {};
+    16 │     private _objectives: any;
+  > 17 │     private _mapData: any;
+       │                       ^^^
+    18 │     private _items: any;
+    19 │ 
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:18:21 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    16 │     private _objectives: any;
+    17 │     private _mapData: any;
+  > 18 │     private _items: any;
+       │                     ^^^
+    19 │ 
+    20 │     private constructor() {}
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:44:26 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    43 │     /* Getters */
+  > 44 │     public get locale(): any {
+       │                          ^^^
+    45 │         return this._locale;
+    46 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:53:30 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    51 │         return this._enemies;
+    52 │     }
+  > 53 │     public get objectives(): any {
+       │                              ^^^
+    54 │         return this._objectives;
+    55 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:56:27 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    54 │         return this._objectives;
+    55 │     }
+  > 56 │     public get mapData(): any {
+       │                           ^^^
+    57 │         return this._mapData;
+    58 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:59:25 lint/suspicious/noExplicitAny ━━━━━━━━━━
+
+  ! Unexpected any. Specify a different type.
+  
+    57 │         return this._mapData;
+    58 │     }
+  > 59 │     public get items(): any {
+       │                         ^^^
+    60 │         return this._items;
+    61 │     }
+  
+  i any disables many type checking rules. Its use should be avoided.
+  
+
+src/systems/DataManager.ts:12:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    10 │ export class DataManager {
+    11 │     private static instance: DataManager;
+  > 12 │     private scene!: Phaser.Scene;
+       │             ^^^^^
+    13 │     private _locale: any;
+    14 │     private _dialogs: Record<string, Dialog> = {};
+  
+  i Unsafe fix: Remove unused declaration.
+  
+    10 10 │   export class DataManager {
+    11 11 │       private static instance: DataManager;
+    12    │ - ····private·scene!:·Phaser.Scene;
+    13 12 │       private _locale: any;
+    14 13 │       private _dialogs: Record<string, Dialog> = {};
+  
+
+src/systems/MinigameManager.ts:874:52 lint/style/noNonNullAssertion ━━━━━━━━━━
+
+  ! Forbidden non-null assertion.
+  
+    872 │             const mask = MaskSystem.getInstance();
+    873 │ 
+  > 874 │             if (["qte", "rhythm", "hold"].includes(this.currentType!)) {
+        │                                                    ^^^^^^^^^^^^^^^^^
+    875 │                 mask.modifyScore(isPerfect ? 2 : 1); /* Anger/Mask boost */
+    876 │             } else {
+  
+
+src/systems/MinigameManager.ts:59:13 lint/correctness/noUnusedPrivateClassMembers  FIXABLE  ━━━━━━━━━━
+
+  ! This private class member is defined but never used.
+  
+    57 │     private breathPhase: number = 0; /* 0 to PI*2 */
+    58 │     private breathSpeed: number = 0.002;
+  > 59 │     private breathTargetSize: number = 50;
+       │             ^^^^^^^^^^^^^^^^
+    60 │ 
+    61 │     /* Focus Props */
+  
+  i Unsafe fix: Remove unused declaration.
+  
+     57  57 │       private breathPhase: number = 0; /* 0 to PI*2 */
+     58  58 │       private breathSpeed: number = 0.002;
+     59     │ - ····private·breathTargetSize:·number·=·50;
+     60  59 │   
+     61  60 │       /* Focus Props */
+  
+
+src/utils/MobileDetector.ts:5:8 lint/complexity/noStaticOnlyClass ━━━━━━━━━━
+
+  ! Avoid classes that contain only static members.
+  
+     3 │  * Used to enable touch controls and adjust UI layout.
+     4 │  */
+   > 5 │ export class MobileDetector {
+       │        ^^^^^^^^^^^^^^^^^^^^^^
+   > 6 │     /**
+        ...
+  > 25 │         return MobileDetector.isMobile() || MobileDetector.isTouchDevice();
+  > 26 │     }
+  > 27 │ }
+       │ ^
+    28 │ 
+  
+  i Prefer using simple functions instead of classes with only static members.
+  
+
+src/scenes/DialogScene.ts:173:30 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    171 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+    172 │             this.lineIndex = 0;
+  > 173 │             this.choiceTexts.forEach((t) => t.destroy());
+        │                              ^^^^^^^
+    174 │             this.choiceTexts = [];
+    175 │             this.showCurrentLine();
+  
+  i Either remove this return or remove the returned value.
+  
+    171 │             this.dialog = DataManager.getInstance().getDialog(choice.nextDialogId)!;
+    172 │             this.lineIndex = 0;
+  > 173 │             this.choiceTexts.forEach((t) => t.destroy());
+        │                                             ^^^^^^^^^^^
+    174 │             this.choiceTexts = [];
+    175 │             this.showCurrentLine();
+  
+
+src/scenes/GameScene.ts:142:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    140 │         });
+    141 │         /* Initial check */
+  > 142 │         this.npcs.forEach((npc) => npc.checkAvailability(TimeManager.getCurrentTime()));
+        │                   ^^^^^^^
+    143 │     }
+    144 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    140 │         });
+    141 │         /* Initial check */
+  > 142 │         this.npcs.forEach((npc) => npc.checkAvailability(TimeManager.getCurrentTime()));
+        │                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    143 │     }
+    144 │ 
+  
+
+src/scenes/GameScene.ts:292:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    290 │             this.player.getSprite() as Phaser.Physics.Arcade.Sprite,
+    291 │         );
+  > 292 │         this.npcs.forEach((npc) => npc.update(delta, this.player.getPosition()));
+        │                   ^^^^^^^
+    293 │ 
+    294 │         /* Interactions */
+  
+  i Either remove this return or remove the returned value.
+  
+    290 │             this.player.getSprite() as Phaser.Physics.Arcade.Sprite,
+    291 │         );
+  > 292 │         this.npcs.forEach((npc) => npc.update(delta, this.player.getPosition()));
+        │                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    293 │ 
+    294 │         /* Interactions */
+  
+
+src/scenes/GameScene.ts:466:19 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    465 │     private setupNPCCollisions(): void {
+  > 466 │         this.npcs.forEach((npc) =>
+        │                   ^^^^^^^
+    467 │             this.physics.add.collider(this.player.getSprite(), npc.getSprite()),
+    468 │         );
+  
+  i Either remove this return or remove the returned value.
+  
+    465 │     private setupNPCCollisions(): void {
+    466 │         this.npcs.forEach((npc) =>
+  > 467 │             this.physics.add.collider(this.player.getSprite(), npc.getSprite()),
+        │             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    468 │         );
+    469 │     }
+  
+
+src/systems/AudioManager.ts:200:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    198 │      */
+    199 │     public destroy(): void {
+  > 200 │         this.music.forEach((s) => s.destroy());
+        │                    ^^^^^^^
+    201 │         this.music.clear();
+    202 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    198 │      */
+    199 │     public destroy(): void {
+  > 200 │         this.music.forEach((s) => s.destroy());
+        │                                   ^^^^^^^^^^^
+    201 │         this.music.clear();
+    202 │     }
+  
+
+src/systems/BattleManager.ts:255:28 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    254 │         // Clear old item menu
+  > 255 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                            ^^^^^^^
+    256 │         this.itemMenuItems = [];
+    257 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    254 │         // Clear old item menu
+  > 255 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                                              ^^^^^^^^^^^^^^
+    256 │         this.itemMenuItems = [];
+    257 │ 
+  
+
+src/systems/BattleManager.ts:321:28 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    319 │         this.selectedIndex = 2; // Return to OGGETTO in main menu
+    320 │         this.itemMenuBg.setVisible(false);
+  > 321 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                            ^^^^^^^
+    322 │         this.itemMenuItems = [];
+    323 │         this.updateMenuSelection();
+  
+  i Either remove this return or remove the returned value.
+  
+    319 │         this.selectedIndex = 2; // Return to OGGETTO in main menu
+    320 │         this.itemMenuBg.setVisible(false);
+  > 321 │         this.itemMenuItems.forEach((item) => item.destroy());
+        │                                              ^^^^^^^^^^^^^^
+    322 │         this.itemMenuItems = [];
+    323 │         this.updateMenuSelection();
+  
+
+src/systems/DialogManager.ts:297:26 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    296 │     private clearChoices(): void {
+  > 297 │         this.choiceTexts.forEach((t) => t.destroy());
+        │                          ^^^^^^^
+    298 │         this.choiceTexts = [];
+    299 │         if (this.timerBar) {
+  
+  i Either remove this return or remove the returned value.
+  
+    296 │     private clearChoices(): void {
+  > 297 │         this.choiceTexts.forEach((t) => t.destroy());
+        │                                         ^^^^^^^^^^^
+    298 │         this.choiceTexts = [];
+    299 │         if (this.timerBar) {
+  
+
+src/systems/InventoryManager.ts:109:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    107 │     getTotalItems(): number {
+    108 │         let total = 0;
+  > 109 │         this.items.forEach((qty) => (total += qty));
+        │                    ^^^^^^^
+    110 │         return total;
+    111 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    107 │     getTotalItems(): number {
+    108 │         let total = 0;
+  > 109 │         this.items.forEach((qty) => (total += qty));
+        │                                     ^^^^^^^^^^^^^^
+    110 │         return total;
+    111 │     }
+  
+
+src/systems/InventoryManager.ts:109:38 lint/suspicious/noAssignInExpressions ━━━━━━━━━━
+
+  × The assignment should not be in an expression.
+  
+    107 │     getTotalItems(): number {
+    108 │         let total = 0;
+  > 109 │         this.items.forEach((qty) => (total += qty));
+        │                                      ^^^^^^^^^^^^
+    110 │         return total;
+    111 │     }
+  
+  i The use of assignments in expressions is confusing.
+    Expressions are often considered as side-effect free.
+  
+
+src/systems/InventoryManager.ts:115:20 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    113 │     saveState(): Record<string, number> {
+    114 │         const state: Record<string, number> = {};
+  > 115 │         this.items.forEach((qty, id) => (state[id] = qty));
+        │                    ^^^^^^^
+    116 │         return state;
+    117 │     }
+  
+  i Either remove this return or remove the returned value.
+  
+    113 │     saveState(): Record<string, number> {
+    114 │         const state: Record<string, number> = {};
+  > 115 │         this.items.forEach((qty, id) => (state[id] = qty));
+        │                                         ^^^^^^^^^^^^^^^^^
+    116 │         return state;
+    117 │     }
+  
+
+src/systems/InventoryManager.ts:115:42 lint/suspicious/noAssignInExpressions ━━━━━━━━━━
+
+  × The assignment should not be in an expression.
+  
+    113 │     saveState(): Record<string, number> {
+    114 │         const state: Record<string, number> = {};
+  > 115 │         this.items.forEach((qty, id) => (state[id] = qty));
+        │                                          ^^^^^^^^^^^^^^^
+    116 │         return state;
+    117 │     }
+  
+  i The use of assignments in expressions is confusing.
+    Expressions are often considered as side-effect free.
+  
+
+src/systems/ObjectiveManager.ts:107:24 lint/suspicious/useIterableCallbackReturn ━━━━━━━━━━
+
+  × This callback passed to forEach() iterable method should not return a value.
+  
+    106 │     private notifyListeners(): void {
+  > 107 │         this.listeners.forEach((listener) => listener(this.currentObjective));
+        │                        ^^^^^^^
+    108 │     }
+    109 │ 
+  
+  i Either remove this return or remove the returned value.
+  
+    106 │     private notifyListeners(): void {
+  > 107 │         this.listeners.forEach((listener) => listener(this.currentObjective));
+        │                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    108 │     }
+    109 │ 
+  
+
+Checked 45 files in 120ms. No fixes applied.
+Found 13 errors.
+Found 33 warnings.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+

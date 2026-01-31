@@ -1,5 +1,4 @@
-import { LOCALE } from "@/config/locale";
-import { InventoryItem } from "@/types/game";
+import { DataManager } from "./DataManager";
 
 export interface ItemEffect {
     type: "heal" | "temptation_reduce" | "damage_boost" | "defense";
@@ -18,68 +17,7 @@ export interface ItemDefinition {
     icon: string;
 }
 
-export const ITEM_DEFINITIONS: Record<string, ItemDefinition> = {
-    caffe: {
-        id: "caffe",
-        name: LOCALE.ITEMS.caffe.name,
-        description: LOCALE.ITEMS.caffe.description,
-        effect: { type: "heal", value: 30 },
-        usableInBattle: true,
-        usableInExploration: true,
-        maxStack: 5,
-        icon: "☕",
-    },
-    sfogliatella: {
-        id: "sfogliatella",
-        name: LOCALE.ITEMS.sfogliatella.name,
-        description: LOCALE.ITEMS.sfogliatella.description,
-        effect: { type: "heal", value: 50 },
-        usableInBattle: true,
-        usableInExploration: true,
-        maxStack: 3,
-        icon: "🥐",
-    },
-    limoncello: {
-        id: "limoncello",
-        name: LOCALE.ITEMS.limoncello.name,
-        description: LOCALE.ITEMS.limoncello.description,
-        effect: { type: "temptation_reduce", value: 20 },
-        usableInBattle: true,
-        usableInExploration: false,
-        maxStack: 3,
-        icon: "🍋",
-    },
-    amuleto: {
-        id: "amuleto",
-        name: LOCALE.ITEMS.amuleto.name,
-        description: LOCALE.ITEMS.amuleto.description,
-        effect: { type: "temptation_reduce", value: 40 },
-        usableInBattle: true,
-        usableInExploration: false,
-        maxStack: 2,
-        icon: "🔮",
-    },
-    foto_mamma: {
-        id: "foto_mamma",
-        name: LOCALE.ITEMS.foto_mamma.name,
-        description: LOCALE.ITEMS.foto_mamma.description,
-        effect: { type: "heal", value: 80 },
-        usableInBattle: true,
-        usableInExploration: true,
-        maxStack: 1,
-        icon: "📷",
-    },
-    biglietto_teatro: {
-        id: "biglietto_teatro",
-        name: LOCALE.ITEMS.biglietto_teatro.name,
-        description: LOCALE.ITEMS.biglietto_teatro.description,
-        effect: { type: "heal", value: 20 },
-        usableInBattle: true,
-        usableInExploration: true,
-        maxStack: 5,
-        icon: "🎭",
-    },
-};
+/** Definitions are now fetched from DataManager */
 
 class InventoryManagerClass {
     private items: Map<string, number> = new Map();
@@ -96,7 +34,7 @@ class InventoryManagerClass {
     }
 
     addItem(itemId: string, quantity: number = 1): boolean {
-        const definition = ITEM_DEFINITIONS[itemId];
+        const definition = this.getDefinition(itemId);
         if (!definition) return false;
 
         const current = this.items.get(itemId) || 0;
@@ -130,7 +68,7 @@ class InventoryManagerClass {
         const result: { itemId: string; quantity: number; definition: ItemDefinition }[] = [];
 
         this.items.forEach((quantity, itemId) => {
-            const definition = ITEM_DEFINITIONS[itemId];
+            const definition = this.getDefinition(itemId);
             if (definition && quantity > 0) {
                 result.push({ itemId, quantity, definition });
             }
@@ -146,7 +84,7 @@ class InventoryManagerClass {
     useItem(itemId: string): ItemEffect | null {
         if (!this.hasItem(itemId)) return null;
 
-        const definition = ITEM_DEFINITIONS[itemId];
+        const definition = this.getDefinition(itemId);
         if (!definition) return null;
 
         this.removeItem(itemId);
@@ -154,18 +92,31 @@ class InventoryManagerClass {
     }
 
     getDefinition(itemId: string): ItemDefinition | null {
-        return ITEM_DEFINITIONS[itemId] || null;
+        const dataMan = DataManager.getInstance();
+        const base = dataMan.items[itemId];
+        const locale = dataMan.locale.ITEMS[itemId];
+        if (!base || !locale) return null;
+
+        return {
+            ...base,
+            name: locale.name,
+            description: locale.description,
+        };
     }
 
     getTotalItems(): number {
         let total = 0;
-        this.items.forEach((qty) => (total += qty));
+        this.items.forEach((qty) => {
+            total += qty;
+        });
         return total;
     }
 
     saveState(): Record<string, number> {
         const state: Record<string, number> = {};
-        this.items.forEach((qty, id) => (state[id] = qty));
+        this.items.forEach((qty, id) => {
+            state[id] = qty;
+        });
         return state;
     }
 
