@@ -16,6 +16,7 @@ import { EffectsManager } from '@/systems/EffectsManager';
 import { TransitionManager } from '@/effects/TransitionManager';
 import { TimeManager } from '@/systems/TimeManager';
 import { VirtualJoystick } from '@/ui/VirtualJoystick';
+import { VirtualActionBtn } from '@/ui/VirtualActionBtn';
 import { SaveSystem } from '@/systems/SaveSystem';
 import { ObjectiveManager } from '@/systems/ObjectiveManager';
 
@@ -44,7 +45,8 @@ export class GameScene extends BaseScene {
     private effectsManager!: EffectsManager;
     private interactionPrompt!: Phaser.GameObjects.Text;
     private mapNameText!: Phaser.GameObjects.Text;
-    private joystick!: VirtualJoystick;
+    private joystick?: VirtualJoystick;
+    private actionBtn?: VirtualActionBtn;
 
     private stage: number = 1;
     private static tutorialDone = false;
@@ -109,6 +111,7 @@ export class GameScene extends BaseScene {
         MaskSystem.getInstance().init(this);
         TimeManager.initialize(this);
         this.joystick = new VirtualJoystick(this);
+        this.actionBtn = new VirtualActionBtn(this);
 
         this.physics.add.collider(this.player.getSprite(), walls);
         this.setupNPCCollisions();
@@ -242,8 +245,9 @@ export class GameScene extends BaseScene {
             if (this.joystick.down) input.y = 1;
         }
 
-        const interactPressed = Phaser.Input.Keyboard.JustDown(this.keys.E);
-        /* Mobile Touch Interaction (Simple tap on prompt region) */
+        const interactPressed = Phaser.Input.Keyboard.JustDown(this.keys.E) || (this.actionBtn && this.actionBtn.isActionActive());
+
+        /* Mobile Touch Interaction Handled by ActionBtn now */
 
         this.player.update(input, delta);
         this.effectsManager.update(time, delta, this.player.getSprite() as Phaser.Physics.Arcade.Sprite);

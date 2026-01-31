@@ -408,7 +408,8 @@ Progetto pronto per il rilascio Beta.
 
 #### Da implementare
 
-- [x] Virtual joystick
+- [x] Virtual joystick (Movimento)
+- [x] Virtual Action Button (Interazione 'E')
 - [x] Touch controls per menu
 - [x] UI responsive (scala automatica)
 - [x] Gesture support (swipe, pinch)
@@ -418,6 +419,7 @@ Progetto pronto per il rilascio Beta.
 #### Files da creare
 
 - `src/ui/VirtualJoystick.ts`
+- `src/ui/VirtualActionBtn.ts`
 - `src/utils/MobileDetector.ts`
 
 ---
