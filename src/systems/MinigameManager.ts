@@ -10,6 +10,7 @@ export class MinigameManager {
     private container: Phaser.GameObjects.Container;
     private isActive: boolean = false;
     private currentType: MinigameType | null = null;
+    private currentDifficulty: number = 1;
     private onComplete: ((success: boolean) => void) | null = null;
     private highScores: Record<string, number> = {};
 
@@ -184,6 +185,7 @@ export class MinigameManager {
     private startMinigame(type: MinigameType, difficulty: number, onComplete: (success: boolean) => void): void {
         this.isActive = true;
         this.currentType = type;
+        this.currentDifficulty = difficulty;
         this.onComplete = onComplete;
         this.hideAllUI();
         this.container.setVisible(true);
@@ -444,6 +446,10 @@ export class MinigameManager {
         this.patternShowingIndex = 0;
         this.instructionText.setText('MEMORIZZA!');
 
+        /* Speed increases with difficulty: 300ms base - 20ms per difficulty level, min 100ms */
+        const showTime = Math.max(100, 300 - (this.currentDifficulty * 20));
+        const intervalTime = Math.max(50, 200 - (this.currentDifficulty * 15));
+
         const showNext = () => {
             if (this.patternShowingIndex >= this.patternSequence.length) {
                 this.patternInputMode = true;
@@ -454,10 +460,10 @@ export class MinigameManager {
             const idx = this.patternSequence[this.patternShowingIndex];
             const btn = this.patternButtons[idx];
             btn.setAlpha(1);
-            this.scene.time.delayedCall(300, () => {
+            this.scene.time.delayedCall(showTime, () => {
                 btn.setAlpha(0.5);
                 this.patternShowingIndex++;
-                this.scene.time.delayedCall(200, showNext);
+                this.scene.time.delayedCall(intervalTime, showNext);
             });
         };
 
@@ -625,7 +631,8 @@ export class MinigameManager {
     private updateReaction(delta: number): void {
         if (!this.reactionPlayer) return;
 
-        const speed = delta * 0.3;
+        /* Speed scales with difficulty: base 0.3 + 0.05 per level */
+        const speed = delta * (0.3 + (this.currentDifficulty * 0.05));
 
         /* Move obstacles down */
         for (let i = this.reactionObstacles.length - 1; i >= 0; i--) {

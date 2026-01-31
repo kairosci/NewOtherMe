@@ -16,10 +16,17 @@ export default defineConfig({
         outDir: 'dist',
         sourcemap: false,
         minify: 'esbuild',
+        chunkSizeWarningLimit: 1500,
         rollupOptions: {
             output: {
                 manualChunks: {
                     phaser: ['phaser'],
+                    game: [
+                        './src/scenes/BootScene.ts',
+                        './src/scenes/MenuScene.ts',
+                        './src/scenes/GameScene.ts',
+                        './src/scenes/BaseScene.ts'
+                    ]
                 },
             },
         },
