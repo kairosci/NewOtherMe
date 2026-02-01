@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { GAME_WIDTH } from "@/config/gameConfig";
 import { DataManager } from "@/systems/DataManager";
 import { TimeManager, type TimeOfDay } from "@/systems/TimeManager";
 
@@ -94,6 +95,7 @@ export class HUD {
                     color: "#ffd700",
                     backgroundColor: "#000000aa",
                     padding: { x: 15, y: 8 },
+                    wordWrap: { width: GAME_WIDTH - 40 },
                 },
             )
             .setOrigin(0.5);

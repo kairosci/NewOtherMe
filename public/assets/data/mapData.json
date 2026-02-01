@@ -1,5 +1,5 @@
 {
-    "SPAWN_POINTS": {
+    "spawnPoints": {
         "apartment": {
             "x": 10,
             "y": 10
@@ -17,7 +17,7 @@
             "y": 15
         }
     },
-    "NPC_CONFIGS": {
+    "npcs": {
         "dario": {
             "map": "theater",
             "position": {

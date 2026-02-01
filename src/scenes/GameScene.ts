@@ -212,6 +212,7 @@ export class GameScene extends BaseScene {
                 padding: { x: 16, y: 8 },
                 stroke: "#000000",
                 strokeThickness: 4,
+                wordWrap: { width: GAME_WIDTH - 60 },
             })
             .setOrigin(0.5)
             .setScrollFactor(0)
@@ -491,7 +492,7 @@ export class GameScene extends BaseScene {
             this.physics.add.collider(this.player.getSprite(), npc.getSprite());
         }
     }
-    private setupDoorTriggers(): void {}
+    private setupDoorTriggers(): void { }
     private setupCamera(w: number, h: number): void {
         this.cameras.main.setBounds(0, 0, w, h);
         this.cameras.main.startFollow(this.player.getSprite(), true, 0.1, 0.1);

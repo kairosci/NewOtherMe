@@ -33,7 +33,7 @@ export class BootScene extends Phaser.Scene {
 
         const musicTracks = ["apartment", "theater", "naplesAlley", "fatherHouse"];
         musicTracks.forEach((track) => {
-            this.load.audio(`bgm_${track}`, [`bgm_${track}.mp3`, `bgm_${track}.ogg`]);
+            this.load.audio(`bgm_${track}`, [`bgm_${track}.ogg`]);
         });
 
         this.load.image("background_shadow", "../background_shadow.png");
