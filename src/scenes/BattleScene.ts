@@ -49,7 +49,9 @@ export class BattleScene extends Phaser.Scene {
         this.createBattleUI();
         this.createMenu();
         this.updateUI();
-        this.showMessage(`${this.enemy.name} ti affronta!`);
+        this.showMessage(
+            `${this.enemy.name}${DataManager.getInstance().locale.BATTLE.MESSAGES.ENCOUNTER}`,
+        );
     }
 
     private setupInput(): void {
@@ -83,13 +85,14 @@ export class BattleScene extends Phaser.Scene {
         this.enemyHpBar.setOrigin(0, 0.5);
 
         const playerY = GAME_HEIGHT - 180;
-        this.add.text(50, playerY, "GENNARO", {
+        const locale = DataManager.getInstance().locale.BATTLE;
+        this.add.text(50, playerY, locale.GENNARO, {
             fontFamily: "monospace",
             fontSize: "16px",
             color: "#e0d5c0",
         });
 
-        this.add.text(50, playerY + 25, "HP", {
+        this.add.text(50, playerY + 25, locale.HP, {
             fontFamily: "monospace",
             fontSize: "12px",
             color: "#888888",
@@ -98,7 +101,7 @@ export class BattleScene extends Phaser.Scene {
         this.playerHpBar = this.add.rectangle(26, playerY + 28, 146, 8, 0x00aa00);
         this.playerHpBar.setOrigin(0, 0.5);
 
-        this.add.text(50, playerY + 45, "TENTAZIONE", {
+        this.add.text(50, playerY + 45, locale.TEMPTATION, {
             fontFamily: "monospace",
             fontSize: "12px",
             color: "#888888",
@@ -217,7 +220,7 @@ export class BattleScene extends Phaser.Scene {
                 await this.playerResist();
                 break;
             case "item":
-                await this.showMessage("Nessun oggetto disponibile.");
+                await this.showMessage(DataManager.getInstance().locale.BATTLE.MESSAGES.ITEM_EMPTY);
                 break;
             case "flee":
                 await this.playerFlee();
@@ -253,7 +256,9 @@ export class BattleScene extends Phaser.Scene {
         );
 
         this.cameras.main.shake(100, 0.01);
-        await this.showMessage(`Attacchi! ${damage} danni!`);
+        await this.showMessage(
+            `${DataManager.getInstance().locale.BATTLE.MESSAGES.FIGHT}${damage} danni!`,
+        );
         this.updateUI();
     }
 
@@ -265,7 +270,9 @@ export class BattleScene extends Phaser.Scene {
             this.state.temptation + BATTLE_CONFIG.temptationPerResist,
         );
 
-        await this.showMessage(`Mantieni la calma. Recuperi ${heal} HP.`);
+        await this.showMessage(
+            `${DataManager.getInstance().locale.BATTLE.MESSAGES.RESIST}${heal} HP.`,
+        );
         this.updateUI();
     }
 
@@ -273,10 +280,10 @@ export class BattleScene extends Phaser.Scene {
         if (Math.random() < BATTLE_CONFIG.fleeChance) {
             this.state.isOver = true;
             this.state.result = "fled";
-            await this.showMessage("Sei fuggito!");
+            await this.showMessage(DataManager.getInstance().locale.BATTLE.MESSAGES.FLEE_SUCCESS);
         } else {
             this.state.temptation = Math.min(100, this.state.temptation + 5);
-            await this.showMessage("Non riesci a fuggire!");
+            await this.showMessage(DataManager.getInstance().locale.BATTLE.MESSAGES.FLEE_FAIL);
             this.updateUI();
         }
     }
@@ -311,19 +318,20 @@ export class BattleScene extends Phaser.Scene {
     }
 
     private async endBattle(): Promise<void> {
+        const localeMsgs = DataManager.getInstance().locale.BATTLE.MESSAGES;
         let message = "";
         switch (this.state.result) {
             case "victory":
-                message = "Hai vinto il confronto.";
+                message = localeMsgs.VICTORY;
                 break;
             case "defeat":
-                message = "Sei stato sopraffatto.";
+                message = localeMsgs.DEFEAT;
                 break;
             case "masked":
-                message = "La maschera ha preso il controllo.";
+                message = localeMsgs.MASKED;
                 break;
             case "fled":
-                message = "Ti sei allontanato.";
+                message = localeMsgs.FLED;
                 break;
         }
 

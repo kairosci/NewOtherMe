@@ -93,5 +93,59 @@
             "name": "Biglietto del Teatro",
             "description": "Un ricordo dei bei tempi. +20 HP."
         }
+    },
+    "CREDITS": {
+        "TITLE": "CREDITI",
+        "SUBTITLE": "Il Teatro delle Ombre",
+        "JAM": "Global Game Jam 2026",
+        "TEAM": "TEAM THE MASKERATI",
+        "TECH": "TECNOLOGIE",
+        "THANKS": "GRAZIE PER AVER GIOCATO!",
+        "BACK": "ESC per Saltare",
+        "BACK_BTN": "< INDIETRO"
+    },
+    "SETTINGS": {
+        "TITLE": "IMPOSTAZIONI",
+        "MUSIC_VOLUME": "MUSICA",
+        "SFX_VOLUME": "EFFETTI",
+        "TEXT_SPEED": "VELOCITÀ TESTO",
+        "FULLSCREEN": "SCHERMO INTERO",
+        "BACK": "TORNA AL MENU"
+    },
+    "ACHIEVEMENTS": {
+        "TITLE": "TROFEI",
+        "UNLOCKED_SUFFIX": " Sbloccati",
+        "LOCKED": "BLOCCATO",
+        "UNLOCKED": "SBLOCCATO",
+        "SECRET": "Achievement Segreto"
+    },
+    "BATTLE": {
+        "GENNARO": "GENNARO",
+        "HP": "HP",
+        "TEMPTATION": "TENTAZIONE",
+        "ACTIONS": {
+            "FIGHT": "AFFRONTA",
+            "RESIST": "RESISTI",
+            "ITEM": "OGGETTO",
+            "FLEE": "FUGGI"
+        },
+        "MESSAGES": {
+            "ENCOUNTER": " ti affronta!",
+            "FIGHT": "Attacchi! ",
+            "RESIST": "Mantieni la calma. Recuperi ",
+            "ITEM_EMPTY": "Nessun oggetto disponibile.",
+            "FLEE_SUCCESS": "Sei fuggito!",
+            "FLEE_FAIL": "Non riesci a fuggire!",
+            "VICTORY": "Hai vinto il confronto.",
+            "DEFEAT": "Sei stato sopraffatto.",
+            "MASKED": "La maschera ha preso il controllo.",
+            "FLED": "Ti sei allontanato."
+        }
+    },
+    "PAUSE": {
+        "TITLE": "PAUSA",
+        "RESUME": "RIPRENDI",
+        "SETTINGS": "IMPOSTAZIONI",
+        "MENU": "TORNA AL MENU"
     }
 }
