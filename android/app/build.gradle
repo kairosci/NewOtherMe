@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.maskerati.teatrodelleombre"
+    namespace = "com.maskerati.ito"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.maskerati.teatrodelleombre"
+        applicationId "com.maskerati.ito"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
