@@ -146,11 +146,22 @@ export class DialogScene extends Phaser.Scene {
 
         this.dialog.choices.forEach((choice: DialogChoice, index: number) => {
             const y = -30 + index * 35;
-            const text = this.add.text(-GAME_WIDTH / 2 + 60, y, choice.text, {
-                fontFamily: "monospace",
-                fontSize: "18px",
-                color: index === 0 ? "#ffd700" : "#ffffff",
-            });
+            const text = this.add
+                .text(-GAME_WIDTH / 2 + 60, y, choice.text, {
+                    fontFamily: "monospace",
+                    fontSize: "18px",
+                    color: index === 0 ? "#ffd700" : "#ffffff",
+                })
+                .setInteractive({ useHandCursor: true })
+                .on("pointerover", () => {
+                    this.selectedChoice = index;
+                    this.updateChoiceSelection();
+                })
+                .on("pointerdown", () => {
+                    this.selectedChoice = index;
+                    this.selectChoice();
+                });
+
             this.dialogBox.add(text);
             this.choiceTexts.push(text);
         });
