@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Il Teatro delle Ombre</string>
+    <string name="title_activity_main">Il Teatro delle Ombre</string>
+    <string name="package_name">com.maskerati.teatrodelleombre</string>
+    <string name="custom_url_scheme">com.maskerati.teatrodelleombre</string>
+</resources>
