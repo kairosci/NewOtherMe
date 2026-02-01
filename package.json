@@ -28,7 +28,7 @@
     "android:open": "npx cap open android"
   },
   "build": {
-    "appId": "com.maskerati.teatrodelleombre",
+    "appId": "com.maskerati.ito",
     "productName": "Il Teatro delle Ombre",
     "directories": {
       "output": "release"

@@ -1,4 +1,4 @@
-package com.maskerati.teatrodelleombre;
+package com.maskerati.ito;
 
 import com.getcapacitor.BridgeActivity;
 
