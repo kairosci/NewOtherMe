@@ -70,5 +70,212 @@
                 "karmaEffect": -1
             }
         ]
+    },
+    "elisa_meet": {
+        "id": "elisa_meet",
+        "lines": [
+            {
+                "speaker": "ELISA",
+                "text": "Gennaro? Sei tu? Ho pensato spesso a te. Come stai?"
+            }
+        ],
+        "choices": [
+            {
+                "text": "Accetta con un sorriso (Karma +1)",
+                "action": "dialog_elisa_smile",
+                "karmaEffect": 1,
+                "nextDialogId": "elisa_smile_response"
+            },
+            {
+                "text": "Rifiuta freddamente (Karma -1)",
+                "action": "dialog_elisa_cold",
+                "karmaEffect": -1,
+                "nextDialogId": "elisa_cold_response"
+            }
+        ]
+    },
+    "elisa_smile_response": {
+        "id": "elisa_smile_response",
+        "lines": [
+            {
+                "text": "Un calore dimenticato ti scalda il petto."
+            },
+            {
+                "speaker": "ELISA",
+                "text": "Mi fa piacere vederti sorridere. Abbi cura di te."
+            }
+        ]
+    },
+    "elisa_cold_response": {
+        "id": "elisa_cold_response",
+        "lines": [
+            {
+                "speaker": "MASCHERA",
+                "text": "Bene. Non hai bisogno di nessuno."
+            },
+            {
+                "speaker": "ELISA",
+                "text": "Oh... capisco. Scusa se ti ho disturbato."
+            }
+        ]
+    },
+    "bully_encounter": {
+        "id": "bully_encounter",
+        "lines": [
+            {
+                "speaker": "BULLO",
+                "text": "Ehi, vecchio! Che ci fai qui? Questo è il nostro vicolo."
+            }
+        ],
+        "choices": [
+            {
+                "text": "Ignora e prosegui (Karma +1)",
+                "action": "dialog_bully_ignore",
+                "karmaEffect": 1,
+                "nextDialogId": "bully_ignore_response"
+            },
+            {
+                "text": "Affronta con rabbia (Karma -1)",
+                "action": "battle_bully_rage",
+                "karmaEffect": -1,
+                "nextDialogId": "bully_rage_response"
+            }
+        ]
+    },
+    "bully_ignore_response": {
+        "id": "bully_ignore_response",
+        "lines": [
+            {
+                "text": "Li oltrepassi in silenzio, sentendo di aver fatto la cosa giusta."
+            },
+            {
+                "speaker": "BULLO",
+                "text": "Tsk, codardo. Vattene!"
+            }
+        ]
+    },
+    "bully_rage_response": {
+        "id": "bully_rage_response",
+        "lines": [
+            {
+                "speaker": "MASCHERA",
+                "text": "Vedi? Il potere funziona. Fagliela pagare!"
+            },
+            {
+                "text": "Combattimento Iniziato!"
+            }
+        ],
+        "onComplete": "start_minigame_mash"
+    },
+    "father_confrontation": {
+        "id": "father_confrontation",
+        "lines": [
+            {
+                "text": "La casa di tuo padre. Tutto è come lo ricordavi. L'odore di tabacco. Le foto sbiadite."
+            },
+            {
+                "speaker": "OMBRA DEL PADRE",
+                "text": "Alla fine sei tornato. Sempre la stessa delusione. Non sei mai stato abbastanza."
+            },
+            {
+                "speaker": "GENNARO",
+                "text": "..."
+            }
+        ],
+        "choices": [
+            {
+                "text": "Resisti alle parole (Inizia Battaglia Finale)",
+                "action": "battle_father_start",
+                "nextDialogId": "father_battle_start"
+            }
+        ]
+    },
+    "father_battle_start": {
+        "id": "father_battle_start",
+        "lines": [
+            {
+                "speaker": "OMBRA DEL PADRE",
+                "text": "Vediamo se sei cambiato, o se sei sempre il solito nullafacente."
+            }
+        ],
+        "onComplete": "start_boss_battle_father"
+    },
+    "father_defeated_resist": {
+        "id": "father_defeated_resist",
+        "lines": [
+            {
+                "speaker": "GENNARO",
+                "text": "No. Non ti lascerò definire chi sono."
+            },
+            {
+                "speaker": "GENNARO",
+                "text": "Ero solo un bambino. Non era colpa mia."
+            },
+            {
+                "text": "L'ombra si dissolve sotto il peso della tua dignità."
+            }
+        ],
+        "onComplete": "trigger_good_ending"
+    },
+    "father_defeated_mask": {
+        "id": "father_defeated_mask",
+        "lines": [
+            {
+                "speaker": "MASCHERA",
+                "text": "Finalmente. Ora siamo uno."
+            },
+            {
+                "text": "L'ombra ride mentre la maschera aderisce al volto di Gennaro."
+            }
+        ],
+        "onComplete": "trigger_bad_ending"
+    },
+    "ending_sunrise": {
+        "id": "ending_sunrise",
+        "lines": [
+            {
+                "text": "Il sole sorge su Napoli."
+            },
+            {
+                "text": "La maschera giace a terra, inerte. Gennaro guarda l'orizzonte, finalmente libero."
+            },
+            {
+                "text": "FINE - L'ALBA"
+            }
+        ]
+    },
+    "ending_night": {
+        "id": "ending_night",
+        "lines": [
+            {
+                "text": "La maschera di Pulcinella fluttua nel buio."
+            },
+            {
+                "speaker": "MASCHERA",
+                "text": "Sei diventato esattamente come me."
+            },
+            {
+                "text": "Gli occhi vuoti fissano il giocatore. Il ciclo si ripete. Per sempre."
+            },
+            {
+                "text": "FINE - NOTTE ETERNA"
+            }
+        ]
+    },
+    "minigame_win": {
+        "id": "minigame_win",
+        "lines": [
+            {
+                "text": "Hai superato la prova!"
+            }
+        ]
+    },
+    "minigame_loss": {
+        "id": "minigame_loss",
+        "lines": [
+            {
+                "speaker": "MASCHERA",
+                "text": "Debole... troppo debole."
+            }
+        ]
     }
-}

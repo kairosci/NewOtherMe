@@ -408,7 +408,15 @@ export class GameScene extends BaseScene {
                     `SCONFIGGI ${npc.getName().toUpperCase()}`,
                 );
 
+                /* Start Battle Music */
+                this.audioManager.playMusic("bgm_theater");
+                this.audioManager.setRate(1.2);
+
                 this.minigameManager.start(minigameType, difficulty, (success) => {
+                    /* Restore Map Music */
+                    this.audioManager.playMusic(`bgm_${this.currentMap}`);
+                    this.audioManager.setRate(1.0 + (this.stage - 1) * 0.05);
+
                     if (success) {
                         /* Record Karma based on approach */
                         if (minigameType === "timing") {
@@ -426,7 +434,7 @@ export class GameScene extends BaseScene {
                                     : "father_defeated_mask";
                         } else if (npc.getId() === "dario") {
                             winDialogId =
-                                minigameType === "timing" ? "dario_defeated" : "dario_victory_mask";
+                                minigameType === "timing" ? "dario_defeated" : "dario_victory_mask"; // Fix: Use updated ID
                         }
 
                         this.dialogManager.show(winDialogId, () => {
@@ -434,6 +442,11 @@ export class GameScene extends BaseScene {
                             npc.setDefeated(true);
                             SaveSystem.defeatBoss(npc.getId());
                             ObjectiveManager.getInstance().onEnemyDefeated(npc.getId());
+
+                            /* Immediate Ending Trigger for Father */
+                            if (npc.getId() === "father_shadow") {
+                                this.scene.start(SCENES.ENDING);
+                            }
                         });
                     } else {
                         this.dialogManager.show("minigame_loss", () => {

@@ -1,7 +1,9 @@
 import Phaser from "phaser";
 import { COLORS, GAME_HEIGHT, GAME_WIDTH, SCENES } from "@/config/gameConfig";
+import { DataManager } from "@/systems/DataManager";
 import { type Ending, KarmaSystem } from "@/systems/KarmaSystem";
 import { SaveSystem } from "@/systems/SaveSystem";
+import type { DialogLine } from "@/types/dialog";
 
 export class EndingScene extends Phaser.Scene {
     private ending!: Ending;
@@ -79,16 +81,11 @@ export class EndingScene extends Phaser.Scene {
         }
 
         this.time.delayedCall(3500, () => {
-            this.showText(
-                [
-                    "L'alba sorge su Napoli.",
-                    "Hai scelto la dignita.",
-                    "La maschera giace a terra, inerte.",
-                    "Non sei tuo padre.",
-                    "Sei libero.",
-                ],
-                0xffd700,
-            );
+            const dialog = DataManager.getInstance().getDialog("ending_sunrise");
+            const lines = dialog
+                ? dialog.lines.map((l: DialogLine) => l.text)
+                : ["L'alba sorge su Napoli.", "Hai scelto la dignita.", "Sei libero."];
+            this.showText(lines, 0xffd700);
         });
     }
 
@@ -178,16 +175,11 @@ export class EndingScene extends Phaser.Scene {
         }
 
         this.time.delayedCall(4000, () => {
-            this.showText(
-                [
-                    "La notte eterna cala.",
-                    "La maschera ha vinto.",
-                    "Sei diventato cio che odiavi.",
-                    "Il ciclo si ripete.",
-                    "Per sempre.",
-                ],
-                COLORS.purple,
-            );
+            const dialog = DataManager.getInstance().getDialog("ending_night");
+            const lines = dialog
+                ? dialog.lines.map((l: DialogLine) => l.text)
+                : ["La notte eterna cala.", "La maschera ha vinto.", "Il ciclo si ripete."];
+            this.showText(lines, COLORS.purple);
         });
     }
 
