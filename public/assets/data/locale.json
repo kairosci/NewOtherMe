@@ -117,7 +117,8 @@
         "UNLOCKED_SUFFIX": " Sbloccati",
         "LOCKED": "BLOCCATO",
         "UNLOCKED": "SBLOCCATO",
-        "SECRET": "Achievement Segreto"
+        "SECRET": "Achievement Segreto",
+        "BACK": "INDIETRO"
     },
     "BATTLE": {
         "GENNARO": "GENNARO",

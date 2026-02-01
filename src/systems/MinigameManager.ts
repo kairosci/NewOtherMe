@@ -362,32 +362,36 @@ export class MinigameManager {
     }
 
     private setupHold(difficulty: number): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.holdBarBg.setVisible(true);
         this.holdBarFill.setVisible(true);
         this.holdValue = 0;
         this.holdDecay = 0.5 + difficulty * 0.1;
-        this.instructionText.setText("TIENI PREMUTO SPAZIO PER RIEMPIRE!");
+        this.instructionText.setText(locale.INSTRUCTIONS.HOLD);
         this.startTimer(5000, false); /* Win if bar full */
     }
 
     private setupBreath(difficulty: number): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.breathCircleOuter.setVisible(true);
         this.breathCircleInner.setVisible(true);
         this.breathPhase = 0;
         this.breathSpeed = 0.002 + difficulty * 0.0005;
-        this.instructionText.setText("PREMI SPAZIO QUANDO IL CERCHIO SI ALARGA (INSPIRA/ESPIRA)");
+        this.instructionText.setText(locale.INSTRUCTIONS.BREATH);
         this.startTimer(5000, true);
     }
 
     private setupFocus(_difficulty: number): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.focusTarget.setVisible(true);
         this.focusScore = 0;
-        this.instructionText.setText("INSEGUI LA STELLA CON IL MOUSE!");
+        this.instructionText.setText(locale.INSTRUCTIONS.FOCUS);
         this.startTimer(5000, false); /* Win if score high enough */
     }
 
     private setupMemory(difficulty: number): void {
-        this.instructionText.setText("TROVA LE COPPIE!");
+        const locale = DataManager.getInstance().locale.MINIGAME;
+        this.instructionText.setText(locale.INSTRUCTIONS.MEMORY);
         this.memoryMatches = 0;
         this.memoryFirstPick = -1;
         this.memoryLocked = false;
