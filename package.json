@@ -22,7 +22,10 @@
     "lint": "biome check ./src",
     "format": "biome format --write ./src",
     "check": "biome check --write ./src",
-    "prepare": "husky"
+    "prepare": "husky",
+    "android:init": "npx cap add android",
+    "android:sync": "npm run build && npx cap sync",
+    "android:open": "npx cap open android"
   },
   "build": {
     "appId": "com.maskerati.teatrodelleombre",
@@ -74,6 +77,9 @@
     "wait-on": "^9.0.3"
   },
   "dependencies": {
+    "@capacitor/android": "^8.0.2",
+    "@capacitor/cli": "^8.0.2",
+    "@capacitor/core": "^8.0.2",
     "phaser": "^3.90.0"
   }
 }
