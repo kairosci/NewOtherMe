@@ -580,8 +580,9 @@ export class MinigameManager {
     }
 
     private showPatternSequence(): void {
+        const locale = DataManager.getInstance().locale.MINIGAME;
         this.patternShowingIndex = 0;
-        this.instructionText.setText("MEMORIZZA!");
+        this.instructionText.setText(locale.INSTRUCTIONS.PATTERN_MEMORIZE);
 
         /* Speed increases with difficulty: 300ms base - 20ms per difficulty level, min 100ms */
         const showTime = Math.max(100, 300 - this.currentDifficulty * 20);
@@ -589,8 +590,9 @@ export class MinigameManager {
 
         const showNext = () => {
             if (this.patternShowingIndex >= this.patternSequence.length) {
+                const locale = DataManager.getInstance().locale.MINIGAME;
                 this.patternInputMode = true;
-                this.instructionText.setText("RIPETI LA SEQUENZA!");
+                this.instructionText.setText(locale.INSTRUCTIONS.PATTERN_REPEAT);
                 return;
             }
 
